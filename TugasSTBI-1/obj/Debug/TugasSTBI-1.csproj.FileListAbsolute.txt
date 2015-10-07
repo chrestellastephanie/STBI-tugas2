@@ -1,0 +1,12 @@
+D:\File\Kodingan\C#\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe.config
+D:\File\Kodingan\C#\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe
+D:\File\Kodingan\C#\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.pdb
+D:\File\Kodingan\C#\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.csprojResolveAssemblyReference.cache
+D:\File\Kodingan\C#\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.exe
+D:\File\Kodingan\C#\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.pdb
+D:\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe.config
+D:\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.exe
+D:\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.pdb
+D:\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe
+D:\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.pdb
+D:\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.csprojResolveAssemblyReference.cache
