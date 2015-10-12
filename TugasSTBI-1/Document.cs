@@ -36,6 +36,10 @@ namespace TugasSTBI_1
             // Regex, untuk menghilangkan angka
             ContentString = Regex.Replace(ContentString, @"[0-9]+ ", string.Empty);
 
+            // Stemming, mengubah kata ke bentuk dasarnya
+            StemmingTool Stemmer = new StemmingTool();
+            ContentString = Stemmer.Stemming(ContentString);
+
             // Split Content per word
             Content = ContentString.Split(' ');
         }
