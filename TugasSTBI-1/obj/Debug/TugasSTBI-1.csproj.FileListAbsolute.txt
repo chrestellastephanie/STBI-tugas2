@@ -10,3 +10,9 @@ D:\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.pdb
 D:\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe
 D:\TugasSTBI-1\TugasSTBI-1\bin\Debug\TugasSTBI-1.pdb
 D:\TugasSTBI-1\TugasSTBI-1\obj\Debug\TugasSTBI-1.csprojResolveAssemblyReference.cache
+D:\TugasSTBI-1 2\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe.config
+D:\TugasSTBI-1 2\TugasSTBI-1\obj\Debug\TugasSTBI-1.exe
+D:\TugasSTBI-1 2\TugasSTBI-1\obj\Debug\TugasSTBI-1.pdb
+D:\TugasSTBI-1 2\TugasSTBI-1\bin\Debug\TugasSTBI-1.exe
+D:\TugasSTBI-1 2\TugasSTBI-1\bin\Debug\TugasSTBI-1.pdb
+D:\TugasSTBI-1 2\TugasSTBI-1\obj\Debug\TugasSTBI-1.csprojResolveAssemblyReference.cache

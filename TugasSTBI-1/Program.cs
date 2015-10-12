@@ -13,6 +13,7 @@ namespace TugasSTBI_1
         {
             // Read file
             string text = System.IO.File.ReadAllText(@"D:\ADI\adi.all");
+            StopwordTool.AddDictionaryFromText(@"D:\stopwords.txt");
 
             // Split text per document
             string[] TextDocuments = text.Split(new string[] { ".I " }, StringSplitOptions.None);
@@ -47,7 +48,7 @@ namespace TugasSTBI_1
 
             using (StreamWriter writer = new StreamWriter(@"D:\InvertedFile.txt"))
             {
-                foreach(string linestring in ListTermWithWeight)
+                foreach (string linestring in ListTermWithWeight)
                 {
                     writer.WriteLine(linestring);
                 }
