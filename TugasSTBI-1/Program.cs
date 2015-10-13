@@ -9,11 +9,46 @@ namespace TugasSTBI_1
 {
     class Program
     {
+        public static void weightQuery(string q/*, List<Document> ListDocuments*/)
+        {
+            float wTerm;
+            string[] qTerm = q.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            TermWeighting QW = new TermWeighting();
+            List<WeightedTerm> ListQueryWithWeight = new List<WeightedTerm>();
+            foreach (var item in qTerm)
+            {
+                // add list element if not found in the list
+                if (true) //term not found in the list
+                {
+                    //count weight of term
+                    //wTerm = QW.CalculateTermWeighting(ListDocuments, i, j, 1, 1, 1);
+                    //no term sama no dokumen
+                    wTerm = 10;
+                    ListQueryWithWeight.Add(new WeightedTerm(item, wTerm));
+                }
+
+
+
+                //Console.Write(".");
+                //Console.Write(item);
+                //Console.Write(".");
+            }
+            foreach (var item in ListQueryWithWeight)
+            {
+                Console.Write("-" + item.term + "-" + item.weight + "-");
+            }
+
+        }
         static void Main(string[] args)
         {
-            // Read file
-            string text = System.IO.File.ReadAllText(@"D:\ADI\adi.all");
-            StopwordTool.AddDictionaryFromText(@"D:\stopwords.txt");
+            // read file
+            string pathDocs = "D:/ADI/adi.all";
+            string text = System.IO.File.ReadAllText(@pathDocs);
+
+            // read queries
+            string pathQueries = "D:/ADI/query.text";
+            Queries qs = new Queries(pathQueries);
+            qs.print();
 
             // Split text per document
             string[] TextDocuments = text.Split(new string[] { ".I " }, StringSplitOptions.None);
