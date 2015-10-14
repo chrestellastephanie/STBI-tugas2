@@ -50,6 +50,9 @@ namespace TugasSTBI_1
             Queries qs = new Queries(pathQueries);
             qs.print();
 
+            // read stopwords
+            StopwordTool.AddDictionaryFromText(@"D:/stopwords.txt");
+
             // Split text per document
             string[] TextDocuments = text.Split(new string[] { ".I " }, StringSplitOptions.None);
 
@@ -61,7 +64,7 @@ namespace TugasSTBI_1
                 ListDocuments.Add(document);
             }
 
-            TermWeighting TW = new TermWeighting();
+            TermWeighting TW = new TermWeighting(ListDocuments);
             List<string> ListTermWithWeight = new List<string>();
 
             for (int i = 0; i < ListDocuments.Count(); i++)
@@ -74,7 +77,7 @@ namespace TugasSTBI_1
                         found.Add(ListDocuments.ElementAt(i).Content[j]);
 
                         // menghitung term weight masing-masing kata di tiap dokumen
-                        ListTermWithWeight.Add(ListDocuments.ElementAt(i).Content[j] + " " + ListDocuments.ElementAt(i).No + " " + TW.CalculateTermWeighting(ListDocuments, i, j, 1, 1, 1));
+                        ListTermWithWeight.Add(ListDocuments.ElementAt(i).Content[j] + " " + ListDocuments.ElementAt(i).No + " " + TW.CalculateTermWeightingDocument(i, j, 1, 1, 1));
                     }
                 }
             }
