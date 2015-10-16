@@ -8,6 +8,13 @@ namespace TugasSTBI_1
 {
     class TermWeighting
     {
+        public List<Document> Documents { get; set; }
+
+        public TermWeighting(List<Document> _Documents)
+        {
+            Documents = _Documents;
+        }
+
         public int RawTf (string [] content, string term)
         {
             int sum = CountTermInDocument(content, term);
@@ -104,7 +111,7 @@ namespace TugasSTBI_1
             return 1;
         }
 
-        public double Idf (List<Document> Documents, string term)
+        public double Idf (string term)
         {
             double result = 0;
             int sum = 0;
@@ -181,11 +188,20 @@ namespace TugasSTBI_1
             return 1;
         }
 
-        public double CalculateTermWeighting(List<Document> Documents, int NoDocument, int NoTerm, int TfCode, int IdfCode, int NormalizationCode)
+        public double CalculateTermWeightingDocument(int NoDocument, int NoTerm, int TfCode, int IdfCode, int NormalizationCode)
         {
             double tf = CalculateTf(Documents.ElementAt(NoDocument).Content, Documents.ElementAt(NoDocument).Content[NoTerm], TfCode);
-            double idf = CalculateIdf(Documents, Documents.ElementAt(NoDocument).Content[NoTerm], IdfCode);
+            double idf = CalculateIdf(Documents.ElementAt(NoDocument).Content[NoTerm], IdfCode);
             double normalization = CalculateNormalization(Documents.ElementAt(NoDocument).Content, NormalizationCode);
+
+            return tf * idf / normalization;
+        }
+
+        public double CalculateTermWeightingQuery(string[] content, int noTerm, int tfCode, int idfCode, int normalizationCode)
+        {
+            double tf = CalculateTf(content, content[noTerm], tfCode);
+            double idf = CalculateIdf(content[noTerm], idfCode);
+            double normalization = CalculateNormalization(content, normalizationCode);
 
             return tf * idf / normalization;
         }
@@ -215,7 +231,7 @@ namespace TugasSTBI_1
             return result;
         }
 
-        private double CalculateIdf(List<Document> Documents, string term, int code)
+        private double CalculateIdf(string term, int code)
         {
             double result = 0;
             switch (code)
@@ -224,7 +240,7 @@ namespace TugasSTBI_1
                     result = (double)NoIdf();
                     break;
                 case 1:
-                    result = Idf(Documents, term);
+                    result = Idf(term);
                     break;
             }
 
