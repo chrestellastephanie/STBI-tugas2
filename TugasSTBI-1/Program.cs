@@ -22,12 +22,9 @@ namespace TugasSTBI_1
                 {
                     //count weight of term
                     //wTerm = QW.CalculateTermWeighting(ListDocuments, i, j, 1, 1, 1);
-                    //no term sama no dokumen
                     wTerm = 10;
                     ListQueryWithWeight.Add(new WeightedTerm(item, wTerm));
                 }
-
-
 
                 //Console.Write(".");
                 //Console.Write(item);
@@ -88,6 +85,17 @@ namespace TugasSTBI_1
                     writer.WriteLine(linestring);
                 }
             }
+
+            // weighting each query's terms
+            for (int i = 0; i < qs.nQuery(); i++)
+            {
+                weightQuery(qs.getQuery(i));
+            }
+
+
+            // untuk setiap dokumen di collection 
+            // itung similaritynya : d1 - similarity
+
 
             //TODO menghilangkan index di content
 
