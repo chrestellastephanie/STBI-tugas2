@@ -32,7 +32,8 @@ namespace TugasSTBI_1
             ':',
             '(',
             ')',
-            '/'
+            '/',
+            '?'
         };
 
         public static void AddDictionaryFromText(string location)

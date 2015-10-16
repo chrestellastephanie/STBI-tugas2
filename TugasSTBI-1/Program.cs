@@ -3,38 +3,52 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TugasSTBI_1
 {
     class Program
     {
-        public static void weightQuery(string q/*, List<Document> ListDocuments*/)
+        public static List<WeightedTerm> weightQuery(string q, List<Document> ListDocuments)
         {
-            float wTerm;
-            string[] qTerm = q.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-            TermWeighting QW = new TermWeighting();
-            List<WeightedTerm> ListQueryWithWeight = new List<WeightedTerm>();
-            foreach (var item in qTerm)
-            {
-                // add list element if not found in the list
-                if (true) //term not found in the list
-                {
-                    //count weight of term
-                    //wTerm = QW.CalculateTermWeighting(ListDocuments, i, j, 1, 1, 1);
-                    wTerm = 10;
-                    ListQueryWithWeight.Add(new WeightedTerm(item, wTerm));
-                }
+            double wTerm;
 
-                //Console.Write(".");
-                //Console.Write(item);
-                //Console.Write(".");
+            string queryString = StopwordTool.RemoveStopwords(q);
+
+            // Regex, untuk menghilangkan angka
+            queryString = Regex.Replace(queryString, @"[0-9]+ ", string.Empty);
+
+            // Stemming, mengubah kata ke bentuk dasarnya
+            StemmingTool Stemmer = new StemmingTool();
+            queryString = Stemmer.Stemming(queryString);
+
+
+            string[] qTerm = queryString.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            TermWeighting QW = new TermWeighting(ListDocuments);
+            List<WeightedTerm> ListQueryWithWeight = new List<WeightedTerm>();
+
+            for (int i = 0; i < qTerm.Count(); i++)
+            {
+                List<string> found = new List<string>();    // store word that has already counts
+
+                if (!found.Contains(qTerm[i]))
+                {
+                    found.Add(qTerm[i]);
+
+                    // menghitung term weight masing-masing kata di tiap query
+                    wTerm = QW.CalculateTermWeightingQuery(qTerm, i, 1, 1, 1);
+                    ListQueryWithWeight.Add(new WeightedTerm(qTerm[i], wTerm));
+                }
             }
+            /*Print to console*/
             foreach (var item in ListQueryWithWeight)
             {
-                Console.Write("-" + item.term + "-" + item.weight + "-");
+                Console.Write(item.term);
+                Console.Write(item.weight);
+                Console.Write("\n");
             }
-
+            return ListQueryWithWeight;
         }
         static void Main(string[] args)
         {
@@ -89,15 +103,18 @@ namespace TugasSTBI_1
                 }
             }
 
-            // weighting each query's terms
+            // weighting term for each query's
             for (int i = 0; i < qs.nQuery(); i++)
             {
-                weightQuery(qs.getQuery(i));
+                weightQuery(qs.getQuery(i),ListDocuments);
             }
 
 
             // untuk setiap dokumen di collection 
             // itung similaritynya : d1 - similarity
+
+            // list dokumen yang akan dicek similaritynya (yang ada termnya)
+
 
 
             //TODO menghilangkan index di content
