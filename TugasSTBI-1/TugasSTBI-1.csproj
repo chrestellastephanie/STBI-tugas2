@@ -41,15 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Docvalue.cs" />
+    <Compile Include="Similarity.cs" />
+    <Compile Include="WeightedTermDoc.cs" />
     <Compile Include="Document.cs" />
-    <Compile Include="experiment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries.cs" />
     <Compile Include="StemmingTool.cs" />
     <Compile Include="StopwordTool.cs" />
     <Compile Include="TermWeighting.cs" />
-    <Compile Include="WeightedTerm.cs" />
+    <Compile Include="WeightedTermQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
