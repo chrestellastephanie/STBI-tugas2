@@ -58,7 +58,7 @@ namespace TugasSTBI_1
             {
                 docsNum.Add(item.docNum);
             }
-            docsNum.Distinct();
+            docsNum = docsNum.Distinct().ToList();
 
             // for each docNum, itung valuenya
             foreach (var item in docsNum)

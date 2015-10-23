@@ -43,6 +43,7 @@ namespace TugasSTBI_1
                 }
             }
             /*Print to console*/
+            Console.Write("QUERY : ");
             foreach (var item in ListQueryWithWeight)
             {
                 Console.Write(item.term);
@@ -51,6 +52,7 @@ namespace TugasSTBI_1
             }
             return ListQueryWithWeight;
         }
+
         static void Main(string[] args)
         {
             // read file
@@ -103,7 +105,6 @@ namespace TugasSTBI_1
                     writer.WriteLine(linestring);
                 }
             }
-
                
             // list of hasil tiap query (list of list of result)
             List<List<Docvalue>> allResults = new List<List<Docvalue>>();
@@ -139,8 +140,10 @@ namespace TugasSTBI_1
             string line;
             using (StreamWriter writer = new StreamWriter(outputResult))
             {
+                Console.WriteLine("jumlah allresult count " + allResults.Count());
                 for (int i = 0; i < allResults.Count(); i++)
                 {
+                    Console.WriteLine("jumlah result count " + allResults.ElementAt(i).Count());
                     for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
                     {
                         line = i + 1 + " ";
@@ -149,8 +152,37 @@ namespace TugasSTBI_1
                     }
                 }
             }
-
+            /*
+            //hitung 
+            List<List<string>> relevantJudgement = new List<List<string>>();
+            List<string> rjPerQuery = new List<string>();
+            string relJudgPath = "D:/ADI/qrels.text";
+            string relJudgText = System.IO.File.ReadAllText(@relJudgPath);
+            string[] rjLine;
+            string [] rjChunked;
+            rjLine = relJudgText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             
+            for (int i = 0; i < rjLine.Count(); i++)
+            {
+                rjChunked = rjLine[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                //Console.WriteLine(Int32.Parse(rjChunked[0]) - 1);
+                //relevantJudgement[Int32.Parse(rjChunked[0]) - 1].Add("aaa");
+                //relevantJudgement[Int32.Parse(rjChunked[0]) - 1].Add(rjChunked[1]);
+            }
+            */
+            /*
+            for (int i = 1; i < relevantJudgement.Count()+1; i++)
+            {
+                Console.WriteLine("RJ query " + i);
+                for (int j = 0; j < relevantJudgement[i].Count(); j++)
+                {
+                    Console.Write(relevantJudgement[i][j]);
+                }
+            }*/
+
+
+
+
 
 
 
