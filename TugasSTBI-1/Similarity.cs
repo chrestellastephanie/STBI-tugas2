@@ -70,9 +70,13 @@ namespace TugasSTBI_1
         public double calculateSim(string docnum)
         {
             double sim = 0;
+            //Console.WriteLine("jumlah term query : " + lQueryTerm.Count());
             for (int i = 0; i < lQueryTerm.Count(); i++)
             {
+                //Console.WriteLine("Term nya : " + lQueryTerm[i].weight);
+                //double hasil = lQueryTerm[i].weight * getWeightFromDocList(lQueryTerm[i].term, docnum); 
                 sim += lQueryTerm[i].weight * getWeightFromDocList(lQueryTerm[i].term,docnum);
+                //Console.WriteLine(hasil);
             }
             return sim;
         }

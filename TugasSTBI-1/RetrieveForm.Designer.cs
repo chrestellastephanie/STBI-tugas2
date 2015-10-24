@@ -32,6 +32,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxInteractiveQuery = new System.Windows.Forms.TextBox();
             this.buttonInteractiveSearch = new System.Windows.Forms.Button();
+            this.listBoxResultInteractive = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -63,7 +65,7 @@
             // 
             // buttonInteractiveSearch
             // 
-            this.buttonInteractiveSearch.Location = new System.Drawing.Point(319, 51);
+            this.buttonInteractiveSearch.Location = new System.Drawing.Point(319, 52);
             this.buttonInteractiveSearch.Name = "buttonInteractiveSearch";
             this.buttonInteractiveSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonInteractiveSearch.TabIndex = 3;
@@ -72,11 +74,31 @@
             this.buttonInteractiveSearch.Visible = false;
             this.buttonInteractiveSearch.Click += new System.EventHandler(this.buttonInteractiveSearch_Click);
             // 
+            // listBoxResultInteractive
+            // 
+            this.listBoxResultInteractive.FormattingEnabled = true;
+            this.listBoxResultInteractive.Location = new System.Drawing.Point(12, 124);
+            this.listBoxResultInteractive.Name = "listBoxResultInteractive";
+            this.listBoxResultInteractive.Size = new System.Drawing.Size(382, 199);
+            this.listBoxResultInteractive.TabIndex = 4;
+            this.listBoxResultInteractive.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "RESULT";
+            // 
             // RetrieveForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 390);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.listBoxResultInteractive);
             this.Controls.Add(this.buttonInteractiveSearch);
             this.Controls.Add(this.textBoxInteractiveQuery);
             this.Controls.Add(this.button2);
@@ -94,5 +116,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBoxInteractiveQuery;
         private System.Windows.Forms.Button buttonInteractiveSearch;
+        private System.Windows.Forms.ListBox listBoxResultInteractive;
+        private System.Windows.Forms.Label label1;
     }
 }

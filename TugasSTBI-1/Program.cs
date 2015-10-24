@@ -15,6 +15,7 @@ namespace TugasSTBI_1
         public static List<Document> ListDocuments; /*List of Document*/
         public static Queries qs; /*list of query*/
         public static string outputInvertedFile = "D:/InvertedFile.txt";
+        public static List<List<Docvalue>> allResults;
         
 
         // return weight for each query term
@@ -46,6 +47,7 @@ namespace TugasSTBI_1
 
                     // menghitung term weight masing-masing kata di tiap query
                     wTerm = QW.CalculateTermWeightingQuery(qTerm, i, 1, 1, 1);
+                    //wTerm = 1;
                     ListQueryWithWeight.Add(new WeightedTermQuery(qTerm[i], wTerm));
                 }
             }
@@ -63,7 +65,7 @@ namespace TugasSTBI_1
         public static void findResultQueries()
         {
             // list of hasil tiap query (list of list of result)
-            List<List<Docvalue>> allResults = new List<List<Docvalue>>();
+            allResults = new List<List<Docvalue>>();
             //for each query
             for (int i = 0; i < qs.nQuery(); i++)
             {
