@@ -5,11 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TugasSTBI_1
 {
     class Program
     {
+        // Global variable
+        public static List<Document> ListDocuments; /*List of Document*/
+        public static Queries qs; /*list of query*/
+        public static string outputInvertedFile = "D:/InvertedFile.txt";
+        
+
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
         {
@@ -53,25 +60,79 @@ namespace TugasSTBI_1
             return ListQueryWithWeight;
         }
 
-        static void Main(string[] args)
+        public static void findResultQueries()
         {
-            // read file
-            string pathDocs = "D:/ADI/adi.all";
-            string text = System.IO.File.ReadAllText(@pathDocs);
+            // list of hasil tiap query (list of list of result)
+            List<List<Docvalue>> allResults = new List<List<Docvalue>>();
+            //for each query
+            for (int i = 0; i < qs.nQuery(); i++)
+            {
+                List<Docvalue> result = new List<Docvalue>();
+                List<WeightedTermQuery> queryWithWeight = new List<WeightedTermQuery>();
+                queryWithWeight = weightingQuery(qs.getQuery(i), ListDocuments);
+                Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
+                result = sim.calculateDocumentsValue();
+                result = result.OrderByDescending(o => o.val).ToList();
+                allResults.Add(result);
+            }
 
-            // read queries
-            string pathQueries = "D:/ADI/query.text";
-            Queries qs = new Queries(pathQueries);
-            qs.print();
+            //print hasil pencarian to console
+            Console.WriteLine("RESULT : ");
+            for (int i = 0; i < allResults.Count(); i++)
+            {
+                Console.WriteLine("result for query" + i);
+                for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
+                {
+                    Console.Write(allResults[i][j].docNum);
+                    Console.Write("-");
+                    Console.Write(allResults[i][j].val);
+                    Console.Write("\n");
+                }
+            }
 
-            // read stopwords
-            StopwordTool.AddDictionaryFromText(@"D:/stopwords.txt");
+            //print hasil ke file
 
+            string outputResult = "D:/SearchResult.txt";
+            string line;
+            using (StreamWriter writer = new StreamWriter(outputResult))
+            {
+                Console.WriteLine("jumlah allresult count " + allResults.Count());
+                for (int i = 0; i < allResults.Count(); i++)
+                {
+                    Console.WriteLine("jumlah result count " + allResults.ElementAt(i).Count());
+                    for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
+                    {
+                        line = i + 1 + " ";
+                        line = line + allResults[i][j].docNum;
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            /*
+            for (int i = 1; i < relevantJudgement.Count()+1; i++)
+            {
+                Console.WriteLine("RJ query " + i);
+                for (int j = 0; j < relevantJudgement[i].Count(); j++)
+                {
+                    Console.Write(relevantJudgement[i][j]);
+                }
+            }*/
+            Console.WriteLine("Selesai!!");
+            Console.ReadLine();
+        }
+
+        public static void findResult()
+        {
+
+        }
+
+        public static void createInvertedFile(string documentsContent)
+        {
             // Split text per document
-            string[] TextDocuments = text.Split(new string[] { ".I " }, StringSplitOptions.None);
+            string[] TextDocuments = documentsContent.Split(new string[] { ".I " }, StringSplitOptions.None);
 
             // Make Document Entities
-            List<Document> ListDocuments = new List<Document>();
+            ListDocuments = new List<Document>();
             for (int i = 1; i < TextDocuments.Count(); i++)
             {
                 Document document = new Document(TextDocuments[i]);
@@ -97,7 +158,7 @@ namespace TugasSTBI_1
             }
 
             ListTermWithWeight.Sort();
-            string outputInvertedFile = "D:/InvertedFile.txt";
+            
             using (StreamWriter writer = new StreamWriter(@outputInvertedFile))
             {
                 foreach (string linestring in ListTermWithWeight)
@@ -105,155 +166,33 @@ namespace TugasSTBI_1
                     writer.WriteLine(linestring);
                 }
             }
-               
-            // list of hasil tiap query (list of list of result)
-            List<List<Docvalue>> allResults = new List<List<Docvalue>>();
-            //for each query
-            for (int i = 0; i < qs.nQuery(); i++)
-            {
-                List<Docvalue> result = new List<Docvalue>();
-                List<WeightedTermQuery> queryWithWeight = new List<WeightedTermQuery>();
-                queryWithWeight = weightingQuery(qs.getQuery(i), ListDocuments);            
-                Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
-                result = sim.calculateDocumentsValue();
-                result = result.OrderByDescending(o => o.val).ToList();
-                allResults.Add(result);
-            }
+        }
 
-            //print hasil pencarian to console
-            Console.WriteLine("RESULT : ");
-            for (int i = 0; i < allResults.Count(); i++)
-            {
-                Console.WriteLine("result for query" + i);
-                for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
-                {
-                    Console.Write(allResults[i][j].docNum);
-                    Console.Write("-");
-                    Console.Write(allResults[i][j].val);
-                    Console.Write("\n");
-                }
-            }
-            
-            //print hasil ke file
+        public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)
+        {
+            // read file
+            pathDocs = "D:/ADI/adi.all";
+            string text = System.IO.File.ReadAllText(@pathDocs);
 
-            string outputResult = "D:/SearchResult.txt";
-            string line;
-            using (StreamWriter writer = new StreamWriter(outputResult))
-            {
-                Console.WriteLine("jumlah allresult count " + allResults.Count());
-                for (int i = 0; i < allResults.Count(); i++)
-                {
-                    Console.WriteLine("jumlah result count " + allResults.ElementAt(i).Count());
-                    for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
-                    {
-                        line = i + 1 + " ";
-                        line = line + allResults[i][j].docNum;
-                        writer.WriteLine(line);
-                    }
-                }
-            }
-            /*
-            //hitung 
-            List<List<string>> relevantJudgement = new List<List<string>>();
-            List<string> rjPerQuery = new List<string>();
-            string relJudgPath = "D:/ADI/qrels.text";
-            string relJudgText = System.IO.File.ReadAllText(@relJudgPath);
-            string[] rjLine;
-            string [] rjChunked;
-            rjLine = relJudgText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            
-            for (int i = 0; i < rjLine.Count(); i++)
-            {
-                rjChunked = rjLine[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                //Console.WriteLine(Int32.Parse(rjChunked[0]) - 1);
-                //relevantJudgement[Int32.Parse(rjChunked[0]) - 1].Add("aaa");
-                //relevantJudgement[Int32.Parse(rjChunked[0]) - 1].Add(rjChunked[1]);
-            }
-            */
-            /*
-            for (int i = 1; i < relevantJudgement.Count()+1; i++)
-            {
-                Console.WriteLine("RJ query " + i);
-                for (int j = 0; j < relevantJudgement[i].Count(); j++)
-                {
-                    Console.Write(relevantJudgement[i][j]);
-                }
-            }*/
+            // read queries
+            pathQueries = "D:/ADI/query.text";
+            qs = new Queries(@pathQueries);
+            qs.print();
+
+            // read stopwords
+            StopwordTool.AddDictionaryFromText(@pathStopWord);
 
 
+            createInvertedFile(text);
+            findResult();
+        }
 
-
-
-
-
-                //TODO menghilangkan index di content
-
-                //// Test Term Weighting tiap kata tiap dokumen
-                //for (int i = 0; i < ListDocuments.Count(); i++)
-                //{
-                //    List<string> found = new List<string>();    // store word that has already counts
-                //    for (int j = 0; j < ListDocuments.ElementAt(i).Content.Count(); j++)
-                //    {
-                //        if (!found.Contains(ListDocuments.ElementAt(i).Content[j]))
-                //        {
-                //            found.Add(ListDocuments.ElementAt(i).Content[j]);
-
-                //            // menghitung termweght masing-masing kata di tiap dokumen
-                //            Console.WriteLine(ListDocuments.ElementAt(i).Content[j] + " : " + TW.CalculateTermWeighting(ListDocuments, i, j, 1, 1, 1));
-                //        }
-                //    }
-                //}
-
-                //using (StreamWriter writer = new StreamWriter(@"D:\InvertedFile.txt"))
-                //{
-                //    // Test Term Weighting tiap kata tiap dokumen
-                //    for (int i = 0; i < ListDocuments.Count(); i++)
-                //    {
-                //        List<string> found = new List<string>();    // store word that has already counts
-                //        for (int j = 0; j < ListDocuments.ElementAt(i).Content.Count(); j++)
-                //        {
-                //            if (!found.Contains(ListDocuments.ElementAt(i).Content[j]))
-                //            {
-                //                found.Add(ListDocuments.ElementAt(i).Content[j]);
-
-                //                // menghitung term weight masing-masing kata di tiap dokumen
-                //                writer.WriteLine(ListDocuments.ElementAt(i).Content[j] + " " + ListDocuments.ElementAt(i).No + " " + TW.CalculateTermWeighting(ListDocuments, i, j, 1, 1, 1));
-                //            }
-                //        }
-                //    }
-                //}
-
-                //// Remove stopwords on title and content document
-                //for (int i = 0; i < ListDocument.Count(); i++)
-                //{
-                //    //ListDocument.ElementAt(i).Title = StopwordTool.RemoveStopwords(ListDocument.ElementAt(i).Title);
-                //    ListDocument.ElementAt(i).Content = StopwordTool.RemoveStopwords(ListDocument.ElementAt(i).Content);
-                //}
-
-                ////// Test print atribut Author salah satu document
-                //for (int i = 0; i < ListDocument.ElementAt(57 - 1).Author.Count(); i++)
-                //{
-                //    Console.WriteLine(ListDocument.ElementAt(57 - 1).Author[i]);
-                //}
-
-                // Bagian content bisa dibuat menjadi, content + title
-
-                ////// Test buat kelas Document
-                //Console.WriteLine(new Document().Between(Documents[1], ".T", "\n.A"));
-
-                ////// Test split text per document
-                //Console.WriteLine(Documents[50]);
-                //Console.WriteLine(Documents.Count());
-
-                ////// Test Stopwords
-                //Console.WriteLine(StopwordTool.RemoveStopwords(
-                //    "I saw a cat and a horse"));
-                //Console.WriteLine(StopwordTool.RemoveStopwords(
-                //    "Google searches the Internet"));
-                //Console.WriteLine(StopwordTool.RemoveStopwords(
-                //    "Using an extra step"));
-                Console.WriteLine("Selesai!!");
-            Console.ReadLine();
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new IndexingForm());
         }
     }
 }

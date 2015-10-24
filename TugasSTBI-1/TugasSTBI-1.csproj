@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DBFE8D88-7ABD-494A-83D7-6F57D52969C1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TugasSTBI_1</RootNamespace>
     <AssemblyName>TugasSTBI-1</AssemblyName>
@@ -31,9 +31,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +47,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docvalue.cs" />
+    <Compile Include="IndexingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IndexingForm.Designer.cs">
+      <DependentUpon>IndexingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RetrieveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RetrieveForm.Designer.cs">
+      <DependentUpon>RetrieveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Similarity.cs" />
     <Compile Include="WeightedTermDoc.cs" />
     <Compile Include="Document.cs" />
@@ -55,6 +72,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="indexingForm.resx">
+      <DependentUpon>IndexingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RetrieveForm.resx">
+      <DependentUpon>RetrieveForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
