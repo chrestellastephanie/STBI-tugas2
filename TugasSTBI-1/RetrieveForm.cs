@@ -77,5 +77,10 @@ namespace TugasSTBI_1
                 listBoxResultInteractive.Items.Add("\n");
             }
         }
+
+        private void RetrieveForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

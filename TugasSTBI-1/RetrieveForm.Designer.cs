@@ -106,7 +106,9 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "RetrieveForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RetrieveForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RetrieveForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

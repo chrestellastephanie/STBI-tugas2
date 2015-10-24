@@ -53,17 +53,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.Tf = new System.Windows.Forms.GroupBox();
-            this.radioButtonRawTfQuery = new System.Windows.Forms.RadioButton();
-            this.radioButtonLogTfQuery = new System.Windows.Forms.RadioButton();
-            this.radioButtonBinaryTfQuery = new System.Windows.Forms.RadioButton();
-            this.radioButtonAugmentedTfQuery = new System.Windows.Forms.RadioButton();
             this.radioButtonNoTfQuery = new System.Windows.Forms.RadioButton();
+            this.radioButtonAugmentedTfQuery = new System.Windows.Forms.RadioButton();
+            this.radioButtonBinaryTfQuery = new System.Windows.Forms.RadioButton();
+            this.radioButtonLogTfQuery = new System.Windows.Forms.RadioButton();
+            this.radioButtonRawTfQuery = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButtonIdfQuery = new System.Windows.Forms.RadioButton();
             this.radioButtonNoIdfQuery = new System.Windows.Forms.RadioButton();
+            this.radioButtonIdfQuery = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioButtonNormQuery = new System.Windows.Forms.RadioButton();
             this.radioButtonNoNormQuery = new System.Windows.Forms.RadioButton();
+            this.radioButtonNormQuery = new System.Windows.Forms.RadioButton();
             this.checkBoxStemming = new System.Windows.Forms.CheckBox();
             this.textBoxDocPath = new System.Windows.Forms.TextBox();
             this.textBoxQueryPath = new System.Windows.Forms.TextBox();
@@ -211,13 +211,13 @@
             this.radioButtonLogTfDoc.Name = "radioButtonLogTfDoc";
             this.radioButtonLogTfDoc.Size = new System.Drawing.Size(56, 17);
             this.radioButtonLogTfDoc.TabIndex = 1;
-            this.radioButtonLogTfDoc.TabStop = true;
             this.radioButtonLogTfDoc.Text = "Log Tf";
             this.radioButtonLogTfDoc.UseVisualStyleBackColor = true;
             // 
             // radioButtonRawTfDoc
             // 
             this.radioButtonRawTfDoc.AutoSize = true;
+            this.radioButtonRawTfDoc.Checked = true;
             this.radioButtonRawTfDoc.Location = new System.Drawing.Point(18, 19);
             this.radioButtonRawTfDoc.Name = "radioButtonRawTfDoc";
             this.radioButtonRawTfDoc.Size = new System.Drawing.Size(60, 17);
@@ -251,6 +251,7 @@
             // radioButtonIdfDoc
             // 
             this.radioButtonIdfDoc.AutoSize = true;
+            this.radioButtonIdfDoc.Checked = true;
             this.radioButtonIdfDoc.Location = new System.Drawing.Point(6, 19);
             this.radioButtonIdfDoc.Name = "radioButtonIdfDoc";
             this.radioButtonIdfDoc.Size = new System.Drawing.Size(37, 17);
@@ -268,7 +269,7 @@
             this.groupBox3.Size = new System.Drawing.Size(136, 67);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "normalization";
+            this.groupBox3.Text = "Normalization";
             // 
             // radioButtonNoNormDoc
             // 
@@ -284,6 +285,7 @@
             // radioButtonNormDoc
             // 
             this.radioButtonNormDoc.AutoSize = true;
+            this.radioButtonNormDoc.Checked = true;
             this.radioButtonNormDoc.Location = new System.Drawing.Point(6, 23);
             this.radioButtonNormDoc.Name = "radioButtonNormDoc";
             this.radioButtonNormDoc.Size = new System.Drawing.Size(88, 17);
@@ -334,38 +336,16 @@
             this.Tf.TabStop = false;
             this.Tf.Text = "Tf";
             // 
-            // radioButtonRawTfQuery
+            // radioButtonNoTfQuery
             // 
-            this.radioButtonRawTfQuery.AutoSize = true;
-            this.radioButtonRawTfQuery.Location = new System.Drawing.Point(6, 20);
-            this.radioButtonRawTfQuery.Name = "radioButtonRawTfQuery";
-            this.radioButtonRawTfQuery.Size = new System.Drawing.Size(60, 17);
-            this.radioButtonRawTfQuery.TabIndex = 0;
-            this.radioButtonRawTfQuery.TabStop = true;
-            this.radioButtonRawTfQuery.Text = "Raw Tf";
-            this.radioButtonRawTfQuery.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonLogTfQuery
-            // 
-            this.radioButtonLogTfQuery.AutoSize = true;
-            this.radioButtonLogTfQuery.Location = new System.Drawing.Point(6, 43);
-            this.radioButtonLogTfQuery.Name = "radioButtonLogTfQuery";
-            this.radioButtonLogTfQuery.Size = new System.Drawing.Size(56, 17);
-            this.radioButtonLogTfQuery.TabIndex = 1;
-            this.radioButtonLogTfQuery.TabStop = true;
-            this.radioButtonLogTfQuery.Text = "Log Tf";
-            this.radioButtonLogTfQuery.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonBinaryTfQuery
-            // 
-            this.radioButtonBinaryTfQuery.AutoSize = true;
-            this.radioButtonBinaryTfQuery.Location = new System.Drawing.Point(6, 66);
-            this.radioButtonBinaryTfQuery.Name = "radioButtonBinaryTfQuery";
-            this.radioButtonBinaryTfQuery.Size = new System.Drawing.Size(67, 17);
-            this.radioButtonBinaryTfQuery.TabIndex = 2;
-            this.radioButtonBinaryTfQuery.TabStop = true;
-            this.radioButtonBinaryTfQuery.Text = "Binary Tf";
-            this.radioButtonBinaryTfQuery.UseVisualStyleBackColor = true;
+            this.radioButtonNoTfQuery.AutoSize = true;
+            this.radioButtonNoTfQuery.Location = new System.Drawing.Point(6, 112);
+            this.radioButtonNoTfQuery.Name = "radioButtonNoTfQuery";
+            this.radioButtonNoTfQuery.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonNoTfQuery.TabIndex = 4;
+            this.radioButtonNoTfQuery.TabStop = true;
+            this.radioButtonNoTfQuery.Text = "No Tf";
+            this.radioButtonNoTfQuery.UseVisualStyleBackColor = true;
             // 
             // radioButtonAugmentedTfQuery
             // 
@@ -378,16 +358,39 @@
             this.radioButtonAugmentedTfQuery.Text = "Augmented Tf";
             this.radioButtonAugmentedTfQuery.UseVisualStyleBackColor = true;
             // 
-            // radioButtonNoTfQuery
+            // radioButtonBinaryTfQuery
             // 
-            this.radioButtonNoTfQuery.AutoSize = true;
-            this.radioButtonNoTfQuery.Location = new System.Drawing.Point(6, 112);
-            this.radioButtonNoTfQuery.Name = "radioButtonNoTfQuery";
-            this.radioButtonNoTfQuery.Size = new System.Drawing.Size(52, 17);
-            this.radioButtonNoTfQuery.TabIndex = 4;
-            this.radioButtonNoTfQuery.TabStop = true;
-            this.radioButtonNoTfQuery.Text = "No Tf";
-            this.radioButtonNoTfQuery.UseVisualStyleBackColor = true;
+            this.radioButtonBinaryTfQuery.AutoSize = true;
+            this.radioButtonBinaryTfQuery.Location = new System.Drawing.Point(6, 66);
+            this.radioButtonBinaryTfQuery.Name = "radioButtonBinaryTfQuery";
+            this.radioButtonBinaryTfQuery.Size = new System.Drawing.Size(67, 17);
+            this.radioButtonBinaryTfQuery.TabIndex = 2;
+            this.radioButtonBinaryTfQuery.TabStop = true;
+            this.radioButtonBinaryTfQuery.Text = "Binary Tf";
+            this.radioButtonBinaryTfQuery.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonLogTfQuery
+            // 
+            this.radioButtonLogTfQuery.AutoSize = true;
+            this.radioButtonLogTfQuery.Location = new System.Drawing.Point(6, 43);
+            this.radioButtonLogTfQuery.Name = "radioButtonLogTfQuery";
+            this.radioButtonLogTfQuery.Size = new System.Drawing.Size(56, 17);
+            this.radioButtonLogTfQuery.TabIndex = 1;
+            this.radioButtonLogTfQuery.TabStop = true;
+            this.radioButtonLogTfQuery.Text = "Log Tf";
+            this.radioButtonLogTfQuery.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonRawTfQuery
+            // 
+            this.radioButtonRawTfQuery.AutoSize = true;
+            this.radioButtonRawTfQuery.Checked = true;
+            this.radioButtonRawTfQuery.Location = new System.Drawing.Point(6, 20);
+            this.radioButtonRawTfQuery.Name = "radioButtonRawTfQuery";
+            this.radioButtonRawTfQuery.Size = new System.Drawing.Size(60, 17);
+            this.radioButtonRawTfQuery.TabIndex = 0;
+            this.radioButtonRawTfQuery.TabStop = true;
+            this.radioButtonRawTfQuery.Text = "Raw Tf";
+            this.radioButtonRawTfQuery.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -400,17 +403,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "idf";
             // 
-            // radioButtonIdfQuery
-            // 
-            this.radioButtonIdfQuery.AutoSize = true;
-            this.radioButtonIdfQuery.Location = new System.Drawing.Point(8, 19);
-            this.radioButtonIdfQuery.Name = "radioButtonIdfQuery";
-            this.radioButtonIdfQuery.Size = new System.Drawing.Size(37, 17);
-            this.radioButtonIdfQuery.TabIndex = 0;
-            this.radioButtonIdfQuery.TabStop = true;
-            this.radioButtonIdfQuery.Text = "Idf";
-            this.radioButtonIdfQuery.UseVisualStyleBackColor = true;
-            // 
             // radioButtonNoIdfQuery
             // 
             this.radioButtonNoIdfQuery.AutoSize = true;
@@ -421,6 +413,18 @@
             this.radioButtonNoIdfQuery.TabStop = true;
             this.radioButtonNoIdfQuery.Text = "No idf";
             this.radioButtonNoIdfQuery.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonIdfQuery
+            // 
+            this.radioButtonIdfQuery.AutoSize = true;
+            this.radioButtonIdfQuery.Checked = true;
+            this.radioButtonIdfQuery.Location = new System.Drawing.Point(8, 19);
+            this.radioButtonIdfQuery.Name = "radioButtonIdfQuery";
+            this.radioButtonIdfQuery.Size = new System.Drawing.Size(37, 17);
+            this.radioButtonIdfQuery.TabIndex = 0;
+            this.radioButtonIdfQuery.TabStop = true;
+            this.radioButtonIdfQuery.Text = "Idf";
+            this.radioButtonIdfQuery.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -433,17 +437,6 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Normalization";
             // 
-            // radioButtonNormQuery
-            // 
-            this.radioButtonNormQuery.AutoSize = true;
-            this.radioButtonNormQuery.Location = new System.Drawing.Point(8, 19);
-            this.radioButtonNormQuery.Name = "radioButtonNormQuery";
-            this.radioButtonNormQuery.Size = new System.Drawing.Size(88, 17);
-            this.radioButtonNormQuery.TabIndex = 0;
-            this.radioButtonNormQuery.TabStop = true;
-            this.radioButtonNormQuery.Text = "Normalization";
-            this.radioButtonNormQuery.UseVisualStyleBackColor = true;
-            // 
             // radioButtonNoNormQuery
             // 
             this.radioButtonNoNormQuery.AutoSize = true;
@@ -454,6 +447,18 @@
             this.radioButtonNoNormQuery.TabStop = true;
             this.radioButtonNoNormQuery.Text = "No normalization";
             this.radioButtonNoNormQuery.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonNormQuery
+            // 
+            this.radioButtonNormQuery.AutoSize = true;
+            this.radioButtonNormQuery.Checked = true;
+            this.radioButtonNormQuery.Location = new System.Drawing.Point(8, 19);
+            this.radioButtonNormQuery.Name = "radioButtonNormQuery";
+            this.radioButtonNormQuery.Size = new System.Drawing.Size(88, 17);
+            this.radioButtonNormQuery.TabIndex = 0;
+            this.radioButtonNormQuery.TabStop = true;
+            this.radioButtonNormQuery.Text = "Normalization";
+            this.radioButtonNormQuery.UseVisualStyleBackColor = true;
             // 
             // checkBoxStemming
             // 
@@ -527,6 +532,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "IndexingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "indexingForm";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
