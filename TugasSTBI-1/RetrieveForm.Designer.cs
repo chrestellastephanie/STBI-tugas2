@@ -33,7 +33,7 @@
             this.textBoxInteractiveQuery = new System.Windows.Forms.TextBox();
             this.buttonInteractiveSearch = new System.Windows.Forms.Button();
             this.listBoxResultInteractive = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelResult = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -44,6 +44,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Experiment";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -59,13 +60,13 @@
             // 
             this.textBoxInteractiveQuery.Location = new System.Drawing.Point(12, 54);
             this.textBoxInteractiveQuery.Name = "textBoxInteractiveQuery";
-            this.textBoxInteractiveQuery.Size = new System.Drawing.Size(301, 20);
+            this.textBoxInteractiveQuery.Size = new System.Drawing.Size(799, 20);
             this.textBoxInteractiveQuery.TabIndex = 2;
             this.textBoxInteractiveQuery.Visible = false;
             // 
             // buttonInteractiveSearch
             // 
-            this.buttonInteractiveSearch.Location = new System.Drawing.Point(319, 52);
+            this.buttonInteractiveSearch.Location = new System.Drawing.Point(817, 51);
             this.buttonInteractiveSearch.Name = "buttonInteractiveSearch";
             this.buttonInteractiveSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonInteractiveSearch.TabIndex = 3;
@@ -79,25 +80,26 @@
             this.listBoxResultInteractive.FormattingEnabled = true;
             this.listBoxResultInteractive.Location = new System.Drawing.Point(12, 124);
             this.listBoxResultInteractive.Name = "listBoxResultInteractive";
-            this.listBoxResultInteractive.Size = new System.Drawing.Size(382, 199);
+            this.listBoxResultInteractive.Size = new System.Drawing.Size(880, 199);
             this.listBoxResultInteractive.TabIndex = 4;
             this.listBoxResultInteractive.Visible = false;
             // 
-            // label1
+            // labelResult
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "RESULT";
+            this.labelResult.AutoSize = true;
+            this.labelResult.Location = new System.Drawing.Point(12, 104);
+            this.labelResult.Name = "labelResult";
+            this.labelResult.Size = new System.Drawing.Size(50, 13);
+            this.labelResult.TabIndex = 5;
+            this.labelResult.Text = "RESULT";
+            this.labelResult.Visible = false;
             // 
             // RetrieveForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 390);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(904, 390);
+            this.Controls.Add(this.labelResult);
             this.Controls.Add(this.listBoxResultInteractive);
             this.Controls.Add(this.buttonInteractiveSearch);
             this.Controls.Add(this.textBoxInteractiveQuery);
@@ -117,6 +119,6 @@
         private System.Windows.Forms.TextBox textBoxInteractiveQuery;
         private System.Windows.Forms.Button buttonInteractiveSearch;
         private System.Windows.Forms.ListBox listBoxResultInteractive;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelResult;
     }
 }
