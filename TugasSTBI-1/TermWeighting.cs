@@ -136,17 +136,17 @@ namespace TugasSTBI_1
             return 1;
         }
 
-        public double Normalization (string [] content)
+        public double Normalization (string [] content, int tfCode, int idfCode)
         {
-            List<int> ListSum = FindSumEachTerm(content);
-            double result = Math.Sqrt(SumQuadrate(ListSum));
+            List<double> lWeight = getListWeight(content, tfCode, idfCode);
+            double result = Math.Sqrt(SumQuadrate(lWeight));
 
             return result;
         }
 
-        private long SumQuadrate (List<int> ListSum)
+        private double SumQuadrate (List<double> ListSum)
         {
-            long sum = 0;
+            double sum = 0;
 
             foreach(int count in ListSum)
             {
@@ -154,6 +154,21 @@ namespace TugasSTBI_1
             }
 
             return sum;
+        }
+
+        private List<double> getListWeight(string[] content, int tfCode, int idfCode)
+        {
+            List<double> lWeight = new List<double>();
+            foreach(var term in content)
+            {
+                double tf = CalculateTf(content, term, tfCode);
+                double idf = CalculateIdf(term, idfCode);
+                double result = tf * idf;
+
+                lWeight.Add(result);
+            }
+
+            return lWeight;
         }
 
         private List<int> FindSumEachTerm(string[] content)
@@ -192,7 +207,12 @@ namespace TugasSTBI_1
         {
             double tf = CalculateTf(Documents.ElementAt(NoDocument).Content, Documents.ElementAt(NoDocument).Content[NoTerm], TfCode);
             double idf = CalculateIdf(Documents.ElementAt(NoDocument).Content[NoTerm], IdfCode);
-            double normalization = CalculateNormalization(Documents.ElementAt(NoDocument).Content, NormalizationCode);
+            double normalization = CalculateNormalization(Documents.ElementAt(NoDocument).Content, TfCode, IdfCode, NormalizationCode);
+
+            if(normalization == 0)
+            {
+                return 0;
+            }
 
             return tf * idf / normalization;
         }
@@ -201,7 +221,12 @@ namespace TugasSTBI_1
         {
             double tf = CalculateTf(content, content[noTerm], tfCode);
             double idf = CalculateIdf(content[noTerm], idfCode);
-            double normalization = CalculateNormalization(content, normalizationCode);
+            double normalization = CalculateNormalization(content, tfCode, idfCode, normalizationCode);
+
+            if(normalization == 0)
+            {
+                return 0;
+            }
 
             return tf * idf / normalization;
         }
@@ -247,16 +272,16 @@ namespace TugasSTBI_1
             return result;
         }
 
-        private double CalculateNormalization (string [] content, int code)
+        private double CalculateNormalization (string [] content, int tfCode, int idfCode, int normalizationCode)
         {
             double result = 0;
-            switch (code)
+            switch (normalizationCode)
             {
                 case 0:
                     result = (double)NoNormalization();
                     break;
                 case 1:
-                    result = Normalization(content);
+                    result = Normalization(content, tfCode, idfCode);
                     break;
             }
 
