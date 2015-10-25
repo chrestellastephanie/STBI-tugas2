@@ -19,6 +19,11 @@ namespace TugasSTBI_1
         public IndexingForm()
         {
             InitializeComponent();
+
+            docDirectory = textBoxDocPath.Text;
+            queryDirectory = textBoxQueryPath.Text;
+            stopWordDirectory = textBoxSWPath.Text;
+            relevanceDirectory = textBoxRelPath.Text;
         }
 
         private void button1_Click(object sender, EventArgs e)

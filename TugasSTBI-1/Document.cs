@@ -16,22 +16,46 @@ namespace TugasSTBI_1
 
         public Document(string text)
         {
-            No = Before(text, "\n.T");
-            Title = Between(text, ".T\n", "\n.A");
-            
-            string TextAuthor = Between(text, ".A\n", "\n.W");
-            if(TextAuthor.Contains("\n"))   // if author more than one
+            if(!text.Contains("\n.A"))  // if doesn't have author
             {
-                // Split text per author
-                Author = TextAuthor.Split('\n');
+                No = Before(text, "\n.T");
+                Title = Between(text, ".T\n", "\n.W");
+                Author = null;
             }
-            else                            // if author just one
+            else
             {
-                Author = new string[1];
-                Author[0] = TextAuthor;
+                No = Before(text, "\n.T");
+                Title = getTitleRecurrence(Between(text, ".T\n", "\n.A"));
+
+                string TextAuthor = Between(text, ".A\n", "\n.W");
+                if(TextAuthor.Contains("\n.A\n"))
+                {
+                    Author = TextAuthor.Split(new string[] { "\n.A\n" }, StringSplitOptions.None);
+                }
+                else
+                {
+                    if(TextAuthor.Contains("\n"))   // if author more than one
+                    {
+                        // Split text per author
+                        Author = TextAuthor.Split('\n');
+                    }
+                    else                            // if author just one
+                    {
+                        Author = new string[1];
+                        Author[0] = TextAuthor;
+                    }
+                }
             }
 
-            string ContentString = StopwordTool.RemoveStopwords(After(text, ".W\n"));
+            string ContentString;
+            if(text.Contains("\n.X\n"))
+            {
+                ContentString = StopwordTool.RemoveStopwords(Between(text, ".W\n", "\n.X"));
+            }
+            else
+            {
+                ContentString = StopwordTool.RemoveStopwords(After(text, ".W\n"));
+            }
 
             // Regex, untuk menghilangkan angka
             ContentString = Regex.Replace(ContentString, @"[0-9]+ ", string.Empty);
@@ -42,6 +66,18 @@ namespace TugasSTBI_1
 
             // Split Content per word
             Content = ContentString.Split(' ');
+        }
+
+        private string getTitleRecurrence(string text)
+        {
+            if (text.Contains("\n.A\n"))
+            {
+                return getTitleRecurrence(Before(text, "\n.A"));
+            }
+            else
+            {
+                return text;
+            }
         }
 
         /// <summary>

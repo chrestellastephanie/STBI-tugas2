@@ -478,7 +478,7 @@
             this.textBoxDocPath.Name = "textBoxDocPath";
             this.textBoxDocPath.Size = new System.Drawing.Size(202, 20);
             this.textBoxDocPath.TabIndex = 20;
-            this.textBoxDocPath.Text = "D:/ADI/adi.all";
+            this.textBoxDocPath.Text = "D:\\ADI\\adi.all";
             // 
             // textBoxQueryPath
             // 
@@ -486,7 +486,7 @@
             this.textBoxQueryPath.Name = "textBoxQueryPath";
             this.textBoxQueryPath.Size = new System.Drawing.Size(202, 20);
             this.textBoxQueryPath.TabIndex = 21;
-            this.textBoxQueryPath.Text = "D:/ADI/query.text";
+            this.textBoxQueryPath.Text = "D:\\ADI\\query.text";
             // 
             // textBoxSWPath
             // 
@@ -494,7 +494,7 @@
             this.textBoxSWPath.Name = "textBoxSWPath";
             this.textBoxSWPath.Size = new System.Drawing.Size(202, 20);
             this.textBoxSWPath.TabIndex = 22;
-            this.textBoxSWPath.Text = "D:/stopwords.txt";
+            this.textBoxSWPath.Text = "D:\\stopwords.txt";
             // 
             // textBoxRelPath
             // 
@@ -502,7 +502,7 @@
             this.textBoxRelPath.Name = "textBoxRelPath";
             this.textBoxRelPath.Size = new System.Drawing.Size(161, 20);
             this.textBoxRelPath.TabIndex = 23;
-            this.textBoxRelPath.Text = "D:/ADI/qrels.text";
+            this.textBoxRelPath.Text = "D:\\ADI\\qrels.text";
             // 
             // IndexingForm
             // 

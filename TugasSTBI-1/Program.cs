@@ -175,17 +175,14 @@ namespace TugasSTBI_1
         public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)
         {
             // read file
-            pathDocs = "D:/ADI/adi.all";
             string text = System.IO.File.ReadAllText(@pathDocs);
 
             // read queries
-            pathQueries = "D:/ADI/query.text";
             qs = new Queries(@pathQueries);
             qs.print();
 
             // read stopwords
             StopwordTool.AddDictionaryFromText(@pathStopWord);
-
 
             createInvertedFile(text);
             findResult();
