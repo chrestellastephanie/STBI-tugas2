@@ -18,6 +18,7 @@ namespace TugasSTBI_1
         public static List<List<Docvalue>> allResults;
         public static int tfDocCode, idfDocCode, normDocCode;
         public static int tfQueryCode, idfQueryCode, normQueryCode;
+        public static int stemCode;
 
 
         // return weight for each query term
@@ -30,10 +31,12 @@ namespace TugasSTBI_1
             // Regex, untuk menghilangkan angka
             queryString = Regex.Replace(queryString, @"[0-9]+ ", string.Empty);
 
-            // Stemming, mengubah kata ke bentuk dasarnya
-            StemmingTool Stemmer = new StemmingTool();
-            queryString = Stemmer.Stemming(queryString);
-
+            if(stemCode == 1)
+            {
+                // Stemming, mengubah kata ke bentuk dasarnya
+                StemmingTool Stemmer = new StemmingTool();
+                queryString = Stemmer.Stemming(queryString);
+            }
 
             string[] qTerm = queryString.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             TermWeighting QW = new TermWeighting(ListDocuments);
@@ -139,7 +142,7 @@ namespace TugasSTBI_1
             ListDocuments = new List<Document>();
             for (int i = 1; i < TextDocuments.Count(); i++)
             {
-                Document document = new Document(TextDocuments[i]);
+                Document document = new Document(TextDocuments[i], stemCode);
                 ListDocuments.Add(document);
             }
 

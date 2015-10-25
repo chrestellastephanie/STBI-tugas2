@@ -84,6 +84,8 @@ namespace TugasSTBI_1
             Program.tfQueryCode = getTfQueryRadioButtonValue();
             Program.idfQueryCode = getIdfQueryRadioButtonValue();
             Program.normQueryCode = getNormQueryRadioButtonValue();
+
+            Program.stemCode = getStemCheckBoxValue();
         }
 
         private int getTfDocRadioButtonValue()
@@ -169,6 +171,17 @@ namespace TugasSTBI_1
         {
             int value = 0;
             if (radioButtonNormQuery.Checked == true)
+            {
+                value = 1;
+            }
+
+            return value;
+        }
+
+        private int getStemCheckBoxValue()
+        {
+            int value = 0;
+            if (checkBoxStemming.Checked == true)
             {
                 value = 1;
             }

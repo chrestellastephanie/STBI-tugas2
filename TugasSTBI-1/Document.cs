@@ -14,7 +14,7 @@ namespace TugasSTBI_1
         public string [] Author { get; set; }
         public string [] Content { get; set; }
 
-        public Document(string text)
+        public Document(string text, int stemCode)
         {
             if(!text.Contains("\n.A"))  // if doesn't have author
             {
@@ -60,9 +60,12 @@ namespace TugasSTBI_1
             // Regex, untuk menghilangkan angka
             ContentString = Regex.Replace(ContentString, @"[0-9]+ ", string.Empty);
 
-            // Stemming, mengubah kata ke bentuk dasarnya
-            StemmingTool Stemmer = new StemmingTool();
-            ContentString = Stemmer.Stemming(ContentString);
+            if(stemCode == 1)
+            {
+                // Stemming, mengubah kata ke bentuk dasarnya
+                StemmingTool Stemmer = new StemmingTool();
+                ContentString = Stemmer.Stemming(ContentString);
+            }
 
             // Split Content per word
             Content = ContentString.Split(' ');
