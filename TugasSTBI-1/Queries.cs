@@ -9,7 +9,11 @@ namespace TugasSTBI_1
     class Queries
     {
         public string [] query;
-        
+
+        public Queries()
+        {
+            query = new string[1];
+        }
         public Queries(string pathQueries)
         {
             // read file
@@ -23,8 +27,6 @@ namespace TugasSTBI_1
             {
                 query[i] = After(query[i], ".W\n");
             }
-           
-
         }
         public string getQuery(int n)
         {

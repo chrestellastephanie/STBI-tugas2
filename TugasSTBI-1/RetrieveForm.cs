@@ -27,8 +27,11 @@ namespace TugasSTBI_1
 
         private void buttonInteractiveSearch_Click(object sender, EventArgs e)
         {
-            Program.qs.query = textBoxInteractiveQuery.Text.Split(' ');
-            Program.findResultQueries();
+            //here
+            Queries interactiveQuery = new Queries();
+            interactiveQuery.query[0] = textBoxInteractiveQuery.Text;
+            //Program.qs.query = textBoxInteractiveQuery.Text.Split(' ');
+            Program.findResultQueries(interactiveQuery);
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
@@ -54,7 +57,7 @@ namespace TugasSTBI_1
             listBoxResultInteractive.Visible = true;
             labelResult.Visible = true;
 
-            Program.findResultQueries();
+            Program.findResultQueries(Program.qs);
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;

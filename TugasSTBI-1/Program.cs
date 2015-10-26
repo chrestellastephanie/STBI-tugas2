@@ -67,16 +67,16 @@ namespace TugasSTBI_1
             return ListQueryWithWeight;
         }
 
-        public static void findResultQueries()
+        public static void findResultQueries(Queries queries)
         {
             // list of hasil tiap query (list of list of result)
             allResults = new List<List<Docvalue>>();
             //for each query
-            for (int i = 0; i < qs.nQuery(); i++)
+            for (int i = 0; i < queries.nQuery(); i++)
             {
                 List<Docvalue> result = new List<Docvalue>();
                 List<WeightedTermQuery> queryWithWeight = new List<WeightedTermQuery>();
-                queryWithWeight = weightingQuery(qs.getQuery(i), ListDocuments);
+                queryWithWeight = weightingQuery(queries.getQuery(i), ListDocuments);
                 Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
@@ -128,11 +128,7 @@ namespace TugasSTBI_1
             Console.ReadLine();
         }
 
-        public static void findResult()
-        {
-
-        }
-
+ 
         public static void createInvertedFile(string documentsContent)
         {
             // Split text per document
@@ -188,7 +184,7 @@ namespace TugasSTBI_1
             StopwordTool.AddDictionaryFromText(@pathStopWord);
 
             createInvertedFile(text);
-            findResult();
+            findResultQueries(qs);
         }
 
         [STAThread]
