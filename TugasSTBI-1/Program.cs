@@ -14,12 +14,13 @@ namespace TugasSTBI_1
         // Global variable
         public static List<Document> ListDocuments; /*List of Document*/
         public static Queries qs; /*list of query*/
-        public static string outputInvertedFile = "D:/InvertedFile.txt";
+        public static List<List<string>> relevantJudgements; /*list relevant judgement for queries*/
         public static List<List<Docvalue>> allResults;
         public static int tfDocCode, idfDocCode, normDocCode;
         public static int tfQueryCode, idfQueryCode, normQueryCode;
         public static int stemCode;
-
+        public static string outputInvertedFile = "D:/InvertedFile.txt";
+        public static string relJudgPath = "D:/ADI/qrels.text";
 
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
@@ -67,6 +68,7 @@ namespace TugasSTBI_1
             return ListQueryWithWeight;
         }
 
+        
         public static void findResultQueries(Queries queries)
         {
             // list of hasil tiap query (list of list of result)
@@ -115,15 +117,7 @@ namespace TugasSTBI_1
                     }
                 }
             }
-            /*
-            for (int i = 1; i < relevantJudgement.Count()+1; i++)
-            {
-                Console.WriteLine("RJ query " + i);
-                for (int j = 0; j < relevantJudgement[i].Count(); j++)
-                {
-                    Console.Write(relevantJudgement[i][j]);
-                }
-            }*/
+
             Console.WriteLine("Selesai!!");
             Console.ReadLine();
         }
@@ -171,6 +165,46 @@ namespace TugasSTBI_1
             }
         }
 
+        public static void readRelJudg()
+        {
+            relevantJudgements = new List<List<string>>();
+            List<string> rjPerQuery = new List<string>();
+            string relJudgText = System.IO.File.ReadAllText(@relJudgPath);
+            string[] rjLine;
+            string[] rjChunked;
+            rjLine = relJudgText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < rjLine.Count(); i++)
+            {
+                Console.WriteLine(rjLine[i]);
+                rjChunked = rjLine[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (relevantJudgements.Count() < Int32.Parse(rjChunked[0])) //di list belum ada list untuk query ke i
+                {
+                    relevantJudgements.Add(new List<string>());
+                }
+                relevantJudgements.ElementAt(Int32.Parse(rjChunked[0]) - 1).Add(rjChunked[1]);
+            }
+            // print relevant judgement to console
+            Console.WriteLine("ini rel judgnya");
+            for (int i = 0; i < relevantJudgements.Count(); i++)
+            {
+                for (int j = 0; j < relevantJudgements.ElementAt(i).Count(); j++)
+                {
+                    Console.Write(relevantJudgements.ElementAt(i).ElementAt(j));
+                    Console.Write("-");
+                }
+                Console.Write("\n");
+            }
+        }
+
+        public int nRelevantRetrieved(List<List<Docvalue>> allRes, List<List<string>> allRelJudg)
+        {
+            int n = 0;
+            // terakhir sampe sini
+
+            return n;
+        }
+
         public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)
         {
             // read file
@@ -184,7 +218,8 @@ namespace TugasSTBI_1
             StopwordTool.AddDictionaryFromText(@pathStopWord);
 
             createInvertedFile(text);
-            findResultQueries(qs);
+            //findResultQueries(qs);
+            readRelJudg();
         }
 
         [STAThread]
