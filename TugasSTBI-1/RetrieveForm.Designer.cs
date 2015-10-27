@@ -60,13 +60,13 @@
             // 
             this.textBoxInteractiveQuery.Location = new System.Drawing.Point(12, 54);
             this.textBoxInteractiveQuery.Name = "textBoxInteractiveQuery";
-            this.textBoxInteractiveQuery.Size = new System.Drawing.Size(799, 20);
+            this.textBoxInteractiveQuery.Size = new System.Drawing.Size(382, 20);
             this.textBoxInteractiveQuery.TabIndex = 2;
             this.textBoxInteractiveQuery.Visible = false;
             // 
             // buttonInteractiveSearch
             // 
-            this.buttonInteractiveSearch.Location = new System.Drawing.Point(817, 51);
+            this.buttonInteractiveSearch.Location = new System.Drawing.Point(400, 54);
             this.buttonInteractiveSearch.Name = "buttonInteractiveSearch";
             this.buttonInteractiveSearch.Size = new System.Drawing.Size(75, 23);
             this.buttonInteractiveSearch.TabIndex = 3;
@@ -80,7 +80,7 @@
             this.listBoxResultInteractive.FormattingEnabled = true;
             this.listBoxResultInteractive.Location = new System.Drawing.Point(12, 124);
             this.listBoxResultInteractive.Name = "listBoxResultInteractive";
-            this.listBoxResultInteractive.Size = new System.Drawing.Size(880, 381);
+            this.listBoxResultInteractive.Size = new System.Drawing.Size(382, 381);
             this.listBoxResultInteractive.TabIndex = 4;
             this.listBoxResultInteractive.Visible = false;
             // 
@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 524);
+            this.ClientSize = new System.Drawing.Size(485, 524);
             this.Controls.Add(this.labelResult);
             this.Controls.Add(this.listBoxResultInteractive);
             this.Controls.Add(this.buttonInteractiveSearch);
