@@ -21,7 +21,7 @@ namespace TugasSTBI_1
         public static int tfQueryCode, idfQueryCode, normQueryCode;
         public static int stemCode;
         public static string outputInvertedFile = "D:/InvertedFile.txt";
-        public static string relJudgPath = "D:/ADI/qrels.text";
+        //public static string relJudgPath = "D:/ADI/qrels.text";
 
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
@@ -109,7 +109,7 @@ namespace TugasSTBI_1
                 Console.WriteLine("jumlah allresult count " + allResults.Count());
                 for (int i = 0; i < allResults.Count(); i++)
                 {
-                    Console.WriteLine("jumlah result count " + allResults.ElementAt(i).Count());
+                    Console.WriteLine("jumlah result count " + i + (" : ") + allResults.ElementAt(i).Count());
                     for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
                     {
                         line = i + 1 + " ";
@@ -166,14 +166,15 @@ namespace TugasSTBI_1
             }
         }
 
-        public static void readRelJudg()
+        public static void readRelJudg(string pathRelJudg)
         {
             relevantJudgements = new List<List<string>>();
             List<string> rjPerQuery = new List<string>();
-            string relJudgText = System.IO.File.ReadAllText(@relJudgPath);
+            string relJudgText = System.IO.File.ReadAllText(@pathRelJudg);
             string[] rjLine;
             string[] rjChunked;
             rjLine = relJudgText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine("jumlah relevan judg : " + rjLine.Count());
             for (int i = 0; i < rjLine.Count(); i++)
             {
                 Console.WriteLine(rjLine[i]);
@@ -210,10 +211,12 @@ namespace TugasSTBI_1
                 {
                     if (allRelJudg[i].Contains(allRes[i][j].docNum))
                     {
+                        
                         Console.Write(allRes[i][j].docNum);
                         Console.Write("-");
                         Console.Write(allRes[i][j].val);
                         Console.Write("\n");
+                         
                         n++;                           
                     }
                 }
@@ -225,6 +228,22 @@ namespace TugasSTBI_1
                 Console.Write(listOfNRelevantRetrieved.ElementAt(i));
                 Console.Write("\n");
             }
+        }
+        public static double calculateRecall(int queryNumber)
+        {
+            double recall = 0;
+            recall = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
+            //Console.WriteLine("jumlah benar yang diretrieve : " + listOfNRelevantRetrieved.ElementAt(queryNumber));
+            //Console.WriteLine("banyaknya dokumen yang relevan pada collection : " + relevantJudgements.ElementAt(queryNumber).Count());
+            //Console.WriteLine("Recall  : " + recall);
+            return recall;
+        }
+
+        public static double calculatePrecision(int queryNumber)
+        {
+            double precision = 0;
+            precision = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)allResults.ElementAt(queryNumber).Count();
+            return precision; 
         }
 
         public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)

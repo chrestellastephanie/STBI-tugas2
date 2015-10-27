@@ -50,14 +50,18 @@ namespace TugasSTBI_1
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) //experiment button
         {
             textBoxInteractiveQuery.Visible = false;
             buttonInteractiveSearch.Visible = false;
             listBoxResultInteractive.Visible = true;
             labelResult.Visible = true;
 
+            Program.readRelJudg(IndexingForm.relevanceDirectory);
             Program.findResultQueries(Program.qs);
+            Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements);
+
+            
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
@@ -65,12 +69,13 @@ namespace TugasSTBI_1
             {
                 listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
                 listBoxResultInteractive.Items.Add(Program.qs.query[i]);
-
+                listBoxResultInteractive.Items.Add("Recall = " + Program.calculateRecall(i));
+                listBoxResultInteractive.Items.Add("Precision = " + Program.calculatePrecision(i));
 
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
                     line = j + 1 + ". ";
-                    line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
+                    //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
                     line = line + ("(") + Program.ListDocuments[nd].No + (")");
                     line = line + (" - ");
@@ -78,10 +83,7 @@ namespace TugasSTBI_1
                     listBoxResultInteractive.Items.Add(line);
                 }
                 listBoxResultInteractive.Items.Add("\n");
-            }
-
-            Program.readRelJudg();
-            Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements);
+            }            
         }
 
         private void RetrieveForm_FormClosing(object sender, FormClosingEventArgs e)
