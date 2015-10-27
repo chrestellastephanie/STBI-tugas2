@@ -79,6 +79,9 @@ namespace TugasSTBI_1
                 }
                 listBoxResultInteractive.Items.Add("\n");
             }
+
+            Program.readRelJudg();
+            Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements);
         }
 
         private void RetrieveForm_FormClosing(object sender, FormClosingEventArgs e)

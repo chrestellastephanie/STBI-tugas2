@@ -16,6 +16,7 @@ namespace TugasSTBI_1
         public static Queries qs; /*list of query*/
         public static List<List<string>> relevantJudgements; /*list relevant judgement for queries*/
         public static List<List<Docvalue>> allResults;
+        public static List<int> listOfNRelevantRetrieved; // jumlah relevan dokumen yang diretrieve               
         public static int tfDocCode, idfDocCode, normDocCode;
         public static int tfQueryCode, idfQueryCode, normQueryCode;
         public static int stemCode;
@@ -197,12 +198,33 @@ namespace TugasSTBI_1
             }
         }
 
-        public int nRelevantRetrieved(List<List<Docvalue>> allRes, List<List<string>> allRelJudg)
+        public static void nRelevantRetrieved(List<List<Docvalue>> allRes, List<List<string>> allRelJudg)
         {
             int n = 0;
-            // terakhir sampe sini
-
-            return n;
+            listOfNRelevantRetrieved = new List<int>();
+            for (int i = 0; i < allRes.Count(); i++)
+            {
+                Console.WriteLine("result for query" + i);
+                n = 0;
+                for (int j = 0; j < allRes.ElementAt(i).Count(); j++)
+                {
+                    if (allRelJudg[i].Contains(allRes[i][j].docNum))
+                    {
+                        Console.Write(allRes[i][j].docNum);
+                        Console.Write("-");
+                        Console.Write(allRes[i][j].val);
+                        Console.Write("\n");
+                        n++;                           
+                    }
+                }
+                listOfNRelevantRetrieved.Add(n);
+            }
+            for (int i = 0; i < listOfNRelevantRetrieved.Count(); i++)
+            {
+                Console.Write("yang relevan untuk query " + i + ":" );
+                Console.Write(listOfNRelevantRetrieved.ElementAt(i));
+                Console.Write("\n");
+            }
         }
 
         public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)
@@ -219,7 +241,7 @@ namespace TugasSTBI_1
 
             createInvertedFile(text);
             //findResultQueries(qs);
-            readRelJudg();
+            
         }
 
         [STAThread]
