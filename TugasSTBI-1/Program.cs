@@ -211,12 +211,10 @@ namespace TugasSTBI_1
                 {
                     if (allRelJudg[i].Contains(allRes[i][j].docNum))
                     {
-                        
                         Console.Write(allRes[i][j].docNum);
                         Console.Write("-");
                         Console.Write(allRes[i][j].val);
                         Console.Write("\n");
-                         
                         n++;                           
                     }
                 }
@@ -238,14 +236,33 @@ namespace TugasSTBI_1
             //Console.WriteLine("Recall  : " + recall);
             return recall;
         }
-
         public static double calculatePrecision(int queryNumber)
         {
             double precision = 0;
             precision = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)allResults.ElementAt(queryNumber).Count();
             return precision; 
         }
-
+        public static double AveragePrecision(int queryNumber)
+        {
+            double AveragePrecision = 0;
+            int relevant = 0;
+            for (int j = 0; j < allResults.ElementAt(queryNumber).Count(); j++)
+            {
+                if (relevantJudgements[queryNumber].Contains(allResults[queryNumber][j].docNum))
+                {
+                    relevant++;
+                    AveragePrecision = AveragePrecision + (double)relevant / (double)(j + 1);
+                }
+            }
+            return AveragePrecision;
+        }
+        public static double calculateNIAP(int queryNumber)
+        {
+            double NIAP = 0;
+            NIAP = AveragePrecision(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
+            Console.WriteLine("NIAP = " + NIAP);
+            return NIAP;
+        }
         public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)
         {
             // read file
