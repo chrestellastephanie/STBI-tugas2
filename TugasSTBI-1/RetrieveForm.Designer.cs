@@ -80,7 +80,7 @@
             this.listBoxResultInteractive.FormattingEnabled = true;
             this.listBoxResultInteractive.Location = new System.Drawing.Point(12, 124);
             this.listBoxResultInteractive.Name = "listBoxResultInteractive";
-            this.listBoxResultInteractive.Size = new System.Drawing.Size(880, 199);
+            this.listBoxResultInteractive.Size = new System.Drawing.Size(880, 381);
             this.listBoxResultInteractive.TabIndex = 4;
             this.listBoxResultInteractive.Visible = false;
             // 
@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 390);
+            this.ClientSize = new System.Drawing.Size(904, 524);
             this.Controls.Add(this.labelResult);
             this.Controls.Add(this.listBoxResultInteractive);
             this.Controls.Add(this.buttonInteractiveSearch);
