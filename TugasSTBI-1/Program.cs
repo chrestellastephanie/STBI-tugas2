@@ -59,13 +59,13 @@ namespace TugasSTBI_1
                 }
             }
             /*Print to console*/
-            Console.Write("QUERY : ");
+            /*Console.Write("QUERY : ");
             foreach (var item in ListQueryWithWeight)
             {
                 Console.Write(item.term);
                 Console.Write(item.weight);
                 Console.Write("\n");
-            }
+            }*/
             return ListQueryWithWeight;
         }
 
@@ -87,6 +87,7 @@ namespace TugasSTBI_1
             }
 
             //print hasil pencarian to console
+            /*
             Console.WriteLine("RESULT : ");
             for (int i = 0; i < allResults.Count(); i++)
             {
@@ -98,7 +99,7 @@ namespace TugasSTBI_1
                     Console.Write(allResults[i][j].val);
                     Console.Write("\n");
                 }
-            }
+            }*/
 
             //print hasil ke file
 
@@ -106,10 +107,10 @@ namespace TugasSTBI_1
             string line;
             using (StreamWriter writer = new StreamWriter(outputResult))
             {
-                Console.WriteLine("jumlah allresult count " + allResults.Count());
+                //Console.WriteLine("jumlah allresult count " + allResults.Count());
                 for (int i = 0; i < allResults.Count(); i++)
                 {
-                    Console.WriteLine("jumlah result count " + i + (" : ") + allResults.ElementAt(i).Count());
+                    //Console.WriteLine("jumlah result count " + i + (" : ") + allResults.ElementAt(i).Count());
                     for (int j = 0; j < allResults.ElementAt(i).Count(); j++)
                     {
                         line = i + 1 + " ";
@@ -133,10 +134,14 @@ namespace TugasSTBI_1
             ListDocuments = new List<Document>();
             for (int i = 1; i < TextDocuments.Count(); i++)
             {
+                //Console.WriteLine(TextDocuments[i]);
                 Document document = new Document(TextDocuments[i], stemCode);
+                //Console.WriteLine(document.Title);
                 ListDocuments.Add(document);
             }
 
+            //uncomment
+            /*
             TermWeighting TW = new TermWeighting(ListDocuments);
             List<string> ListTermWithWeight = new List<string>();
 
@@ -145,6 +150,7 @@ namespace TugasSTBI_1
                 List<string> found = new List<string>();    // store word that has already counts
                 for (int j = 0; j < ListDocuments.ElementAt(i).Content.Count(); j++)
                 {
+                    //Console.WriteLine(ListDocuments.ElementAt(i).Content[j]);
                     if (!found.Contains(ListDocuments.ElementAt(i).Content[j]))
                     {
                         found.Add(ListDocuments.ElementAt(i).Content[j]);
@@ -163,7 +169,7 @@ namespace TugasSTBI_1
                 {
                     writer.WriteLine(linestring);
                 }
-            }
+            }*/
         }
 
         public static void readRelJudg(string pathRelJudg)
@@ -174,20 +180,23 @@ namespace TugasSTBI_1
             string[] rjLine;
             string[] rjChunked;
             rjLine = relJudgText.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            Console.WriteLine("jumlah relevan judg : " + rjLine.Count());
+            //Console.WriteLine("jumlah relevan judg : " + rjLine.Count());
             for (int i = 0; i < rjLine.Count(); i++)
             {
-                Console.WriteLine(rjLine[i]);
+                //Console.WriteLine(rjLine[i]);
                 rjChunked = rjLine[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (relevantJudgements.Count() < Int32.Parse(rjChunked[0])) //di list belum ada list untuk query ke i
+                //Console.WriteLine(rjLine[i]);
+                while (relevantJudgements.Count() != Int32.Parse(rjChunked[0])) //di list belum ada list untuk query ke i
                 {
                     relevantJudgements.Add(new List<string>());
                 }
+                //error : index was out of range (yang ke 36 nya ga ada)
                 relevantJudgements.ElementAt(Int32.Parse(rjChunked[0]) - 1).Add(rjChunked[1]);
+                //Console.WriteLine(Int32.Parse(rjChunked[0]) - 1 + " -- " + rjChunked[1]);
             }
             // print relevant judgement to console
-            Console.WriteLine("ini rel judgnya");
+            //Console.WriteLine("ini rel judgnya");
+            /*
             for (int i = 0; i < relevantJudgements.Count(); i++)
             {
                 for (int j = 0; j < relevantJudgements.ElementAt(i).Count(); j++)
@@ -196,7 +205,7 @@ namespace TugasSTBI_1
                     Console.Write("-");
                 }
                 Console.Write("\n");
-            }
+            }*/
         }
 
         public static void nRelevantRetrieved(List<List<Docvalue>> allRes, List<List<string>> allRelJudg)
@@ -205,27 +214,34 @@ namespace TugasSTBI_1
             listOfNRelevantRetrieved = new List<int>();
             for (int i = 0; i < allRes.Count(); i++)
             {
-                Console.WriteLine("result for query" + i);
+                //Console.WriteLine("result for query" + i);
                 n = 0;
                 for (int j = 0; j < allRes.ElementAt(i).Count(); j++)
                 {
-                    if (allRelJudg[i].Contains(allRes[i][j].docNum))
+                    //Console.WriteLine(i);
+                    if (allRelJudg[i].Count() != 0)
                     {
-                        Console.Write(allRes[i][j].docNum);
-                        Console.Write("-");
-                        Console.Write(allRes[i][j].val);
-                        Console.Write("\n");
-                        n++;                           
+                        if (allRelJudg[i].Contains(allRes[i][j].docNum))
+                        {
+                            //Console.Write(i);
+                            //Console.Write("...");
+                            //Console.Write(allRes[i][j].docNum);
+                            //Console.Write("-");
+                            //Console.Write(allRes[i][j].val);
+                            //Console.Write("\n");
+                            n++;
+                        }
                     }
                 }
                 listOfNRelevantRetrieved.Add(n);
             }
+            /*
             for (int i = 0; i < listOfNRelevantRetrieved.Count(); i++)
             {
                 Console.Write("yang relevan untuk query " + i + ":" );
                 Console.Write(listOfNRelevantRetrieved.ElementAt(i));
                 Console.Write("\n");
-            }
+            }*/
         }
         public static double calculateRecall(int queryNumber)
         {
@@ -260,7 +276,7 @@ namespace TugasSTBI_1
         {
             double NIAP = 0;
             NIAP = AveragePrecision(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
-            Console.WriteLine("NIAP = " + NIAP);
+            //Console.WriteLine("NIAP = " + NIAP);
             return NIAP;
         }
         public static void mainProgram(string pathDocs, string pathQueries, string pathRel, string pathStopWord)
@@ -270,21 +286,22 @@ namespace TugasSTBI_1
 
             // read queries
             qs = new Queries(@pathQueries);
-            qs.print();
+            //qs.print();
 
             // read stopwords
             StopwordTool.AddDictionaryFromText(@pathStopWord);
 
-            createInvertedFile(text);
+            createInvertedFile(text); //uncomment
+            //readRelJudg(IndexingForm.relevanceDirectory);
             //findResultQueries(qs);
             
         }
 
         [STAThread]
         static void Main()
-        {
-            Application.EnableVisualStyles();
+        {            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new IndexingForm());
         }
     }

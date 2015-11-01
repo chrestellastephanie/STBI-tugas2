@@ -87,7 +87,7 @@ namespace TugasSTBI_1
         /// Reference: http://www.dotnetperls.com/between-before-after
         /// get document Author and Title
         /// </summary>
-        private string Between(string value, string a, string b)
+        public string Between(string value, string a, string b)
         {
             int posA = value.IndexOf(a);
             int posB = value.LastIndexOf(b);
@@ -111,7 +111,7 @@ namespace TugasSTBI_1
         /// Reference: http://www.dotnetperls.com/between-before-after
         /// get document number 
         /// </summary>
-        private string Before(string value, string a)
+        public string Before(string value, string a)
         {
             int posA = value.IndexOf(a);
             if (posA == -1)
@@ -125,7 +125,7 @@ namespace TugasSTBI_1
         /// Reference: http://www.dotnetperls.com/between-before-after
         /// get document content 
         /// </summary>
-        private string After(string value, string a)
+        public string After(string value, string a)
         {
             int posA = value.LastIndexOf(a);
             if (posA == -1)

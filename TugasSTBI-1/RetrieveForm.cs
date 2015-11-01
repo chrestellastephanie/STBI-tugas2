@@ -69,12 +69,12 @@ namespace TugasSTBI_1
             for (int i = 0; i < Program.allResults.Count(); i++)
             {
                 listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
-                //listBoxResultInteractive.Items.Add(Program.qs.query[i]);
+                listBoxResultInteractive.Items.Add(Program.qs.query[i]);
                 listBoxResultInteractive.Items.Add("Recall = " + Program.calculateRecall(i));
                 listBoxResultInteractive.Items.Add("Precision = " + Program.calculatePrecision(i));
                 listBoxResultInteractive.Items.Add("Non-Interpolated Average Precision = " + Program.calculateNIAP(i));
 
-/*
+
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
                     line = j + 1 + ". ";
@@ -85,7 +85,6 @@ namespace TugasSTBI_1
                     line = line + Program.ListDocuments[nd].Title;
                     listBoxResultInteractive.Items.Add(line);
                 }
- */
                 listBoxResultInteractive.Items.Add("\n");
             }            
         }

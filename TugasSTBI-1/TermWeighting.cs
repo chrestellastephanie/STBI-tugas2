@@ -222,7 +222,7 @@ namespace TugasSTBI_1
             double tf = CalculateTf(content, content[noTerm], tfCode);
             double idf = CalculateIdf(content[noTerm], idfCode);
             double normalization = CalculateNormalization(content, tfCode, idfCode, normalizationCode);
-            Console.WriteLine("normalization : " + normalization);
+            //Console.WriteLine("normalization : " + normalization);
 
             if(normalization == 0)
             {

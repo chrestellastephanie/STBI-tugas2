@@ -25,7 +25,15 @@ namespace TugasSTBI_1
 
             for (int i = 0; i < query.Length; i++)
             {
-                query[i] = After(query[i], ".W\n");
+                if (query[i].Contains("\n.B\n")) //untuk menangani test case cisi
+                {
+                    query[i] = Between(query[i], ".W\n", "\n.B");
+                }
+                else
+                {
+                    query[i] = After(query[i], ".W\n");
+                }
+                Console.WriteLine(query[i]);
             }
         }
         public string getQuery(int n)
@@ -64,6 +72,30 @@ namespace TugasSTBI_1
                 return "";
             }
             return value.Substring(adjustedPosA);
+        }
+
+        /// <summary>
+        /// Reference: http://www.dotnetperls.com/between-before-after
+        /// get document Author and Title
+        /// </summary>
+        public string Between(string value, string a, string b)
+        {
+            int posA = value.IndexOf(a);
+            int posB = value.LastIndexOf(b);
+            if (posA == -1)
+            {
+                return "";
+            }
+            if (posB == -1)
+            {
+                return "";
+            }
+            int adjustedPosA = posA + a.Length;
+            if (adjustedPosA >= posB)
+            {
+                return "";
+            }
+            return value.Substring(adjustedPosA, posB - adjustedPosA);
         }
     }
 }
