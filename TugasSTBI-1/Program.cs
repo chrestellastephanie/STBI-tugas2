@@ -141,7 +141,6 @@ namespace TugasSTBI_1
             }
 
             //uncomment
-            /*
             TermWeighting TW = new TermWeighting(ListDocuments);
             List<string> ListTermWithWeight = new List<string>();
 
@@ -169,7 +168,7 @@ namespace TugasSTBI_1
                 {
                     writer.WriteLine(linestring);
                 }
-            }*/
+            }
         }
 
         public static void readRelJudg(string pathRelJudg)
@@ -292,14 +291,12 @@ namespace TugasSTBI_1
             StopwordTool.AddDictionaryFromText(@pathStopWord);
 
             createInvertedFile(text); //uncomment
-            //readRelJudg(IndexingForm.relevanceDirectory);
-            //findResultQueries(qs);
-            
         }
 
         [STAThread]
         static void Main()
-        {            Application.EnableVisualStyles();
+        {            
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new IndexingForm());
