@@ -66,6 +66,9 @@ namespace TugasSTBI_1
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
+            double meanRecall = 0;
+            double meanPrecision = 0;
+            double meanNIAP = 0;
             for (int i = 0; i < Program.allResults.Count(); i++)
             {
                 listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
@@ -73,7 +76,9 @@ namespace TugasSTBI_1
                 listBoxResultInteractive.Items.Add("Recall = " + Program.calculateRecall(i));
                 listBoxResultInteractive.Items.Add("Precision = " + Program.calculatePrecision(i));
                 listBoxResultInteractive.Items.Add("Non-Interpolated Average Precision = " + Program.calculateNIAP(i));
-
+                meanRecall = meanRecall + Program.calculateRecall(i);
+                meanPrecision = meanPrecision+ Program.calculatePrecision(i);
+                meanNIAP = meanNIAP + Program.calculateNIAP(i);
 
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
@@ -86,7 +91,14 @@ namespace TugasSTBI_1
                     listBoxResultInteractive.Items.Add(line);
                 }
                 listBoxResultInteractive.Items.Add("\n");
-            }            
+            }
+            meanRecall = meanRecall / Program.allResults.Count();
+            meanPrecision = meanPrecision / Program.allResults.Count();
+            meanNIAP = meanNIAP / Program.allResults.Count();
+            listBoxResultInteractive.Items.Add("Mean Recall: " + meanRecall);
+            listBoxResultInteractive.Items.Add("Mean Precision: " + meanPrecision);
+            listBoxResultInteractive.Items.Add("Mean Non interpolated average precision: " + meanNIAP);
+
         }
 
         private void RetrieveForm_FormClosing(object sender, FormClosingEventArgs e)
