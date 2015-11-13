@@ -17,21 +17,10 @@ namespace TugasSTBI_1
 
         public int RawTf (string [] content, string term)
         {
-            int sum = CountTermInDocument(content, term);
-
-            return sum;
-        }
-
-        private int CountTermInDocument (string [] content, string term)
-        {
-            int sum = 0;
-            foreach (string word in content)
-            {
-                if (word.Equals(term))
-                {
-                    sum++;
-                }
-            }
+            //int sum = CountTermInDocument(content, term);
+            int sum = (from s in content
+                       where s == term
+                       select s).Count();
 
             return sum;
         }
@@ -39,7 +28,9 @@ namespace TugasSTBI_1
         public double LogTf(string[] content, string term)
         {
             double result = 0;
-            int sum = CountTermInDocument(content, term);
+            int sum = (from s in content
+                       where s == term
+                       select s).Count();
 
             if(sum != 0)
             {
@@ -63,47 +54,19 @@ namespace TugasSTBI_1
         public double AugmentedTf (string [] content, string term)
         {
             double result = 0;
-            int sum = CountTermInDocument(content, term);            // count tf term in content
+            int sum = (from s in content
+                       where s == term
+                       select s).Count();            // count tf term in content
 
             if (sum != 0)
             {
-                int maxTf = FindMaxTf (content);
+                //int maxTf = FindMaxTf (content);
+                int maxTf = content.GroupBy(x => x)
+                          .Max(x => x.Count());
                 result = 0.5 + (double) (0.5 * sum / maxTf);
             }
 
             return result;
-        }
-
-        private int FindMaxTf (string [] content)
-        {
-            // count tf each word in document
-            List<string> found = new List<string>();    // store word that has already counts
-            int maxTf = 0;                              // store value of max tf
-            for (int i = 0; i < content.Count(); i++)
-            {
-                if (!found.Contains(content[i]))
-                {
-                    found.Add(content[i]);
-
-                    int SumEachWord = 0;
-                    string term1 = content[i];
-                    for (int j = i; j < content.Count(); j++)
-                    {
-                        if (content[j].Equals(term1))
-                        {
-                            SumEachWord++;
-                        }
-                    }
-
-                    // find max tf
-                    if (SumEachWord > maxTf)
-                    {
-                        maxTf = SumEachWord;
-                    }
-                }
-            }
-
-            return maxTf;
         }
 
         public int noTf()
@@ -115,12 +78,11 @@ namespace TugasSTBI_1
         {
             double result = 0;
             int sum = 0;
-            foreach (var document in Documents)
+
+            // use the dictionary to search the term
+            if (Program.dDocuments.ContainsKey(term))
             {
-                if (document.Content.Contains(term))
-                {
-                    sum++;
-                }
+                sum = Program.dDocuments[term].Count;
             }
 
             if (sum != 0)
