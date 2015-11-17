@@ -23,6 +23,9 @@ namespace TugasSTBI_1
         public static string outputInvertedFile = "D:/InvertedFile.txt";
         //public static string relJudgPath = "D:/ADI/qrels.text";
 
+        public static Dictionary<string, Dictionary<string, double>> dTermWeigth;
+        public static Dictionary<string, Dictionary<string, int>> dDocuments;
+
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
         {
@@ -132,17 +135,34 @@ namespace TugasSTBI_1
 
             // Make Document Entities
             ListDocuments = new List<Document>();
+            dDocuments = new Dictionary<string, Dictionary<string, int>>();
             for (int i = 1; i < TextDocuments.Count(); i++)
             {
                 //Console.WriteLine(TextDocuments[i]);
                 Document document = new Document(TextDocuments[i], stemCode);
                 //Console.WriteLine(document.Title);
                 ListDocuments.Add(document);
+
+                // input terms in document to dictionary
+                foreach (string term in document.Content.Distinct())
+                {
+                    if (dDocuments.ContainsKey(term))
+                    {
+                        dDocuments[term].Add(document.No, (from s in document.Content where s == term select s).Count());
+                    }
+                    else
+                    {
+                        dDocuments.Add(term, new Dictionary<string, int>());
+                        dDocuments[term].Add(document.No, (from s in document.Content where s == term select s).Count());
+                    }
+                }
             }
 
             //uncomment
             TermWeighting TW = new TermWeighting(ListDocuments);
             List<string> ListTermWithWeight = new List<string>();
+
+            dTermWeigth = new Dictionary<string, Dictionary<string, double>>();
 
             for (int i = 0; i < ListDocuments.Count(); i++)
             {
@@ -150,13 +170,35 @@ namespace TugasSTBI_1
                 for (int j = 0; j < ListDocuments.ElementAt(i).Content.Count(); j++)
                 {
                     //Console.WriteLine(ListDocuments.ElementAt(i).Content[j]);
+                    string term = ListDocuments.ElementAt(i).Content[j];
                     if (!found.Contains(ListDocuments.ElementAt(i).Content[j]))
                     {
                         found.Add(ListDocuments.ElementAt(i).Content[j]);
 
                         // menghitung term weight masing-masing kata di tiap dokumen
-                        ListTermWithWeight.Add(ListDocuments.ElementAt(i).Content[j] + " " + ListDocuments.ElementAt(i).No + " " + TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+                        //ListTermWithWeight.Add(ListDocuments.ElementAt(i).Content[j] + " " + ListDocuments.ElementAt(i).No + " " + TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+
+                        if (dTermWeigth.ContainsKey(term))  // dictionary already has the term 'key'
+                        {
+                            dTermWeigth[term].Add(ListDocuments.ElementAt(i).No, TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+                        }
+                        else    // dictionary not yet has the term 'key'
+                        {
+                            dTermWeigth.Add(term, new Dictionary<string, double>());
+                            dTermWeigth[term].Add(ListDocuments.ElementAt(i).No, TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+                        }
                     }
+                }
+            }
+
+            foreach (KeyValuePair<string, Dictionary<string, double>> entry in dTermWeigth)
+            {
+                string term = entry.Key;
+                foreach (KeyValuePair<string, double> subEntry in entry.Value)
+                {
+                    string noDoc = subEntry.Key;
+                    double weight = subEntry.Value;
+                    ListTermWithWeight.Add(term + " " + noDoc + " " + weight);
                 }
             }
 
