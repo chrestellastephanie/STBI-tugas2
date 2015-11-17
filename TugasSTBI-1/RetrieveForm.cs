@@ -35,7 +35,7 @@ namespace TugasSTBI_1
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
-
+            
             for (int i = 0; i < Program.allResults.Count(); i++)
             {
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
@@ -79,7 +79,7 @@ namespace TugasSTBI_1
                 meanRecall = meanRecall + Program.calculateRecall(i);
                 meanPrecision = meanPrecision+ Program.calculatePrecision(i);
                 meanNIAP = meanNIAP + Program.calculateNIAP(i);
-
+                
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
                     line = j + 1 + ". ";

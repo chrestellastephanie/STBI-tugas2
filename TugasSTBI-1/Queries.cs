@@ -33,7 +33,7 @@ namespace TugasSTBI_1
                 {
                     query[i] = After(query[i], ".W\n");
                 }
-                Console.WriteLine(query[i]);
+                //Console.WriteLine(query[i]);
             }
         }
         public string getQuery(int n)
