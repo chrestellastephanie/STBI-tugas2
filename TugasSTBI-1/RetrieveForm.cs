@@ -31,7 +31,7 @@ namespace TugasSTBI_1
             Queries interactiveQuery = new Queries();
             interactiveQuery.query[0] = textBoxInteractiveQuery.Text;
             //Program.qs.query = textBoxInteractiveQuery.Text.Split(' ');
-            Program.findResultQueries(interactiveQuery);
+            Program.findResultQueries(interactiveQuery, Program.nRetrieve1);
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
@@ -59,7 +59,7 @@ namespace TugasSTBI_1
             labelResult.Visible = true;
 
             Program.readRelJudg(IndexingForm.relevanceDirectory);
-            Program.findResultQueries(Program.qs);
+            Program.findResultQueries(Program.qs, Program.nRetrieve1);
             Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements);
 
             

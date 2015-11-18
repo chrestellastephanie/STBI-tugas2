@@ -26,6 +26,13 @@ namespace TugasSTBI_1
         public static Dictionary<string, Dictionary<string, double>> dTermWeigth;
         public static Dictionary<string, Dictionary<string, int>> dDocuments;
 
+        //relevance feedback
+        public static int nRetrieve1 = -1; // jumlah top K dokumen yang diretrieve pertama kali
+        public static string relevanceFeedbackMethod; //jenis metode yang dipilih untuk melakukan relevance feedback
+        public static int useQueryExpansion; //apakah akan menggunakan query expansion
+        public static int nPseudoRelevant;
+        public static string secondDocCollection;
+
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
         {
@@ -73,7 +80,7 @@ namespace TugasSTBI_1
         }
 
         
-        public static void findResultQueries(Queries queries)
+        public static void findResultQueries(Queries queries, int k)
         {
             // list of hasil tiap query (list of list of result)
             allResults = new List<List<Docvalue>>();
@@ -86,6 +93,10 @@ namespace TugasSTBI_1
                 Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
+                if (k != -1) //-1 kalau hasil diretrieve semua
+                {
+                    result = result.Take(k).ToList();
+                }    
                 allResults.Add(result);
             }
 
@@ -122,11 +133,14 @@ namespace TugasSTBI_1
                     }
                 }
             }
-
             Console.WriteLine("Selesai!!");
             Console.ReadLine();
         }
 
+        public static void findResultQueriesTopK(Queries queries, int k)
+        {
+
+        }
  
         public static void createInvertedFile(string documentsContent)
         {

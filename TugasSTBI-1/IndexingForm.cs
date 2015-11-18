@@ -26,7 +26,7 @@ namespace TugasSTBI_1
             relevanceDirectory = textBoxRelPath.Text;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) //choose document collection
         {
             DialogResult documentsDialog = openFileDialog1.ShowDialog();
             if (documentsDialog == DialogResult.OK)
@@ -86,8 +86,69 @@ namespace TugasSTBI_1
             Program.normQueryCode = getNormQueryRadioButtonValue();
 
             Program.stemCode = getStemCheckBoxValue();
+
+            if (!string.IsNullOrWhiteSpace(nRetrieve1TextBox.Text)) //jika user mengisi jumlah dokumen yang diretrieve pertama kali
+            {
+                Program.nRetrieve1 = Int32.Parse(nRetrieve1TextBox.Text);
+            }
+            if (!string.IsNullOrWhiteSpace(topNPseudoTextBox.Text)) //jika user mengisi top N untuk pseudo
+            {
+                Program.nPseudoRelevant = Int32.Parse(topNPseudoTextBox.Text);
+            }
+            Program.relevanceFeedbackMethod = getRelevanceFeedbackMethodValue();
+            Program.useQueryExpansion = isUseQueryExpansion();
+            Program.secondDocCollection = getSecondDocCollection();
+            
+
+            //Console.WriteLine("QE : " + Program.useQueryExpansion);
+            
         }
 
+        private string getRelevanceFeedbackMethodValue()
+        {
+            string method = "rochio";
+            if (radioButtonRochio.Checked)
+            {
+                method = "rochio";
+            }
+            else if(radioButtonRegular.Checked)
+            {
+                method = "regular";
+            }
+            else if (radioButtonDecHi.Checked)
+            {
+                method = "dechi";
+            }
+            else if (radioButtonPseudo.Checked)
+            {
+                method = "pseudo";
+            }
+            return method;
+        }
+
+        private int isUseQueryExpansion()
+        {
+            if (radioButtonQEYes.Checked)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+        private string getSecondDocCollection()
+        {
+            if (radioButtonSameDC.Checked)
+            {
+                return "same";
+            }
+            else
+            {
+                return "diff";
+            }
+        }
         private int getTfDocRadioButtonValue()
         {
             int value = 0;
