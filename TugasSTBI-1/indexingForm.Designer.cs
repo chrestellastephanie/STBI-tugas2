@@ -69,12 +69,32 @@
             this.textBoxQueryPath = new System.Windows.Forms.TextBox();
             this.textBoxSWPath = new System.Windows.Forms.TextBox();
             this.textBoxRelPath = new System.Windows.Forms.TextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.nRetrieve1TextBox = new System.Windows.Forms.TextBox();
+            this.labelNRetrieve1 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.radioButtonPseudo = new System.Windows.Forms.RadioButton();
+            this.radioButtonDecHi = new System.Windows.Forms.RadioButton();
+            this.radioButtonRegular = new System.Windows.Forms.RadioButton();
+            this.radioButtonRochio = new System.Windows.Forms.RadioButton();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.radioButtonQENo = new System.Windows.Forms.RadioButton();
+            this.radioButtonQEYes = new System.Windows.Forms.RadioButton();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.radioButtonSameDC = new System.Windows.Forms.RadioButton();
+            this.radioButtonDiffDC = new System.Windows.Forms.RadioButton();
+            this.labelPseudoTopN = new System.Windows.Forms.Label();
+            this.topNPseudoTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.Tf.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -119,7 +139,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(283, 20);
+            this.button1.Location = new System.Drawing.Point(643, 22);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -129,7 +149,7 @@
             // 
             // buttonChooseQuery
             // 
-            this.buttonChooseQuery.Location = new System.Drawing.Point(283, 49);
+            this.buttonChooseQuery.Location = new System.Drawing.Point(643, 48);
             this.buttonChooseQuery.Name = "buttonChooseQuery";
             this.buttonChooseQuery.Size = new System.Drawing.Size(75, 23);
             this.buttonChooseQuery.TabIndex = 5;
@@ -139,7 +159,7 @@
             // 
             // buttonChooseRel
             // 
-            this.buttonChooseRel.Location = new System.Drawing.Point(283, 77);
+            this.buttonChooseRel.Location = new System.Drawing.Point(643, 77);
             this.buttonChooseRel.Name = "buttonChooseRel";
             this.buttonChooseRel.Size = new System.Drawing.Size(75, 23);
             this.buttonChooseRel.TabIndex = 6;
@@ -149,7 +169,7 @@
             // 
             // buttonChooseStopw
             // 
-            this.buttonChooseStopw.Location = new System.Drawing.Point(283, 106);
+            this.buttonChooseStopw.Location = new System.Drawing.Point(643, 105);
             this.buttonChooseStopw.Name = "buttonChooseStopw";
             this.buttonChooseStopw.Size = new System.Drawing.Size(75, 23);
             this.buttonChooseStopw.TabIndex = 7;
@@ -476,7 +496,7 @@
             // 
             this.textBoxDocPath.Location = new System.Drawing.Point(75, 22);
             this.textBoxDocPath.Name = "textBoxDocPath";
-            this.textBoxDocPath.Size = new System.Drawing.Size(202, 20);
+            this.textBoxDocPath.Size = new System.Drawing.Size(562, 20);
             this.textBoxDocPath.TabIndex = 20;
             this.textBoxDocPath.Text = "D:\\ADI\\adi.all";
             // 
@@ -484,7 +504,7 @@
             // 
             this.textBoxQueryPath.Location = new System.Drawing.Point(75, 49);
             this.textBoxQueryPath.Name = "textBoxQueryPath";
-            this.textBoxQueryPath.Size = new System.Drawing.Size(202, 20);
+            this.textBoxQueryPath.Size = new System.Drawing.Size(562, 20);
             this.textBoxQueryPath.TabIndex = 21;
             this.textBoxQueryPath.Text = "D:\\ADI\\query.text";
             // 
@@ -492,7 +512,7 @@
             // 
             this.textBoxSWPath.Location = new System.Drawing.Point(76, 108);
             this.textBoxSWPath.Name = "textBoxSWPath";
-            this.textBoxSWPath.Size = new System.Drawing.Size(202, 20);
+            this.textBoxSWPath.Size = new System.Drawing.Size(561, 20);
             this.textBoxSWPath.TabIndex = 22;
             this.textBoxSWPath.Text = "D:\\stopwords.txt";
             // 
@@ -500,15 +520,187 @@
             // 
             this.textBoxRelPath.Location = new System.Drawing.Point(115, 79);
             this.textBoxRelPath.Name = "textBoxRelPath";
-            this.textBoxRelPath.Size = new System.Drawing.Size(161, 20);
+            this.textBoxRelPath.Size = new System.Drawing.Size(522, 20);
             this.textBoxRelPath.TabIndex = 23;
             this.textBoxRelPath.Text = "D:\\ADI\\qrels.text";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.topNPseudoTextBox);
+            this.groupBox6.Controls.Add(this.labelPseudoTopN);
+            this.groupBox6.Controls.Add(this.nRetrieve1TextBox);
+            this.groupBox6.Controls.Add(this.labelNRetrieve1);
+            this.groupBox6.Location = new System.Drawing.Point(357, 174);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(193, 77);
+            this.groupBox6.TabIndex = 25;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Relevance Feedback";
+            // 
+            // nRetrieve1TextBox
+            // 
+            this.nRetrieve1TextBox.Location = new System.Drawing.Point(107, 20);
+            this.nRetrieve1TextBox.Name = "nRetrieve1TextBox";
+            this.nRetrieve1TextBox.Size = new System.Drawing.Size(44, 20);
+            this.nRetrieve1TextBox.TabIndex = 26;
+            // 
+            // labelNRetrieve1
+            // 
+            this.labelNRetrieve1.AutoSize = true;
+            this.labelNRetrieve1.Location = new System.Drawing.Point(6, 24);
+            this.labelNRetrieve1.Name = "labelNRetrieve1";
+            this.labelNRetrieve1.Size = new System.Drawing.Size(95, 13);
+            this.labelNRetrieve1.TabIndex = 0;
+            this.labelNRetrieve1.Text = "Top K Retrieve #1";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.radioButtonPseudo);
+            this.groupBox7.Controls.Add(this.radioButtonDecHi);
+            this.groupBox7.Controls.Add(this.radioButtonRegular);
+            this.groupBox7.Controls.Add(this.radioButtonRochio);
+            this.groupBox7.Location = new System.Drawing.Point(357, 257);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(193, 114);
+            this.groupBox7.TabIndex = 26;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Choose Method";
+            // 
+            // radioButtonPseudo
+            // 
+            this.radioButtonPseudo.AutoSize = true;
+            this.radioButtonPseudo.Location = new System.Drawing.Point(9, 85);
+            this.radioButtonPseudo.Name = "radioButtonPseudo";
+            this.radioButtonPseudo.Size = new System.Drawing.Size(61, 17);
+            this.radioButtonPseudo.TabIndex = 3;
+            this.radioButtonPseudo.Text = "Pseudo";
+            this.radioButtonPseudo.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDecHi
+            // 
+            this.radioButtonDecHi.AutoSize = true;
+            this.radioButtonDecHi.Location = new System.Drawing.Point(9, 65);
+            this.radioButtonDecHi.Name = "radioButtonDecHi";
+            this.radioButtonDecHi.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonDecHi.TabIndex = 2;
+            this.radioButtonDecHi.Text = "Dec-Hi";
+            this.radioButtonDecHi.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonRegular
+            // 
+            this.radioButtonRegular.AutoSize = true;
+            this.radioButtonRegular.Location = new System.Drawing.Point(9, 42);
+            this.radioButtonRegular.Name = "radioButtonRegular";
+            this.radioButtonRegular.Size = new System.Drawing.Size(62, 17);
+            this.radioButtonRegular.TabIndex = 1;
+            this.radioButtonRegular.Text = "Regular";
+            this.radioButtonRegular.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonRochio
+            // 
+            this.radioButtonRochio.AutoSize = true;
+            this.radioButtonRochio.Checked = true;
+            this.radioButtonRochio.Location = new System.Drawing.Point(9, 19);
+            this.radioButtonRochio.Name = "radioButtonRochio";
+            this.radioButtonRochio.Size = new System.Drawing.Size(59, 17);
+            this.radioButtonRochio.TabIndex = 0;
+            this.radioButtonRochio.TabStop = true;
+            this.radioButtonRochio.Text = "Rochio";
+            this.radioButtonRochio.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.radioButtonQENo);
+            this.groupBox8.Controls.Add(this.radioButtonQEYes);
+            this.groupBox8.Location = new System.Drawing.Point(357, 387);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(200, 68);
+            this.groupBox8.TabIndex = 27;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Query Expansion";
+            // 
+            // radioButtonQENo
+            // 
+            this.radioButtonQENo.AutoSize = true;
+            this.radioButtonQENo.Location = new System.Drawing.Point(9, 42);
+            this.radioButtonQENo.Name = "radioButtonQENo";
+            this.radioButtonQENo.Size = new System.Drawing.Size(39, 17);
+            this.radioButtonQENo.TabIndex = 1;
+            this.radioButtonQENo.TabStop = true;
+            this.radioButtonQENo.Text = "No";
+            this.radioButtonQENo.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonQEYes
+            // 
+            this.radioButtonQEYes.AutoSize = true;
+            this.radioButtonQEYes.Checked = true;
+            this.radioButtonQEYes.Location = new System.Drawing.Point(9, 19);
+            this.radioButtonQEYes.Name = "radioButtonQEYes";
+            this.radioButtonQEYes.Size = new System.Drawing.Size(43, 17);
+            this.radioButtonQEYes.TabIndex = 0;
+            this.radioButtonQEYes.TabStop = true;
+            this.radioButtonQEYes.Text = "Yes";
+            this.radioButtonQEYes.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.radioButtonDiffDC);
+            this.groupBox9.Controls.Add(this.radioButtonSameDC);
+            this.groupBox9.Location = new System.Drawing.Point(565, 174);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(177, 100);
+            this.groupBox9.TabIndex = 28;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "2nd Retrieval Doc Collection";
+            // 
+            // radioButtonSameDC
+            // 
+            this.radioButtonSameDC.AutoSize = true;
+            this.radioButtonSameDC.Location = new System.Drawing.Point(6, 24);
+            this.radioButtonSameDC.Name = "radioButtonSameDC";
+            this.radioButtonSameDC.Size = new System.Drawing.Size(125, 17);
+            this.radioButtonSameDC.TabIndex = 0;
+            this.radioButtonSameDC.TabStop = true;
+            this.radioButtonSameDC.Text = "Same as first retrieval";
+            this.radioButtonSameDC.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDiffDC
+            // 
+            this.radioButtonDiffDC.AutoSize = true;
+            this.radioButtonDiffDC.Location = new System.Drawing.Point(6, 47);
+            this.radioButtonDiffDC.Name = "radioButtonDiffDC";
+            this.radioButtonDiffDC.Size = new System.Drawing.Size(147, 17);
+            this.radioButtonDiffDC.TabIndex = 1;
+            this.radioButtonDiffDC.TabStop = true;
+            this.radioButtonDiffDC.Text = "Different from first retrieval";
+            this.radioButtonDiffDC.UseVisualStyleBackColor = true;
+            // 
+            // labelPseudoTopN
+            // 
+            this.labelPseudoTopN.AutoSize = true;
+            this.labelPseudoTopN.Location = new System.Drawing.Point(6, 51);
+            this.labelPseudoTopN.Name = "labelPseudoTopN";
+            this.labelPseudoTopN.Size = new System.Drawing.Size(90, 13);
+            this.labelPseudoTopN.TabIndex = 2;
+            this.labelPseudoTopN.Text = "Top N for pseudo";
+            // 
+            // topNPseudoTextBox
+            // 
+            this.topNPseudoTextBox.Location = new System.Drawing.Point(107, 47);
+            this.topNPseudoTextBox.Name = "topNPseudoTextBox";
+            this.topNPseudoTextBox.Size = new System.Drawing.Size(44, 20);
+            this.topNPseudoTextBox.TabIndex = 29;
+            this.topNPseudoTextBox.Text = "5";
             // 
             // IndexingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 557);
+            this.ClientSize = new System.Drawing.Size(754, 557);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.textBoxRelPath);
             this.Controls.Add(this.textBoxSWPath);
             this.Controls.Add(this.textBoxQueryPath);
@@ -546,6 +738,14 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -594,6 +794,22 @@
         private System.Windows.Forms.TextBox textBoxQueryPath;
         private System.Windows.Forms.TextBox textBoxSWPath;
         private System.Windows.Forms.TextBox textBoxRelPath;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox nRetrieve1TextBox;
+        private System.Windows.Forms.Label labelNRetrieve1;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RadioButton radioButtonPseudo;
+        private System.Windows.Forms.RadioButton radioButtonDecHi;
+        private System.Windows.Forms.RadioButton radioButtonRegular;
+        private System.Windows.Forms.RadioButton radioButtonRochio;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.RadioButton radioButtonQENo;
+        private System.Windows.Forms.RadioButton radioButtonQEYes;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.RadioButton radioButtonDiffDC;
+        private System.Windows.Forms.RadioButton radioButtonSameDC;
+        private System.Windows.Forms.TextBox topNPseudoTextBox;
+        private System.Windows.Forms.Label labelPseudoTopN;
 
     }
 }
