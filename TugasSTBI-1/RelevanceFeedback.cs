@@ -23,13 +23,14 @@ namespace TugasSTBI_1
                     result = ideDecHi(wQueryOld, relevant, irrelevant[0]);
                     break;
                 case "pseudo":
+                    result = rochio(wQueryOld, relevant, irrelevant);
                     break;
             }
 
             return result;
         }
 
-        public static double rochio(double wQueryOld, List<double> relevant, List<double> irrelevant)
+        private static double rochio(double wQueryOld, List<double> relevant, List<double> irrelevant)
         {
             double result;
             result = wQueryOld + (relevant.Sum() / relevant.Count) - (irrelevant.Sum() / irrelevant.Count);
@@ -37,7 +38,7 @@ namespace TugasSTBI_1
             return result;
         }
 
-        public static double ideReg(double wQueryOld, List<double> relevant, List<double> irrelevant)
+        private static double ideReg(double wQueryOld, List<double> relevant, List<double> irrelevant)
         {
             double result;
             result = wQueryOld + relevant.Sum() - irrelevant.Sum();
@@ -45,7 +46,7 @@ namespace TugasSTBI_1
             return result;
         }
 
-        public static double ideDecHi(double wQueryOld, List<double> relevant, double irrelevant)
+        private static double ideDecHi(double wQueryOld, List<double> relevant, double irrelevant)
         {
             double result;
             result = wQueryOld + relevant.Sum() - irrelevant;
