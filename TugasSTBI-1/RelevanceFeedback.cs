@@ -8,11 +8,10 @@ namespace TugasSTBI_1
 {
     class RelevanceFeedback
     {
-        public static double calculateNewQuery(string relevanceFeedbackMethod, double wQueryOld,
-                                                    List<double> relevant, List<double> irrelevant)
+        public static double calculateNewQuery(double wQueryOld, List<double> relevant, List<double> irrelevant)
         {
             double result = 0;
-            switch (relevanceFeedbackMethod)
+            switch (Program.relevanceFeedbackMethod)
             {
                 case "rochio":
                     result = rochio(wQueryOld, relevant, irrelevant);
