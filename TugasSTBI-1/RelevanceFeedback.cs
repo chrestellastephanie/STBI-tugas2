@@ -31,6 +31,33 @@ namespace TugasSTBI_1
             return result;
         }
 
+        private static List<double> CreateRelevant(string term, int querynumber)
+        {
+
+            List<double> relevant = new List<double>();
+            for (int i = 0; i <= Program.nRetrieve1 - 1; i++)
+            {
+                if (Program.relFeedback.ElementAt(querynumber).ElementAt(i).val == 1)
+                {
+                    relevant.Add(Program.dTermWeigth[term][Program.relFeedback.ElementAt(querynumber).ElementAt(i).docNum]);
+                }
+            }
+            return relevant;
+        }
+
+        private static List<double> CreateIrrelevant(string term, int querynumber)
+        {
+            List<double> irrelevant = new List<double>();
+            for (int i = 0; i <= Program.nRetrieve1 - 1; i++)
+            {
+                if (Program.relFeedback.ElementAt(querynumber).ElementAt(i).val == 0)
+                {
+                    irrelevant.Add(Program.dTermWeigth[term][Program.relFeedback.ElementAt(querynumber).ElementAt(i).docNum]);
+                }
+            }
+            return irrelevant;
+        }
+
         private static double rochio(double wQueryOld, List<double> relevant, List<double> irrelevant)
         {
             double result;
