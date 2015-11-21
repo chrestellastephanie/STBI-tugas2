@@ -135,7 +135,6 @@ namespace TugasSTBI_1
                 var relevantForm = new relevanceFeedbackForm();
                 relevantForm.setTitle(listBoxResultInteractive.SelectedItem.ToString());
                 relevantForm.Show(this);
-
             }
         }
     }

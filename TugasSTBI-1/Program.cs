@@ -32,7 +32,9 @@ namespace TugasSTBI_1
         public static int useQueryExpansion; //apakah akan menggunakan query expansion
         public static int nPseudoRelevant;
         public static string secondDocCollection;
-        public static List<List<Docvalue>> relFeedback = new List<List<Docvalue>>();
+        public static List<HashSet<Docvalue>> relFeedback = new List<HashSet<Docvalue>>();
+        public static HashSet<Docvalue> dvList = new HashSet<Docvalue>();
+        public static Dictionary<string, int> dTitle_NumDoc = new Dictionary<string, int>(); //hashtable title-docnum. assigned when create inverted file.
 
 
         // return weight for each query term
@@ -151,6 +153,8 @@ namespace TugasSTBI_1
 
             // Make Document Entities
             ListDocuments = new List<Document>();
+            dTitle_NumDoc = new Dictionary<String, int>();
+            //dTitle_NumDoc.Add("lalala", 1);
             dDocuments = new Dictionary<string, Dictionary<string, int>>();
             for (int i = 1; i < TextDocuments.Count(); i++)
             {
@@ -158,6 +162,13 @@ namespace TugasSTBI_1
                 Document document = new Document(TextDocuments[i], stemCode);
                 //Console.WriteLine(document.Title);
                 ListDocuments.Add(document);
+                //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
+                string titlewithoutenter = document.Title;
+                dTitle_NumDoc.Add(titlewithoutenter, i);
+                //Console.Write(document.Title);
+                //Console.Write(" - ");
+                //Console.Write(i);
+                //Console.Write("\n");
 
                 // input terms in document to dictionary
                 foreach (string term in document.Content.Distinct())
@@ -172,6 +183,15 @@ namespace TugasSTBI_1
                         dDocuments[term].Add(document.No, (from s in document.Content where s == term select s).Count());
                     }
                 }
+            }
+
+            //print dTitle_NumDoc
+            foreach (var item in dTitle_NumDoc)
+            {
+                Console.Write(item.Key);
+                Console.Write(" - ");
+                Console.Write(item.Value);
+                Console.Write("\n");
             }
 
             //uncomment
@@ -350,6 +370,13 @@ namespace TugasSTBI_1
 
             createInvertedFile(text); //uncomment
         }
+
+        /*public static string getDocNum(string title)
+        {
+            string docNum = "";
+
+            return docNum;
+        }*/
 
         [STAThread]
         static void Main()
