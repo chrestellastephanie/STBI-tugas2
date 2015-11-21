@@ -83,6 +83,7 @@
             this.listBoxResultInteractive.Size = new System.Drawing.Size(820, 381);
             this.listBoxResultInteractive.TabIndex = 4;
             this.listBoxResultInteractive.Visible = false;
+            this.listBoxResultInteractive.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxResultInteractive_MouseDoubleClick_1);
             // 
             // labelResult
             // 

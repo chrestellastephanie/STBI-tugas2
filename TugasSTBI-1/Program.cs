@@ -32,6 +32,8 @@ namespace TugasSTBI_1
         public static int useQueryExpansion; //apakah akan menggunakan query expansion
         public static int nPseudoRelevant;
         public static string secondDocCollection;
+        public static List<List<Docvalue>> relFeedback = new List<List<Docvalue>>();
+
 
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
@@ -356,6 +358,7 @@ namespace TugasSTBI_1
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new IndexingForm());
+            //Application.Run(new relevanceFeedbackForm());
         }
     }
 }

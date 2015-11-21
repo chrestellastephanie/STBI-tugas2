@@ -8,6 +8,7 @@ namespace TugasSTBI_1
 {
     class RelevanceFeedback
     {
+        
         public static double calculateNewQuery(double wQueryOld, List<double> relevant, List<double> irrelevant)
         {
             double result = 0;

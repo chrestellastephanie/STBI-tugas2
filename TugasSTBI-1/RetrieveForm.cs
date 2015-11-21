@@ -105,5 +105,38 @@ namespace TugasSTBI_1
         {
             Application.Exit();
         }
+
+        private void listBoxResultInteractive_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = this.listBoxResultInteractive.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                MessageBox.Show(index.ToString());
+            }
+            
+        }
+
+        /*private void listBoxResultInteractive_DoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = this.listBoxResultInteractive.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                MessageBox.Show(index.ToString());
+            }
+        }*/
+
+        private void listBoxResultInteractive_MouseDoubleClick_1(object sender, MouseEventArgs e)
+        {
+            int index = this.listBoxResultInteractive.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                //MessageBox.Show(listBoxResultInteractive.SelectedItem.ToString());
+                //MessageBox.Show("Apakah dokumen ini relevan?");
+                var relevantForm = new relevanceFeedbackForm();
+                relevantForm.setTitle(listBoxResultInteractive.SelectedItem.ToString());
+                relevantForm.Show(this);
+
+            }
+        }
     }
 }
