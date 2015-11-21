@@ -33,7 +33,8 @@ namespace TugasSTBI_1
         public static int nPseudoRelevant;
         public static string secondDocCollection;
         public static List<List<Docvalue>> relFeedback = new List<List<Docvalue>>();
-
+        public static List<List<WeightedTermQuery>> lQueryWeigthOld;
+        public static List<List<WeightedTermQuery>> lQueryWeightNew;
 
         // return weight for each query term
         public static List<WeightedTermQuery> weightingQuery(string q, List<Document> ListDocuments)
