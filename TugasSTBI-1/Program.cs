@@ -35,6 +35,9 @@ namespace TugasSTBI_1
         public static List<HashSet<Docvalue>> relFeedback = new List<HashSet<Docvalue>>();
         public static HashSet<Docvalue> dvList = new HashSet<Docvalue>();
         public static Dictionary<string, int> dTitle_NumDoc = new Dictionary<string, int>(); //hashtable title-docnum. assigned when create inverted file.
+        public static List<List<WeightedTermQuery>> lQueryWeightOld;
+        public static List<List<WeightedTermQuery>> lQueryWeightNew;
+        public static List<Dictionary<string, double>> lDQueryWeightOld;
 
 
         // return weight for each query term
