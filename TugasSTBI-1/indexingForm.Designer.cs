@@ -70,6 +70,8 @@
             this.textBoxSWPath = new System.Windows.Forms.TextBox();
             this.textBoxRelPath = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.topNPseudoTextBox = new System.Windows.Forms.TextBox();
+            this.labelPseudoTopN = new System.Windows.Forms.Label();
             this.nRetrieve1TextBox = new System.Windows.Forms.TextBox();
             this.labelNRetrieve1 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -81,10 +83,8 @@
             this.radioButtonQENo = new System.Windows.Forms.RadioButton();
             this.radioButtonQEYes = new System.Windows.Forms.RadioButton();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.radioButtonSameDC = new System.Windows.Forms.RadioButton();
             this.radioButtonDiffDC = new System.Windows.Forms.RadioButton();
-            this.labelPseudoTopN = new System.Windows.Forms.Label();
-            this.topNPseudoTextBox = new System.Windows.Forms.TextBox();
+            this.radioButtonSameDC = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -537,6 +537,23 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Relevance Feedback";
             // 
+            // topNPseudoTextBox
+            // 
+            this.topNPseudoTextBox.Location = new System.Drawing.Point(107, 47);
+            this.topNPseudoTextBox.Name = "topNPseudoTextBox";
+            this.topNPseudoTextBox.Size = new System.Drawing.Size(44, 20);
+            this.topNPseudoTextBox.TabIndex = 29;
+            this.topNPseudoTextBox.Text = "5";
+            // 
+            // labelPseudoTopN
+            // 
+            this.labelPseudoTopN.AutoSize = true;
+            this.labelPseudoTopN.Location = new System.Drawing.Point(6, 51);
+            this.labelPseudoTopN.Name = "labelPseudoTopN";
+            this.labelPseudoTopN.Size = new System.Drawing.Size(90, 13);
+            this.labelPseudoTopN.TabIndex = 2;
+            this.labelPseudoTopN.Text = "Top N for pseudo";
+            // 
             // nRetrieve1TextBox
             // 
             this.nRetrieve1TextBox.Location = new System.Drawing.Point(107, 20);
@@ -653,17 +670,6 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "2nd Retrieval Doc Collection";
             // 
-            // radioButtonSameDC
-            // 
-            this.radioButtonSameDC.AutoSize = true;
-            this.radioButtonSameDC.Location = new System.Drawing.Point(6, 24);
-            this.radioButtonSameDC.Name = "radioButtonSameDC";
-            this.radioButtonSameDC.Size = new System.Drawing.Size(125, 17);
-            this.radioButtonSameDC.TabIndex = 0;
-            this.radioButtonSameDC.TabStop = true;
-            this.radioButtonSameDC.Text = "Same as first retrieval";
-            this.radioButtonSameDC.UseVisualStyleBackColor = true;
-            // 
             // radioButtonDiffDC
             // 
             this.radioButtonDiffDC.AutoSize = true;
@@ -671,26 +677,20 @@
             this.radioButtonDiffDC.Name = "radioButtonDiffDC";
             this.radioButtonDiffDC.Size = new System.Drawing.Size(147, 17);
             this.radioButtonDiffDC.TabIndex = 1;
-            this.radioButtonDiffDC.TabStop = true;
             this.radioButtonDiffDC.Text = "Different from first retrieval";
             this.radioButtonDiffDC.UseVisualStyleBackColor = true;
             // 
-            // labelPseudoTopN
+            // radioButtonSameDC
             // 
-            this.labelPseudoTopN.AutoSize = true;
-            this.labelPseudoTopN.Location = new System.Drawing.Point(6, 51);
-            this.labelPseudoTopN.Name = "labelPseudoTopN";
-            this.labelPseudoTopN.Size = new System.Drawing.Size(90, 13);
-            this.labelPseudoTopN.TabIndex = 2;
-            this.labelPseudoTopN.Text = "Top N for pseudo";
-            // 
-            // topNPseudoTextBox
-            // 
-            this.topNPseudoTextBox.Location = new System.Drawing.Point(107, 47);
-            this.topNPseudoTextBox.Name = "topNPseudoTextBox";
-            this.topNPseudoTextBox.Size = new System.Drawing.Size(44, 20);
-            this.topNPseudoTextBox.TabIndex = 29;
-            this.topNPseudoTextBox.Text = "5";
+            this.radioButtonSameDC.AutoSize = true;
+            this.radioButtonSameDC.Checked = true;
+            this.radioButtonSameDC.Location = new System.Drawing.Point(6, 24);
+            this.radioButtonSameDC.Name = "radioButtonSameDC";
+            this.radioButtonSameDC.Size = new System.Drawing.Size(125, 17);
+            this.radioButtonSameDC.TabIndex = 0;
+            this.radioButtonSameDC.TabStop = true;
+            this.radioButtonSameDC.Text = "Same as first retrieval";
+            this.radioButtonSameDC.UseVisualStyleBackColor = true;
             // 
             // IndexingForm
             // 

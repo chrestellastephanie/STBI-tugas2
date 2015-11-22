@@ -33,6 +33,10 @@ namespace TugasSTBI_1
             //Program.qs.query = textBoxInteractiveQuery.Text.Split(' ');
             Program.findResultQueries(interactiveQuery, Program.nRetrieve1);
 
+            //reset listdocuments
+            Program.ListDocuments.Clear();
+            Program.ListDocuments = new List<Document>(Program.ListDocumentsFixed);
+
             //// test relevance
             //RelevanceFeedback.assignRelFeedback();
             //QueryExpansion.doQueryExpansion();
@@ -63,6 +67,10 @@ namespace TugasSTBI_1
             buttonInteractiveSearch.Visible = false;
             listBoxResultInteractive.Visible = true;
             labelResult.Visible = true;
+
+            //reset list documents
+            Program.ListDocuments.Clear();
+            Program.ListDocuments = new List<Document>(Program.ListDocumentsFixed);
 
             Program.readRelJudg(IndexingForm.relevanceDirectory);
             Program.findResultQueries(Program.qs, Program.nRetrieve1);
@@ -142,6 +150,103 @@ namespace TugasSTBI_1
                 relevantForm.setTitle(listBoxResultInteractive.SelectedItem.ToString());
                 relevantForm.Show(this);
             }
+        }
+
+        private void buttonSecondRetrieval_Click(object sender, EventArgs e)
+        {
+            // if user choose "different doc" option, update listDocument. remove judged document (relFeedback) and update reljudgement(for experiment only)
+            if (Program.secondDocCollection.Equals("diff"))
+            {
+                //remove judged documents from document collection
+                int count = Program.relFeedback.Count(); //menghitung jumlah feedback yang diberikan user
+                List<string> judgedDocNum = new List<string>(); //list of judged documents number
+                foreach (var item in Program.relFeedback)
+                {
+                    foreach (var subitem in item)
+                    {
+                        Console.Write("ini nihh");
+                        Console.Write(subitem.docNum);
+                        Console.Write("\n");
+                        if (!judgedDocNum.Contains(subitem.docNum))
+                        {
+                            judgedDocNum.Add(subitem.docNum);
+                        }
+                    }
+                }
+                for (int i = 0; i < judgedDocNum.Count(); i++)
+                {
+                    var item = Program.ListDocuments.SingleOrDefault(x => x.No == judgedDocNum[i]);
+                    if (item != null)
+                        Program.ListDocuments.Remove(item);
+                }
+
+            }             
+
+
+            //do retrieval as first retrieval
+            Queries expandedQuery = new Queries();
+            expandedQuery.query[0] = "library"; //isi pake expanded query
+            Program.findResultQueries(expandedQuery, -1);
+            
+            //show result in the form
+            listBoxResultInteractive.Items.Clear();
+            string line;
+            int nd;
+
+            for (int i = 0; i < Program.allResults.Count(); i++)
+            {
+                for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
+                {
+                    line = j + 1 + ". ";
+                    //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
+                    nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
+                    //line = line + ("(") + Program.ListDocuments[nd].No + (")");
+                    //line = line + (" - ");
+                    line = line + Program.ListDocuments[nd].Title;
+                    listBoxResultInteractive.Items.Add(line);
+                }
+            }
+
+
+                //for (int i = 0; i < Program.qs.nQuery(); i++) //foreach query in test collection
+                //{
+                    //tambahin foreach relevan feedback
+                    //Console.WriteLine("jumlah feedback : " + Program.relFeedback.Count());
+                        
+                        
+                        //foreach (var item in Program.relFeedback)
+                        //{
+                        //    foreach (var subitem in item)
+                        //    {
+                        //        Console.Write(subitem.docNum);
+                        //        Console.Write(" ... ");
+                        //        Console.Write(subitem.val);
+                        //        Console.Write("\n");
+                        //        if(Program.relevantJudgementsHash.ElementAt(0).ContainsKey(subitem.docNum)) //remove relevant document from qrels)
+                        //        {
+                        //            Program.relevantJudgementsHash.ElementAt(0).Remove("46"); //remove relevant document from qrels
+                        //        }
+                        //    }
+                        //}
+                    //Program.relevantJudgementsHash.ElementAt(0).Remove("46"); //remove relevant document from qrels
+                //}
+            
+            // print relevant judgement hashtable to console
+            //Console.WriteLine("ini rel judgement yang hash kedua");
+
+            //for (int i = 0; i < Program.relevantJudgementsHash.Count(); i++)
+            //{
+            //    for (int j = 0; j < Program.relevantJudgementsHash.ElementAt(i).Count(); j++)
+            //    {
+            //        Console.Write(Program.relevantJudgementsHash.ElementAt(i).ElementAt(j).Key);
+            //        Console.Write("-");
+            //        Console.Write(Program.relevantJudgementsHash.ElementAt(i).ElementAt(j).Value);
+            //        Console.Write(" ");
+            //    }
+            //    Console.Write("\n");
+            //}
+
+            // yang diatas tuh buat yang experiment. yang interactive ga usah update qrels
         }
     }
 }

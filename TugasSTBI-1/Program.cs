@@ -12,9 +12,11 @@ namespace TugasSTBI_1
     class Program
     {
         // Global variable
+        public static List<Document> ListDocumentsFixed; /*List of Document master*/    
         public static List<Document> ListDocuments; /*List of Document*/
         public static Queries qs; /*list of query*/
         public static List<List<string>> relevantJudgements; /*list relevant judgement for queries*/
+        public static List<Dictionary<String, int>> relevantJudgementsHash;
         public static List<List<Docvalue>> allResults;
         public static List<int> listOfNRelevantRetrieved; // jumlah relevan dokumen yang diretrieve               
         public static int tfDocCode, idfDocCode, normDocCode;
@@ -185,6 +187,7 @@ namespace TugasSTBI_1
 
             // Make Document Entities
             ListDocuments = new List<Document>();
+            ListDocumentsFixed = new List<Document>();
             dTitle_NumDoc = new Dictionary<String, int>();
             //dTitle_NumDoc.Add("lalala", 1);
             dDocuments = new Dictionary<string, Dictionary<string, int>>();
@@ -194,6 +197,7 @@ namespace TugasSTBI_1
                 Document document = new Document(TextDocuments[i], stemCode);
                 //Console.WriteLine(document.Title);
                 ListDocuments.Add(document);
+                ListDocumentsFixed.Add(document);
                 //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
                 string titlewithoutenter = document.Title;
                 dTitle_NumDoc.Add(titlewithoutenter, i);
@@ -284,6 +288,7 @@ namespace TugasSTBI_1
         public static void readRelJudg(string pathRelJudg)
         {
             relevantJudgements = new List<List<string>>();
+            relevantJudgementsHash = new List<Dictionary<string, int>>();
             List<string> rjPerQuery = new List<string>();
             string relJudgText = System.IO.File.ReadAllText(@pathRelJudg);
             string[] rjLine;
@@ -298,9 +303,11 @@ namespace TugasSTBI_1
                 while (relevantJudgements.Count() != Int32.Parse(rjChunked[0])) //di list belum ada list untuk query ke i
                 {
                     relevantJudgements.Add(new List<string>());
+                    relevantJudgementsHash.Add(new Dictionary<string,int>());
                 }
-                //error : index was out of range (yang ke 36 nya ga ada)
+                // rjChunked[1] : no dokumen yang relevan untuk no query rjChunked[0]
                 relevantJudgements.ElementAt(Int32.Parse(rjChunked[0]) - 1).Add(rjChunked[1]);
+                relevantJudgementsHash.ElementAt(Int32.Parse(rjChunked[0]) - 1).Add(rjChunked[1],1);
                 //Console.WriteLine(Int32.Parse(rjChunked[0]) - 1 + " -- " + rjChunked[1]);
             }
             // print relevant judgement to console
@@ -315,6 +322,20 @@ namespace TugasSTBI_1
                 }
                 Console.Write("\n");
             }*/
+            // print relevant judgement hashtable to console
+            Console.WriteLine("ini rel judgement yang hash");
+            
+            for (int i = 0; i < relevantJudgementsHash.Count(); i++)
+            {
+                for (int j = 0; j < relevantJudgementsHash.ElementAt(i).Count(); j++)
+                {
+                    Console.Write(relevantJudgementsHash.ElementAt(i).ElementAt(j).Key);
+                    Console.Write("-");
+                    Console.Write(relevantJudgementsHash.ElementAt(i).ElementAt(j).Value);
+                    Console.Write(" ");
+                }
+                Console.Write("\n");
+            }
         }
 
         public static void nRelevantRetrieved(List<List<Docvalue>> allRes, List<List<string>> allRelJudg)

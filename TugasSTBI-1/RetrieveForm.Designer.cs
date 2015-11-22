@@ -34,6 +34,7 @@
             this.buttonInteractiveSearch = new System.Windows.Forms.Button();
             this.listBoxResultInteractive = new System.Windows.Forms.ListBox();
             this.labelResult = new System.Windows.Forms.Label();
+            this.buttonSecondRetrieval = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -95,11 +96,22 @@
             this.labelResult.Text = "RESULT";
             this.labelResult.Visible = false;
             // 
+            // buttonSecondRetrieval
+            // 
+            this.buttonSecondRetrieval.Location = new System.Drawing.Point(761, 12);
+            this.buttonSecondRetrieval.Name = "buttonSecondRetrieval";
+            this.buttonSecondRetrieval.Size = new System.Drawing.Size(175, 23);
+            this.buttonSecondRetrieval.TabIndex = 6;
+            this.buttonSecondRetrieval.Text = "Second Retrieval";
+            this.buttonSecondRetrieval.UseVisualStyleBackColor = true;
+            this.buttonSecondRetrieval.Click += new System.EventHandler(this.buttonSecondRetrieval_Click);
+            // 
             // RetrieveForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 524);
+            this.Controls.Add(this.buttonSecondRetrieval);
             this.Controls.Add(this.labelResult);
             this.Controls.Add(this.listBoxResultInteractive);
             this.Controls.Add(this.buttonInteractiveSearch);
@@ -123,5 +135,6 @@
         private System.Windows.Forms.Button buttonInteractiveSearch;
         private System.Windows.Forms.ListBox listBoxResultInteractive;
         private System.Windows.Forms.Label labelResult;
+        private System.Windows.Forms.Button buttonSecondRetrieval;
     }
 }
