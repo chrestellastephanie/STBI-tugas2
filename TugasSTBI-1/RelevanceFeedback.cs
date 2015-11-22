@@ -31,30 +31,59 @@ namespace TugasSTBI_1
             return result;
         }
 
-        private static List<double> CreateRelevant(string term, int querynumber)
+        public static List<double> CreateRelevant(string term, int querynumber)
         {
-
             List<double> relevant = new List<double>();
             for (int i = 0; i <= Program.nRetrieve1 - 1; i++)
             {
                 if (Program.relFeedback.ElementAt(querynumber).ElementAt(i).val == 1)
                 {
-                    relevant.Add(Program.dTermWeigth[term][Program.relFeedback.ElementAt(querynumber).ElementAt(i).docNum]);
+                    double weight = 0;
+                    if (Program.dTermWeigth.ContainsKey(term))
+                    {
+                        string no = Program.relFeedback.ElementAt(querynumber).ElementAt(i).docNum;
+                        if(Program.dTermWeigth[term].ContainsKey(no))
+                        {
+                            weight = Program.dTermWeigth[term][no];
+                        }
+                    }
+                    relevant.Add(weight);
                 }
             }
+
+            if(relevant.Count == 0)
+            {
+                relevant.Add(0);
+            }
+
             return relevant;
         }
 
-        private static List<double> CreateIrrelevant(string term, int querynumber)
+        public static List<double> CreateIrrelevant(string term, int querynumber)
         {
             List<double> irrelevant = new List<double>();
             for (int i = 0; i <= Program.nRetrieve1 - 1; i++)
             {
                 if (Program.relFeedback.ElementAt(querynumber).ElementAt(i).val == 0)
                 {
-                    irrelevant.Add(Program.dTermWeigth[term][Program.relFeedback.ElementAt(querynumber).ElementAt(i).docNum]);
+                    double weight = 0;
+                    if (Program.dTermWeigth.ContainsKey(term))
+                    {
+                        string no = Program.relFeedback.ElementAt(querynumber).ElementAt(i).docNum;
+                        if (Program.dTermWeigth[term].ContainsKey(no))
+                        {
+                            weight = Program.dTermWeigth[term][no];
+                        }
+                    }
+                    irrelevant.Add(weight);
                 }
             }
+
+            if (irrelevant.Count == 0)
+            {
+                irrelevant.Add(0);
+            }
+
             return irrelevant;
         }
 
@@ -80,6 +109,53 @@ namespace TugasSTBI_1
             result = wQueryOld + relevant.Sum() - irrelevant;
 
             return result;
+        }
+
+        public static void reWeightingQuery()
+        {
+            int iter = 0;
+            foreach(var query in Program.lQueryWeightNew)
+            {
+                int iter1 = 0;
+                foreach(var item in query)
+                {
+                    List<double> relevant = CreateRelevant(item.term, iter);
+                    List<double> irrelevant = CreateIrrelevant(item.term, iter);
+                    double newWeight = calculateNewQuery(item.weight, relevant, irrelevant);
+                    Program.lDQueryWeightNew[iter][item.term] = newWeight;
+                    Program.lQueryWeightNew[iter][iter1].weight = newWeight;
+                    iter1++;
+                }
+                iter++;
+            }
+        }
+
+        public static void reCalculateSimilarity(int k)
+        {
+            Program.allResults = new List<List<Docvalue>>();
+            for (int i = 0; i < Program.lQueryWeightNew.Count; i++)
+            {
+                List<Docvalue> result = new List<Docvalue>();
+                Similarity sim = new Similarity(Program.lQueryWeightNew[i] , Program.outputInvertedFile);
+                result = sim.calculateDocumentsValue();
+                result = result.OrderByDescending(o => o.val).ToList();
+                if (k != -1) //-1 kalau hasil diretrieve semua
+                {
+                    result = result.Take(k).ToList();
+                }
+                Program.allResults.Add(result);
+            }
+        }
+
+        public static void assignRelFeedback()
+        {
+            Program.relFeedback = new List<HashSet<Docvalue>>();
+            foreach(var item in Program.lQueryWeightOld)
+            {
+                HashSet<Docvalue> query = new HashSet<Docvalue>();
+                query.Add(new Docvalue("1", 1));
+                Program.relFeedback.Add(query);
+            }
         }
     }
 }

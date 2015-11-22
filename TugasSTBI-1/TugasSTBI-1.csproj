@@ -53,6 +53,7 @@
     <Compile Include="IndexingForm.Designer.cs">
       <DependentUpon>IndexingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QueryExpansion.cs" />
     <Compile Include="RelevanceFeedback.cs" />
     <Compile Include="relevanceFeedbackForm.cs">
       <SubType>Form</SubType>

@@ -32,6 +32,12 @@ namespace TugasSTBI_1
             interactiveQuery.query[0] = textBoxInteractiveQuery.Text;
             //Program.qs.query = textBoxInteractiveQuery.Text.Split(' ');
             Program.findResultQueries(interactiveQuery, Program.nRetrieve1);
+            
+            //// test relevance
+            //RelevanceFeedback.assignRelFeedback();
+            //QueryExpansion.doQueryExpansion();
+            //RelevanceFeedback.reWeightingQuery();
+
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
@@ -60,6 +66,22 @@ namespace TugasSTBI_1
 
             Program.readRelJudg(IndexingForm.relevanceDirectory);
             Program.findResultQueries(Program.qs, Program.nRetrieve1);
+
+            //// print list query
+            //int iter = 0;
+            //foreach(var item in Program.lQueryWeightOld)
+            //{
+            //    int iter1 = 0;
+            //    foreach(var subitem in item)
+            //    {
+            //        Console.WriteLine(subitem.term + " " + subitem.weight);
+            //        Console.WriteLine(Program.lQueryWeightNew[iter][iter1].term + " " + Program.lQueryWeightNew[iter][iter1].weight);
+            //        Console.WriteLine(Program.lDQueryWeightNew[iter][subitem.term]);
+            //        iter1++;
+            //    }
+            //    iter++;
+            //}
+
             Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements);
 
             

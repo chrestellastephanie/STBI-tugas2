@@ -37,7 +37,7 @@ namespace TugasSTBI_1
         public static Dictionary<string, int> dTitle_NumDoc = new Dictionary<string, int>(); //hashtable title-docnum. assigned when create inverted file.
         public static List<List<WeightedTermQuery>> lQueryWeightOld;
         public static List<List<WeightedTermQuery>> lQueryWeightNew;
-        public static List<Dictionary<string, double>> lDQueryWeightOld;
+        public static List<Dictionary<string, double>> lDQueryWeightNew;
 
 
         // return weight for each query term
@@ -91,12 +91,41 @@ namespace TugasSTBI_1
         {
             // list of hasil tiap query (list of list of result)
             allResults = new List<List<Docvalue>>();
+
+            // list of list query old and new
+            lQueryWeightOld = new List<List<WeightedTermQuery>>();
+            lQueryWeightNew = new List<List<WeightedTermQuery>>();
+            lDQueryWeightNew = new List<Dictionary<string, double>>();
+
             //for each query
             for (int i = 0; i < queries.nQuery(); i++)
             {
                 List<Docvalue> result = new List<Docvalue>();
                 List<WeightedTermQuery> queryWithWeight = new List<WeightedTermQuery>();
                 queryWithWeight = weightingQuery(queries.getQuery(i), ListDocuments);
+                
+                lQueryWeightOld.Add(queryWithWeight);   // add list of query
+
+                // initialize list new query, same as list old query 
+                List<WeightedTermQuery> lQueryWeight = new List<WeightedTermQuery>();
+                foreach (var item in queryWithWeight)
+                {
+                    WeightedTermQuery queryWeight = new WeightedTermQuery(item.term, item.weight);
+                    lQueryWeight.Add(queryWeight);
+                }
+                lQueryWeightNew.Add(lQueryWeight);
+
+                // initialize dictionary new query
+                Dictionary<string, double> dQueryWeight = new Dictionary<string, double>();
+                foreach(var item in queryWithWeight)
+                {
+                    if(!dQueryWeight.ContainsKey(item.term))
+                    {
+                        dQueryWeight.Add(item.term, item.weight);
+                    }
+                }
+                lDQueryWeightNew.Add(dQueryWeight);
+
                 Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
