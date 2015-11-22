@@ -34,7 +34,7 @@ namespace TugasSTBI_1
         public static List<double> CreateRelevant(string term, int querynumber)
         {
             List<double> relevant = new List<double>();
-            for (int i = 0; i <= Program.nRetrieve1 - 1; i++)
+            for (int i = 0; i <= Program.relFeedback[querynumber].Count - 1; i++)
             {
                 if (Program.relFeedback.ElementAt(querynumber).ElementAt(i).val == 1)
                 {
@@ -62,7 +62,7 @@ namespace TugasSTBI_1
         public static List<double> CreateIrrelevant(string term, int querynumber)
         {
             List<double> irrelevant = new List<double>();
-            for (int i = 0; i <= Program.nRetrieve1 - 1; i++)
+            for (int i = 0; i <= Program.relFeedback[querynumber].Count - 1; i++)
             {
                 if (Program.relFeedback.ElementAt(querynumber).ElementAt(i).val == 0)
                 {
@@ -128,6 +128,8 @@ namespace TugasSTBI_1
                 }
                 iter++;
             }
+
+            removeQuery();
         }
 
         public static void reCalculateSimilarity(int k)
@@ -155,6 +157,20 @@ namespace TugasSTBI_1
                 HashSet<Docvalue> query = new HashSet<Docvalue>();
                 query.Add(new Docvalue("1", 1));
                 Program.relFeedback.Add(query);
+            }
+        }
+
+        private static void removeQuery()
+        {
+            int iter = 0;
+            foreach (var item in Program.lQueryWeightNew)
+            {
+                foreach (var subitem in item.Where(v => v.weight <= 0).ToList())
+                {
+                    Program.lQueryWeightNew[iter].Remove(subitem);
+                    Program.lDQueryWeightNew[iter].Remove(subitem.term);
+                }
+                iter++;
             }
         }
     }
