@@ -178,6 +178,10 @@ namespace TugasSTBI_1
                         if (Program.relevantJudgements[queryNumber].Contains(Program.allResults[queryNumber][i].docNum))
                         {
                             query.Add(new Docvalue(Program.allResults[queryNumber][i].docNum, 1));
+                            if(Program.secondDocCollection.Equals("diff"))
+                            {
+                                Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][i].docNum);
+                            }
                         }
                         else
                         {
