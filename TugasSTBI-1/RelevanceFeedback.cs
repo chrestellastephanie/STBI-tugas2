@@ -165,13 +165,13 @@ namespace TugasSTBI_1
                 int j = 0;
                 for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
                 {
-                    if (Program.nRetrieve1 < Program.allResults.ElementAt(queryNumber).Count())
+                    if ((Program.nRetrieve1 > Program.allResults.ElementAt(queryNumber).Count()) || (Program.nRetrieve1 == -1))
                     {
-                        j = Program.nRetrieve1;
+                        j = Program.allResults.ElementAt(queryNumber).Count();
                     }
                     else
                     {
-                        j = Program.allResults.ElementAt(queryNumber).Count();
+                        j = Program.nRetrieve1;
                     }
                     for (int i = 0; i <= j - 1; i++)
                     {
