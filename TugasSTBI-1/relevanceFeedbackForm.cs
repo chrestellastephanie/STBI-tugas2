@@ -35,7 +35,7 @@ namespace TugasSTBI_1
             //Console.WriteLine("lala : " + pos + " -> " + titleRaw);
             string numDoc = Program.dTitle_NumDoc[titleRaw].ToString();
             Program.dvList.Add(new Docvalue(numDoc, isRelevant));
-            Program.relFeedback.Add(Program.dvList);
+            //Program.relFeedback.Add(Program.dvList);
             /*foreach (var item in Program.dvList)
             {
                 Console.Write(item.docNum);

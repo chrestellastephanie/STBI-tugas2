@@ -52,11 +52,11 @@ namespace TugasSTBI_1
             }
 
             /*print relevant*/
-            Console.WriteLine("printan relevant : ");
+            /*Console.WriteLine("printan relevant : ");
             for (int i = 0; i < relevant.Count(); i++)
             {
                 Console.WriteLine(relevant.ElementAt(i));
-            }
+            }*/
 
                 if (relevant.Count == 0)
                 {

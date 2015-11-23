@@ -152,23 +152,35 @@ namespace TugasSTBI_1
             }
         }
 
-        private void buttonSecondRetrieval_Click(object sender, EventArgs e)
+        private void buttonSecondRetrieval_Click(object sender, EventArgs e) // interactive mode
         {
-            // if user choose "different doc" option, update listDocument. remove judged document (relFeedback) and update reljudgement(for experiment only)
+            Program.relFeedback.Clear();
+            Program.relFeedback.Add(Program.dvList);
 
+            //print query baru + weight
+            foreach (var item in Program.lQueryWeightNew)
+            {
+                foreach (var subitem in item)
+                {
+                    Console.Write(subitem.term);
+                    Console.Write("---");
+                    Console.Write(subitem.weight);
+                    Console.Write("\n");
+                }
+            }
+
+
+            // if user choose "different doc" option, update listDocument. remove judged document (relFeedback) and update reljudgement(for experiment only)
             if (Program.secondDocCollection.Equals("diff"))
             {
-                //remove judged documents from document collection
                 int count = Program.relFeedback.Count(); //menghitung jumlah feedback yang diberikan user
                 List<string> judgedDocNum = new List<string>(); //list of judged documents number
-                
                 foreach (var item in Program.relFeedback)
                 {
                     foreach (var subitem in item)
                     {
-                        Console.Write("ini nihh");
-                        Console.Write(subitem.docNum);
-                        Console.Write("\n");
+                        //Console.Write(subitem.docNum);
+                        //Console.Write("\n");
                         if (!judgedDocNum.Contains(subitem.docNum))
                         {
                             judgedDocNum.Add(subitem.docNum);
@@ -187,16 +199,20 @@ namespace TugasSTBI_1
                     string[] tempContent = new string[1];
                     tempContent[0] = "";
                     Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Content = tempContent;
-                    //Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i])).Content = null;
-                        
                 }
             }
             Program.createInvertedFileFromListDocuments();
 
             //do retrieval as first retrieval
-            Queries expandedQuery = new Queries();
-            expandedQuery.query[0] = "library"; //isi pake expanded query
+            
+            //Queries expandedQuery = new Queries();
+            //expandedQuery.query[0] = "library"; //isi pake expanded 
             //Program.findResultQueries(expandedQuery, -1);
+            if (Program.useQueryExpansion == 1)
+            {
+                QueryExpansion.doQueryExpansion();
+            }
+            RelevanceFeedback.reWeightingQuery();
             RelevanceFeedback.reCalculateSimilarity(-1);
             
             //show result in the form
@@ -213,9 +229,9 @@ namespace TugasSTBI_1
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
                     //line = line + ("(") + Program.ListDocuments[nd].No + (")");
                     //line = line + (" - ");
-                    Console.WriteLine("nd = " + nd);
+                    //Console.WriteLine("nd = " + nd);
                     line = line + Program.ListDocuments[nd].Title;
-                    Console.WriteLine("ini gilaaa : " + Program.ListDocuments.ElementAt(nd).Title);
+                    //Console.WriteLine("ini gilaaa : " + Program.ListDocuments.ElementAt(nd).Title);
                     //line = line + Program.dTitle_NumDoc.FirstOrDefault(x => x.Value == nd).Key;
                        
                     listBoxResultInteractive.Items.Add(line);
