@@ -73,10 +73,18 @@ namespace TugasSTBI_1
             Program.ListDocuments = new List<Document>(Program.ListDocumentsFixed);
 
             Program.readRelJudg(IndexingForm.relevanceDirectory);
-            Program.findResultQueries(Program.qs, Program.nRetrieve1);
-            Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements);
+            Program.findResultQueries(Program.qs, Program.nRetrieve1); //first retrieve
+            RelevanceFeedback.assignRelFeedback();
+            if (Program.useQueryExpansion == 1)
+            {
+                QueryExpansion.doQueryExpansion();
+            }
+            RelevanceFeedback.reWeightingQuery();
+            RelevanceFeedback.reCalculateSimilarity(-1);
+            Program.nRelevantRetrieved(Program.allResults, Program.relevantJudgements); //pake relevantJudgement yang baru! -> udah di hapus pas assignFeedback
 
             
+
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;

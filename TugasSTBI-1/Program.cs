@@ -476,6 +476,7 @@ namespace TugasSTBI_1
         public static double calculateRecall(int queryNumber)
         {
             double recall = 0;
+
             recall = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
             //Console.WriteLine("jumlah benar yang diretrieve : " + listOfNRelevantRetrieved.ElementAt(queryNumber));
             //Console.WriteLine("banyaknya dokumen yang relevan pada collection : " + relevantJudgements.ElementAt(queryNumber).Count());
