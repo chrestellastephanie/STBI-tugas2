@@ -51,10 +51,17 @@ namespace TugasSTBI_1
                 }
             }
 
-            if(relevant.Count == 0)
+            /*print relevant*/
+            Console.WriteLine("printan relevant : ");
+            for (int i = 0; i < relevant.Count(); i++)
             {
-                relevant.Add(0);
+                Console.WriteLine(relevant.ElementAt(i));
             }
+
+                if (relevant.Count == 0)
+                {
+                    relevant.Add(0);
+                }
 
             return relevant;
         }
@@ -138,13 +145,13 @@ namespace TugasSTBI_1
             for (int i = 0; i < Program.lQueryWeightNew.Count; i++)
             {
                 List<Docvalue> result = new List<Docvalue>();
-                Similarity sim = new Similarity(Program.lQueryWeightNew[i] , Program.outputInvertedFile);
+                Similarity sim = new Similarity(Program.lQueryWeightNew[i] , Program.outputInvertedFile2);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
-                if (k != -1) //-1 kalau hasil diretrieve semua
+                /*if (k != -1) //-1 kalau hasil diretrieve semua
                 {
                     result = result.Take(k).ToList();
-                }
+                }*/
                 Program.allResults.Add(result);
             }
         }

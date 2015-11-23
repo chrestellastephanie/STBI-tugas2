@@ -155,11 +155,13 @@ namespace TugasSTBI_1
         private void buttonSecondRetrieval_Click(object sender, EventArgs e)
         {
             // if user choose "different doc" option, update listDocument. remove judged document (relFeedback) and update reljudgement(for experiment only)
+
             if (Program.secondDocCollection.Equals("diff"))
             {
                 //remove judged documents from document collection
                 int count = Program.relFeedback.Count(); //menghitung jumlah feedback yang diberikan user
                 List<string> judgedDocNum = new List<string>(); //list of judged documents number
+                
                 foreach (var item in Program.relFeedback)
                 {
                     foreach (var subitem in item)
@@ -175,18 +177,27 @@ namespace TugasSTBI_1
                 }
                 for (int i = 0; i < judgedDocNum.Count(); i++)
                 {
-                    var item = Program.ListDocuments.SingleOrDefault(x => x.No == judgedDocNum[i]);
+                    /*var item = Program.ListDocuments.SingleOrDefault(x => x.No == judgedDocNum[i]);
                     if (item != null)
+                    {
                         Program.ListDocuments.Remove(item);
+                    }*/
+                    //document title and content jadi null
+                    Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Title = "";
+                    string[] tempContent = new string[1];
+                    tempContent[0] = "";
+                    Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Content = tempContent;
+                    //Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i])).Content = null;
+                        
                 }
-
-            }             
-
+            }
+            Program.createInvertedFileFromListDocuments();
 
             //do retrieval as first retrieval
             Queries expandedQuery = new Queries();
             expandedQuery.query[0] = "library"; //isi pake expanded query
-            Program.findResultQueries(expandedQuery, -1);
+            //Program.findResultQueries(expandedQuery, -1);
+            RelevanceFeedback.reCalculateSimilarity(-1);
             
             //show result in the form
             listBoxResultInteractive.Items.Clear();
@@ -202,7 +213,11 @@ namespace TugasSTBI_1
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
                     //line = line + ("(") + Program.ListDocuments[nd].No + (")");
                     //line = line + (" - ");
+                    Console.WriteLine("nd = " + nd);
                     line = line + Program.ListDocuments[nd].Title;
+                    Console.WriteLine("ini gilaaa : " + Program.ListDocuments.ElementAt(nd).Title);
+                    //line = line + Program.dTitle_NumDoc.FirstOrDefault(x => x.Value == nd).Key;
+                       
                     listBoxResultInteractive.Items.Add(line);
                 }
             }

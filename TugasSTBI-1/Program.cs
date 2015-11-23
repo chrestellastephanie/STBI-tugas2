@@ -23,6 +23,7 @@ namespace TugasSTBI_1
         public static int tfQueryCode, idfQueryCode, normQueryCode;
         public static int stemCode;
         public static string outputInvertedFile = "D:/InvertedFile.txt";
+        public static string outputInvertedFile2 = "D:/InvertedFile2nd.txt"; // untuk 2nd retrieval
         //public static string relJudgPath = "D:/ADI/qrels.text";
 
         public static Dictionary<string, Dictionary<string, double>> dTermWeigth;
@@ -179,28 +180,24 @@ namespace TugasSTBI_1
         {
 
         }
- 
-        public static void createInvertedFile(string documentsContent)
+        public static void createInvertedFileFromListDocuments()
         {
             // Split text per document
-            string[] TextDocuments = documentsContent.Split(new string[] { ".I " }, StringSplitOptions.None);
+            //string[] TextDocuments = documentsContent.Split(new string[] { ".I " }, StringSplitOptions.None);
 
             // Make Document Entities
-            ListDocuments = new List<Document>();
-            ListDocumentsFixed = new List<Document>();
-            dTitle_NumDoc = new Dictionary<String, int>();
+            //ListDocuments = new List<Document>();
+            //ListDocumentsFixed = new List<Document>();
+            //dTitle_NumDoc = new Dictionary<String, int>();
             //dTitle_NumDoc.Add("lalala", 1);
             dDocuments = new Dictionary<string, Dictionary<string, int>>();
-            for (int i = 1; i < TextDocuments.Count(); i++)
+            for (int i = 1; i < ListDocuments.Count(); i++)
             {
                 //Console.WriteLine(TextDocuments[i]);
-                Document document = new Document(TextDocuments[i], stemCode);
+                Document document = ListDocuments[i];
                 //Console.WriteLine(document.Title);
-                ListDocuments.Add(document);
-                ListDocumentsFixed.Add(document);
-                //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
-                string titlewithoutenter = document.Title;
-                dTitle_NumDoc.Add(titlewithoutenter, i);
+                //ListDocuments.Add(document);
+                //dTitle_NumDoc.Add(document.Title, i);
                 //Console.Write(document.Title);
                 //Console.Write(" - ");
                 //Console.Write(i);
@@ -229,6 +226,109 @@ namespace TugasSTBI_1
                 Console.Write(item.Value);
                 Console.Write("\n");
             }
+
+            //uncomment
+            TermWeighting TW = new TermWeighting(ListDocuments);
+            List<string> ListTermWithWeight = new List<string>();
+
+            dTermWeigth = new Dictionary<string, Dictionary<string, double>>();
+
+            for (int i = 0; i < ListDocuments.Count(); i++)
+            {
+                List<string> found = new List<string>();    // store word that has already counts
+                for (int j = 0; j < ListDocuments.ElementAt(i).Content.Count(); j++)
+                {
+                    //Console.WriteLine(ListDocuments.ElementAt(i).Content[j]);
+                    string term = ListDocuments.ElementAt(i).Content[j];
+                    if (!found.Contains(ListDocuments.ElementAt(i).Content[j]))
+                    {
+                        found.Add(ListDocuments.ElementAt(i).Content[j]);
+
+                        // menghitung term weight masing-masing kata di tiap dokumen
+                        //ListTermWithWeight.Add(ListDocuments.ElementAt(i).Content[j] + " " + ListDocuments.ElementAt(i).No + " " + TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+
+                        if (dTermWeigth.ContainsKey(term))  // dictionary already has the term 'key'
+                        {
+                            dTermWeigth[term].Add(ListDocuments.ElementAt(i).No, TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+                        }
+                        else    // dictionary not yet has the term 'key'
+                        {
+                            dTermWeigth.Add(term, new Dictionary<string, double>());
+                            dTermWeigth[term].Add(ListDocuments.ElementAt(i).No, TW.CalculateTermWeightingDocument(i, j, tfDocCode, idfQueryCode, normDocCode));
+                        }
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<string, Dictionary<string, double>> entry in dTermWeigth)
+            {
+                string term = entry.Key;
+                foreach (KeyValuePair<string, double> subEntry in entry.Value)
+                {
+                    string noDoc = subEntry.Key;
+                    double weight = subEntry.Value;
+                    ListTermWithWeight.Add(term + " " + noDoc + " " + weight);
+                }
+            }
+
+            ListTermWithWeight.Sort();
+
+            using (StreamWriter writer = new StreamWriter(@outputInvertedFile2))
+            {
+                foreach (string linestring in ListTermWithWeight)
+                {
+                    writer.WriteLine(linestring);
+                }
+            }
+        }
+        public static void createInvertedFile(string documentsContent)
+        {
+            // Split text per document
+            string[] TextDocuments = documentsContent.Split(new string[] { ".I " }, StringSplitOptions.None);
+
+            // Make Document Entities
+            ListDocuments = new List<Document>();
+            ListDocumentsFixed = new List<Document>();
+            dTitle_NumDoc = new Dictionary<String, int>();
+            //dTitle_NumDoc.Add("lalala", 1);
+            dDocuments = new Dictionary<string, Dictionary<string, int>>();
+            for (int i = 1; i < TextDocuments.Count(); i++)
+            {
+                //Console.WriteLine(TextDocuments[i]);
+                Document document = new Document(TextDocuments[i], stemCode);
+                //Console.WriteLine(document.Title);
+                ListDocuments.Add(document);
+                ListDocumentsFixed.Add(document);
+                //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
+                dTitle_NumDoc.Add(document.Title, i);
+                //Console.Write(document.Title);
+                //Console.Write(" - ");
+                //Console.Write(i);
+                //Console.Write("\n");
+
+                // input terms in document to dictionary
+                foreach (string term in document.Content.Distinct())
+                {
+                    if (dDocuments.ContainsKey(term))
+                    {
+                        dDocuments[term].Add(document.No, (from s in document.Content where s == term select s).Count());
+                    }
+                    else
+                    {
+                        dDocuments.Add(term, new Dictionary<string, int>());
+                        dDocuments[term].Add(document.No, (from s in document.Content where s == term select s).Count());
+                    }
+                }
+            }
+
+            //print dTitle_NumDoc
+            /*foreach (var item in dTitle_NumDoc)
+            {
+                Console.Write(item.Key);
+                Console.Write(" - ");
+                Console.Write(item.Value);
+                Console.Write("\n");
+            }*/
 
             //uncomment
             TermWeighting TW = new TermWeighting(ListDocuments);
