@@ -159,9 +159,23 @@ namespace TugasSTBI_1
         public static void assignRelFeedback()
         {
             Program.relFeedback = new List<HashSet<Docvalue>>();
-            //foreach (var item in Program.lQueryWeightOld)
-            //{
-                
+            if (Program.relevanceFeedbackMethod.Equals("pseudo"))
+            {
+                HashSet<Docvalue> query = new HashSet<Docvalue>();
+                for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
+                {
+                    for (int a = 0; a <= Program.nPseudoRelevant - 1; a++)
+                    {
+                        query.Add(new Docvalue(Program.allResults[queryNumber][a].docNum, 1));
+                    }
+                    Program.relFeedback.Add(query);
+                }
+            }
+            else
+            {
+                //foreach (var item in Program.lQueryWeightOld)
+                //{
+
                 int j = 0;
                 for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
                 {
@@ -179,7 +193,7 @@ namespace TugasSTBI_1
                         if (Program.relevantJudgements[queryNumber].Contains(Program.allResults[queryNumber][i].docNum))
                         {
                             query.Add(new Docvalue(Program.allResults[queryNumber][i].docNum, 1));
-                            if(Program.secondDocCollection.Equals("diff"))
+                            if (Program.secondDocCollection.Equals("diff"))
                             {
                                 Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][i].docNum);
                             }
@@ -191,6 +205,7 @@ namespace TugasSTBI_1
                     }
                     Program.relFeedback.Add(query);
                 }
+            }
             //}
         }
 
