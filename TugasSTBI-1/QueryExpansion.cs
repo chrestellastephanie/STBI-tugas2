@@ -17,7 +17,7 @@ namespace TugasSTBI_1
                     if (item.val == 1)
                     {
                         int no = Int32.Parse(item.docNum);
-                        foreach (string term in Program.ListDocuments[no].Content)
+                        foreach (string term in Program.ListDocuments[no - 1].Content)
                         {
                             if (!Program.lDQueryWeightNew[i].ContainsKey(term))
                             {

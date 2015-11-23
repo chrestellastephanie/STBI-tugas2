@@ -159,11 +159,33 @@ namespace TugasSTBI_1
         public static void assignRelFeedback()
         {
             Program.relFeedback = new List<HashSet<Docvalue>>();
-            foreach(var item in Program.lQueryWeightOld)
+            foreach (var item in Program.lQueryWeightOld)
             {
                 HashSet<Docvalue> query = new HashSet<Docvalue>();
-                query.Add(new Docvalue("1", 1));
-                Program.relFeedback.Add(query);
+                int j = 0;
+                for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
+                {
+                    if (Program.nRetrieve1 < Program.allResults.ElementAt(queryNumber).Count())
+                    {
+                        j = Program.nRetrieve1;
+                    }
+                    else
+                    {
+                        j = Program.allResults.ElementAt(queryNumber).Count();
+                    }
+                    for (int i = 0; i <= j - 1; i++)
+                    {
+                        if (Program.relevantJudgements[queryNumber].Contains(Program.allResults[queryNumber][i].docNum))
+                        {
+                            query.Add(new Docvalue(Program.allResults[queryNumber][i].docNum, 1));
+                        }
+                        else
+                        {
+                            query.Add(new Docvalue(Program.allResults[queryNumber][i].docNum, 0));
+                        }
+                    }
+                    Program.relFeedback.Add(query);
+                }
             }
         }
 
