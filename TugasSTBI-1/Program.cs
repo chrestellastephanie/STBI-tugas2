@@ -219,13 +219,14 @@ namespace TugasSTBI_1
             }
 
             //print dTitle_NumDoc
+            /*
             foreach (var item in dTitle_NumDoc)
             {
                 Console.Write(item.Key);
                 Console.Write(" - ");
                 Console.Write(item.Value);
                 Console.Write("\n");
-            }
+            }*/
 
             //uncomment
             TermWeighting TW = new TermWeighting(ListDocuments);
@@ -300,11 +301,12 @@ namespace TugasSTBI_1
                 ListDocuments.Add(document);
                 ListDocumentsFixed.Add(document);
                 //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
-                dTitle_NumDoc.Add(document.Title, i);
-                //Console.Write(document.Title);
-                //Console.Write(" - ");
-                //Console.Write(i);
-                //Console.Write("\n");
+                string ttl = document.Title + "|||" + i;
+                dTitle_NumDoc.Add(ttl, i);
+                Console.Write(document.Title);
+                Console.Write(" - ");
+                Console.Write(i);
+                Console.Write("\n");
 
                 // input terms in document to dictionary
                 foreach (string term in document.Content.Distinct())
@@ -423,7 +425,7 @@ namespace TugasSTBI_1
                 Console.Write("\n");
             }*/
             // print relevant judgement hashtable to console
-            Console.WriteLine("ini rel judgement yang hash");
+            /*Console.WriteLine("ini rel judgement yang hash");
             
             for (int i = 0; i < relevantJudgementsHash.Count(); i++)
             {
@@ -435,7 +437,7 @@ namespace TugasSTBI_1
                     Console.Write(" ");
                 }
                 Console.Write("\n");
-            }
+            }*/
         }
 
         public static void nRelevantRetrieved(List<List<Docvalue>> allRes, List<List<string>> allRelJudg)

@@ -53,8 +53,8 @@ namespace TugasSTBI_1
                     line = j + 1 + ". ";
                     //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum)-1;
-                    //line = line + ("(") + Program.ListDocuments[nd].No + (")");
-                    //line = line + (" - ");
+                    line = line + ("((") + Program.ListDocuments[nd].No + ("))");
+                    line = line + (" ---- ");
                     line = line + Program.ListDocuments[nd].Title;
                     listBoxResultInteractive.Items.Add(line);
                 }
@@ -166,6 +166,7 @@ namespace TugasSTBI_1
             Program.relFeedback.Add(Program.dvList);
 
             //print query baru + weight
+            /*
             foreach (var item in Program.lQueryWeightNew)
             {
                 foreach (var subitem in item)
@@ -175,7 +176,7 @@ namespace TugasSTBI_1
                     Console.Write(subitem.weight);
                     Console.Write("\n");
                 }
-            }
+            }*/
 
 
             // if user choose "different doc" option, update listDocument. remove judged document (relFeedback) and update reljudgement(for experiment only)
@@ -235,8 +236,8 @@ namespace TugasSTBI_1
                     line = j + 1 + ". ";
                     //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
-                    //line = line + ("(") + Program.ListDocuments[nd].No + (")");
-                    //line = line + (" - ");
+                    line = line + ("((") + Program.ListDocuments[nd].No + ("))");
+                    line = line + (" ---- ");
                     //Console.WriteLine("nd = " + nd);
                     line = line + Program.ListDocuments[nd].Title;
                     //Console.WriteLine("ini gilaaa : " + Program.ListDocuments.ElementAt(nd).Title);
