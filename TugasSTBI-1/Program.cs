@@ -128,7 +128,7 @@ namespace TugasSTBI_1
                     }
                 }
                 lDQueryWeightNew.Add(dQueryWeight);
-
+                //Console.WriteLine("query ke : " + i);
                 Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
@@ -300,7 +300,6 @@ namespace TugasSTBI_1
                 //Console.WriteLine(document.Title);
                 ListDocuments.Add(document);
                 ListDocumentsFixed.Add(document);
-                //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
                 string ttl = document.Title + "|||" + i;
                 dTitle_NumDoc.Add(ttl, i);
                 /*

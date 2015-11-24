@@ -9,7 +9,7 @@ namespace TugasSTBI_1
     class Similarity
     {
         List<WeightedTermQuery> lQueryTerm;
-        List<WeightedTermDoc> lDocTerm; /*document which contain query term*/
+        List<WeightedTermDoc> lDocTerm; /*document which contains query term*/
 
         public Similarity()
         {
@@ -76,7 +76,7 @@ namespace TugasSTBI_1
                 //Console.WriteLine("Term nya : " + lQueryTerm[i].weight);
                 //double hasil = lQueryTerm[i].weight * getWeightFromDocList(lQueryTerm[i].term, docnum); 
                 sim += lQueryTerm[i].weight * getWeightFromDocList(lQueryTerm[i].term,docnum);
-                //Console.WriteLine(hasil);
+                //Console.WriteLine(sim);
             }
             return sim;
         }
