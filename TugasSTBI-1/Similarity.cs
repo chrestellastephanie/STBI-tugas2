@@ -17,15 +17,27 @@ namespace TugasSTBI_1
             lDocTerm = null;
         }
 
-        public Similarity(List<WeightedTermQuery> lq, string invertedFilePath)
+        public Similarity(List<WeightedTermQuery> lq/*, Dictionary<string, Dictionary<string, double>> invertedFileDict*/)
         {
             //Console.WriteLine("here");
             lQueryTerm = lq;
-            System.IO.StreamReader file = new System.IO.StreamReader(invertedFilePath);
+            //System.IO.StreamReader file = new System.IO.StreamReader(invertedFilePath);
+
             string line;
             string[] temp;
+
             lDocTerm = new List<WeightedTermDoc>();
-            while ((line = file.ReadLine()) != null)
+            foreach (var termInQuery in lq)
+            {
+                if (Program.dTermWeigth.ContainsKey(termInQuery.term)) //cek term query ada di inverted file ga
+                {
+                    foreach (var term in Program.dTermWeigth[termInQuery.term])
+                    {
+                        lDocTerm.Add(new WeightedTermDoc(termInQuery.term, term.Key, term.Value));
+                    }
+                }
+            }
+            /*while ((line = file.ReadLine()) != null)
             {
                 //Console.WriteLine(line);
                 temp = line.Split(' ');
@@ -37,6 +49,8 @@ namespace TugasSTBI_1
                     }
                 }
             }
+             */ 
+
             /*foreach (var item in lDocTerm)
             {
                 Console.WriteLine("ldocterm : " + item.term);
