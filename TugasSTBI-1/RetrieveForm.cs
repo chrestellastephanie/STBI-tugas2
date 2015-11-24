@@ -128,6 +128,21 @@ namespace TugasSTBI_1
             {
                 listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
                 listBoxResultInteractive.Items.Add(Program.qs.query[i]);
+                for (int a = 0; a <= Program.lQueryWeightOld.ElementAt(i).Count() - 1; a++)
+                {
+                    listBoxResultInteractive.Items.Add(Program.lQueryWeightOld.ElementAt(i).ElementAt(a).term + " " + Program.lQueryWeightOld.ElementAt(i).ElementAt(a).weight);
+                }
+                line = Program.lQueryWeightNew.ElementAt(i).ElementAt(0).term;
+                for (int b = 1; b<= Program.lQueryWeightNew.ElementAt(i).Count() - 1; b++)
+                {
+                    line = line + " ";
+                    line = line + Program.lQueryWeightNew.ElementAt(i).ElementAt(b).term;
+                }
+                listBoxResultInteractive.Items.Add(line);
+                for (int c = 0; c <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; c++)
+                {
+                    listBoxResultInteractive.Items.Add(Program.lQueryWeightNew.ElementAt(i).ElementAt(c).term + " " + Program.lQueryWeightNew.ElementAt(i).ElementAt(c).weight);
+                }
                 listBoxResultInteractive.Items.Add("Recall = " + Program.calculateRecall(i));
                 listBoxResultInteractive.Items.Add("Precision = " + Program.calculatePrecision(i));
                 listBoxResultInteractive.Items.Add("Non-Interpolated Average Precision = " + Program.calculateNIAP(i));
