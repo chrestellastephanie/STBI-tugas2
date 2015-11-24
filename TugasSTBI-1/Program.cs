@@ -518,7 +518,10 @@ namespace TugasSTBI_1
         public static double calculateNIAP(int queryNumber)
         {
             double NIAP = 0;
-            NIAP = AveragePrecision(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
+            if (relevantJudgements.ElementAt(queryNumber).Count() != 0)
+            {
+                NIAP = AveragePrecision(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
+            }
             //Console.WriteLine("NIAP = " + NIAP);
             return NIAP;
         }
