@@ -330,6 +330,8 @@ namespace TugasSTBI_1
                                 }
                             }
                             if (!found) return;
+                            int length;
+
                             switch (sb.ToString(sb.Length - 2, 2))
                             {
                                 case "at":

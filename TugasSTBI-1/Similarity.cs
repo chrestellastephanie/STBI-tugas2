@@ -53,12 +53,12 @@ namespace TugasSTBI_1
             List<Docvalue> res = new List<Docvalue>();            
 
             //cari no dokumen yang distinct
-            List<string> docsNum = new List<string>();
+            HashSet<string> docsNum = new HashSet<string>();
             foreach (var item in lDocTerm)
             {
                 docsNum.Add(item.docNum);
             }
-            docsNum = docsNum.Distinct().ToList();
+            //docsNum = docsNum.Distinct().ToList();
 
             // for each docNum, itung valuenya
             foreach (var item in docsNum)
