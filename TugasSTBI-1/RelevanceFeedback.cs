@@ -137,8 +137,9 @@ namespace TugasSTBI_1
             }
 
             removeQuery();
+            distinctQueryOld();
         }
-
+        
         public static void reCalculateSimilarity(int k)
         {
             //Program.allResults = new List<List<Docvalue>>();
@@ -224,6 +225,16 @@ namespace TugasSTBI_1
                     Program.lQueryWeightNew[iter].Remove(subitem);
                     Program.lDQueryWeightNew[iter].Remove(subitem.term);
                 }
+                iter++;
+            }
+        }
+
+        private static void distinctQueryOld()
+        {
+            int iter = 0;
+            foreach (var item in Program.lQueryWeightOld)
+            {
+                Program.lQueryWeightOld[iter].Distinct();
                 iter++;
             }
         }
