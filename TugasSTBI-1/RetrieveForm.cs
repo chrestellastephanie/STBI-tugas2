@@ -298,6 +298,28 @@ namespace TugasSTBI_1
 
             for (int i = 0; i < Program.allResults.Count(); i++)
             {
+                line = Program.lQueryWeightOld.ElementAt(i).ElementAt(0).term;
+                for (int k=1; k<= Program.lQueryWeightOld.ElementAt(i).Count()-1; k++)
+                {
+                    line = line + " ";
+                    line = line + Program.lQueryWeightOld.ElementAt(i).ElementAt(k).term;
+                }
+                listBoxResultInteractive.Items.Add(line);
+                for (int l = 0; l <= Program.lQueryWeightOld.ElementAt(i).Count() - 1; l++)
+                {
+                    listBoxResultInteractive.Items.Add(Program.lQueryWeightOld.ElementAt(i).ElementAt(l).term + " " + Program.lQueryWeightOld.ElementAt(i).ElementAt(l).weight);
+                }
+                line = Program.lQueryWeightNew.ElementAt(i).ElementAt(0).term;
+                for (int k = 1; k <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; k++)
+                {
+                    line = line + " ";
+                    line = line + Program.lQueryWeightNew.ElementAt(i).ElementAt(k).term;
+                }
+                listBoxResultInteractive.Items.Add(line);
+                for (int l = 0; l <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; l++)
+                {
+                    listBoxResultInteractive.Items.Add(Program.lQueryWeightNew.ElementAt(i).ElementAt(l).term + " " + Program.lQueryWeightNew.ElementAt(i).ElementAt(l).weight);
+                }
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
                     line = j + 1 + ". ";
