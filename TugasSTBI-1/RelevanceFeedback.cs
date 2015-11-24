@@ -141,7 +141,8 @@ namespace TugasSTBI_1
 
         public static void reCalculateSimilarity(int k)
         {
-            Program.allResults = new List<List<Docvalue>>();
+            //Program.allResults = new List<List<Docvalue>>();
+            Program.allResults.Clear();
             for (int i = 0; i < Program.lQueryWeightNew.Count; i++)
             {
                 List<Docvalue> result = new List<Docvalue>();
