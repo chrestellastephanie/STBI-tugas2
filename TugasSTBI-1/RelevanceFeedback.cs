@@ -167,6 +167,10 @@ namespace TugasSTBI_1
                     for (int a = 0; a <= Program.nPseudoRelevant - 1; a++)
                     {
                         query.Add(new Docvalue(Program.allResults[queryNumber][a].docNum, 1));
+                        if (Program.secondDocCollection.Equals("diff"))
+                        {
+                            Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][a].docNum);
+                        }
                     }
                     Program.relFeedback.Add(query);
                 }

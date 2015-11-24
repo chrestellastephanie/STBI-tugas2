@@ -303,10 +303,12 @@ namespace TugasSTBI_1
                 //string titlewithoutenter = Regex.Replace(document.Title, @"\t|\n|\r", "");
                 string ttl = document.Title + "|||" + i;
                 dTitle_NumDoc.Add(ttl, i);
+                /*
                 Console.Write(document.Title);
                 Console.Write(" - ");
                 Console.Write(i);
                 Console.Write("\n");
+                 */
 
                 // input terms in document to dictionary
                 foreach (string term in document.Content.Distinct())

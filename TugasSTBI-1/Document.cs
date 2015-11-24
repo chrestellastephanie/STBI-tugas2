@@ -11,11 +11,74 @@ namespace TugasSTBI_1
     {
         public string No { get; set; }
         public string Title { get; set; }
-        public string [] Author { get; set; }
+        //public string [] Author { get; set; }
         public string [] Content { get; set; }
 
         public Document(string text, int stemCode)
         {
+            No = "";
+            Title = "";
+            Content = new string[1];
+            Content[0] = " ";
+            text = "\n.I " + text;
+            string[] textSplitedByPart = text.Split(new string[] { "\n." }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0 ; i<textSplitedByPart.Count(); i++)
+            {
+                //Console.WriteLine(textSplitedByPart[i]);
+                //Console.WriteLine("-.-.-.-.-.-.-");
+
+                if (textSplitedByPart[i][0]=='I')
+                {
+                    //Console.WriteLine("masuk sini");
+
+                    string[] chunk = textSplitedByPart[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    No = chunk[1];
+                    Console.WriteLine("no : " + No);
+                }
+                else if (textSplitedByPart[i][0] == 'T')
+                {
+                    if (textSplitedByPart[i].Length!=1)
+                    {
+                        Title = textSplitedByPart[i].Substring(2);
+                    }
+                    else
+                    {
+                        Title = " ";
+                    }
+                    //Console.WriteLine("title : " + Title);
+                }
+                //else if (textSplitedByPart[i][0]=='A')
+                //{
+                //    Console.WriteLine("masuk ke A");
+                //    Author[0] = textSplitedByPart[i].Substring(2);
+                //    Console.WriteLine("author : " + Author);
+                //}
+                else if (textSplitedByPart[i][0]=='W')
+                {
+                    string strContent = textSplitedByPart[i].Substring(2);
+                    //remove number from content text
+                    strContent = Regex.Replace(strContent, @"[0-9]+ ", string.Empty);
+                    if (stemCode == 1)
+                    {
+                        // Stemming, mengubah kata ke bentuk dasarnya
+                        StemmingTool Stemmer = new StemmingTool();
+                        strContent = Stemmer.Stemming(strContent);
+                    }
+                    Content = strContent.Split(' ');
+                    //print content
+                    //Console.WriteLine("content : ");
+                    //for (int j = 0; j < Content.Count(); j++)
+                    //{
+                    //    Console.Write(Content[j] + " ");
+                    //}
+                }
+                else
+                {
+                    //Console.WriteLine("ga diambil");
+                }
+            }
+
+            /*
             if(!text.Contains("\n.A"))  // if doesn't have author
             {
                 No = Before(text, "\n.T");
@@ -69,6 +132,7 @@ namespace TugasSTBI_1
 
             // Split Content per word
             Content = ContentString.Split(' ');
+             */
         }
 
         private string getTitleRecurrence(string text)
