@@ -17,11 +17,16 @@ namespace TugasSTBI_1
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //button interactive
         {
             textBoxInteractiveQuery.Visible = true;
             buttonInteractiveSearch.Visible = true;
             listBoxResultInteractive.Visible = true;
+            listBoxResultInteractive.Items.Clear();
+            if (!Program.relevanceFeedbackMethod.Equals("pseudo"))
+            {
+                buttonSecondRetrieval.Visible = true;
+            }
             labelResult.Visible = true;
         }
 
@@ -32,6 +37,19 @@ namespace TugasSTBI_1
             interactiveQuery.query[0] = textBoxInteractiveQuery.Text;
             //Program.qs.query = textBoxInteractiveQuery.Text.Split(' ');
             Program.findResultQueries(interactiveQuery, Program.nRetrieve1);
+
+            if (Program.relevanceFeedbackMethod.Equals("pseudo"))
+            {
+                RelevanceFeedback.assignRelFeedback(); //kalo pseudo yang top N dianggap relevan
+                Program.createInvertedFileFromListDocuments();
+
+                if (Program.useQueryExpansion == 1)
+                {
+                    QueryExpansion.doQueryExpansion();
+                }
+                RelevanceFeedback.reWeightingQuery();
+                RelevanceFeedback.reCalculateSimilarity(-1);
+            }
 
             //reset listdocuments
             Program.ListDocuments.Clear();
@@ -66,6 +84,7 @@ namespace TugasSTBI_1
             textBoxInteractiveQuery.Visible = false;
             buttonInteractiveSearch.Visible = false;
             listBoxResultInteractive.Visible = true;
+            buttonSecondRetrieval.Visible = false;
             labelResult.Visible = true;
 
             //reset list documents

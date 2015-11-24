@@ -104,6 +104,7 @@
             this.buttonSecondRetrieval.TabIndex = 6;
             this.buttonSecondRetrieval.Text = "Second Retrieval";
             this.buttonSecondRetrieval.UseVisualStyleBackColor = true;
+            this.buttonSecondRetrieval.Visible = false;
             this.buttonSecondRetrieval.Click += new System.EventHandler(this.buttonSecondRetrieval_Click);
             // 
             // RetrieveForm
