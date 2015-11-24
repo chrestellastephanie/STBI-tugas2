@@ -75,6 +75,39 @@ namespace TugasSTBI_1
             Program.readRelJudg(IndexingForm.relevanceDirectory);
             Program.findResultQueries(Program.qs, Program.nRetrieve1); //first retrieve
             RelevanceFeedback.assignRelFeedback();
+
+            //if (Program.secondDocCollection.Equals("diff"))
+            //{
+            //    int count = Program.relFeedback.Count(); //menghitung jumlah feedback yang diberikan user
+            //    List<string> judgedDocNum = new List<string>(); //list of judged documents number
+            //    foreach (var item in Program.relFeedback)
+            //    {
+            //        foreach (var subitem in item)
+            //        {
+            //            //Console.Write(subitem.docNum);
+            //            //Console.Write("\n");
+            //            if (!judgedDocNum.Contains(subitem.docNum))
+            //            {
+            //                judgedDocNum.Add(subitem.docNum);
+            //            }
+            //        }
+            //    }
+            //    for (int i = 0; i < judgedDocNum.Count(); i++)
+            //    {
+            //        /*var item = Program.ListDocuments.SingleOrDefault(x => x.No == judgedDocNum[i]);
+            //        if (item != null)
+            //        {
+            //            Program.ListDocuments.Remove(item);
+            //        }*/
+            //        //document title and content jadi null
+            //        Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Title = "";
+            //        string[] tempContent = new string[1];
+            //        tempContent[0] = "";
+            //        Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Content = tempContent;
+            //    }
+            //}
+            Program.createInvertedFileFromListDocuments();
+
             if (Program.useQueryExpansion == 1)
             {
                 QueryExpansion.doQueryExpansion();
