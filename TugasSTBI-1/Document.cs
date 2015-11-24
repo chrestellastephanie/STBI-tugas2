@@ -57,13 +57,14 @@ namespace TugasSTBI_1
                 {
                     string strContent = textSplitedByPart[i].Substring(2);
                     strContent = StopwordTool.RemoveStopwords(strContent);
+                    Console.WriteLine(strContent);
                     //remove number from content text
                     strContent = Regex.Replace(strContent, @"[0-9]+ ", string.Empty);
                     if (stemCode == 1)
                     {
                         // Stemming, mengubah kata ke bentuk dasarnya
-                        StemmingTool Stemmer = new StemmingTool();
-                        strContent = Stemmer.Stemming(strContent);
+                        StemmingTool Stemmer2 = new StemmingTool();
+                        strContent = Stemmer2.Stemming(strContent);
                     }
                     Content = strContent.Split(' ');
                     //print content

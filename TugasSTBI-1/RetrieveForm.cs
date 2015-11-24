@@ -271,9 +271,9 @@ namespace TugasSTBI_1
                         Program.ListDocuments.Remove(item);
                     }*/
                     //document title and content jadi null
-                    Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Title = "";
+                    Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Title = " ";
                     string[] tempContent = new string[1];
-                    tempContent[0] = "";
+                    tempContent[0] = " ";
                     Program.ListDocuments.ElementAt(Int32.Parse(judgedDocNum[i]) - 1).Content = tempContent;
                 }
             }
@@ -294,13 +294,14 @@ namespace TugasSTBI_1
             //show result in the form
             listBoxResultInteractive.Items.Clear();
             string line;
-            int nd;
+            int nd, numerator;
+            numerator = 1;
 
             for (int i = 0; i < Program.allResults.Count(); i++)
             {
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
-                {
-                    line = j + 1 + ". ";
+                {                    
+                    line = numerator + ". ";
                     //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
                     line = line + ("((") + Program.ListDocuments[nd].No + ("))");
@@ -309,8 +310,11 @@ namespace TugasSTBI_1
                     line = line + Program.ListDocuments[nd].Title;
                     //Console.WriteLine("ini gilaaa : " + Program.ListDocuments.ElementAt(nd).Title);
                     //line = line + Program.dTitle_NumDoc.FirstOrDefault(x => x.Value == nd).Key;
-                       
-                    listBoxResultInteractive.Items.Add(line);
+                    if (!Program.ListDocuments[nd].Title.Equals(""))
+                    {
+                        listBoxResultInteractive.Items.Add(line);
+                        numerator++;
+                    }
                 }
             }
 
