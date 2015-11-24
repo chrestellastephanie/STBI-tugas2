@@ -9,7 +9,7 @@ namespace TugasSTBI_1
     class Similarity
     {
         List<WeightedTermQuery> lQueryTerm;
-        List<WeightedTermDoc> lDocTerm; /*document which contains query term*/
+        Dictionary<string, Dictionary<string, double>> lDocTerm; /*document which contains query term*/
 
         public Similarity()
         {
@@ -26,14 +26,25 @@ namespace TugasSTBI_1
             string line;
             string[] temp;
 
-            lDocTerm = new List<WeightedTermDoc>();
-            foreach (var termInQuery in lq)
+            lDocTerm = new Dictionary<string, Dictionary<string, double>>();
+            foreach (var termInQuery in lq.Select(g => g.term).Distinct().ToList())
             {
-                if (Program.dTermWeigth.ContainsKey(termInQuery.term)) //cek term query ada di inverted file ga
+                if (Program.dTermWeigth.ContainsKey(termInQuery)) //cek term query ada di inverted file ga
                 {
-                    foreach (var term in Program.dTermWeigth[termInQuery.term])
+                    if(!lDocTerm.ContainsKey(termInQuery)) //kalo term belom ada di lDocTerm. then bikin key baru di lDocterm
                     {
-                        lDocTerm.Add(new WeightedTermDoc(termInQuery.term, term.Key, term.Value));
+                        lDocTerm.Add(termInQuery, new Dictionary<string,double>());
+                        foreach (var term in Program.dTermWeigth[termInQuery])
+                        {
+                            lDocTerm[termInQuery].Add(term.Key, term.Value);
+                        }
+                    }
+                    else //kalo udah ada, then tambahin dari lDocterm[term] nya
+                    {
+                        foreach (var term in Program.dTermWeigth[termInQuery])
+                        {
+                            lDocTerm[termInQuery].Add(term.Key, term.Value);
+                        }
                     }
                 }
             }
@@ -70,7 +81,10 @@ namespace TugasSTBI_1
             HashSet<string> docsNum = new HashSet<string>();
             foreach (var item in lDocTerm)
             {
-                docsNum.Add(item.docNum);
+                foreach(var subitem in item.Value)
+                {
+                    docsNum.Add(subitem.Key);
+                }
             }
             //docsNum = docsNum.Distinct().ToList();
 
@@ -97,12 +111,13 @@ namespace TugasSTBI_1
 
         public double getWeightFromDocList(string term, string docNum)
         {
+            //return dari hash
             double w = 0;
-            foreach (var item in lDocTerm)
+            if(lDocTerm.ContainsKey(term))
             {
-                if (item.term == term && item.docNum==docNum)
+                if(lDocTerm[term].ContainsKey(docNum))
                 {
-                    w = item.weight;
+                    w = lDocTerm[term][docNum];
                 }
             }
             return w;
