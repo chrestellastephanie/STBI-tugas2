@@ -170,7 +170,10 @@ namespace TugasSTBI_1
                         query.Add(new Docvalue(Program.allResults[queryNumber][a].docNum, 1));
                         if (Program.secondDocCollection.Equals("diff"))
                         {
-                            Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][a].docNum);
+                            if (Program.modeUsed.Equals("experiment"))
+                            {
+                                Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][a].docNum);
+                            }
                         }
                     }
                     Program.relFeedback.Add(query);
@@ -182,7 +185,7 @@ namespace TugasSTBI_1
                 //{
 
                 int j = 0;
-                for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
+                for (int queryNumber = 0; queryNumber < Program.allResults.Count(); queryNumber++)
                 {
                     if ((Program.nRetrieve1 > Program.allResults.ElementAt(queryNumber).Count()) || (Program.nRetrieve1 == -1))
                     {
