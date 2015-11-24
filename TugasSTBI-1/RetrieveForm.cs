@@ -143,58 +143,68 @@ namespace TugasSTBI_1
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
+            string outputResult = "D:/recall.txt";
+            
             double meanRecall = 0;
             double meanPrecision = 0;
             double meanNIAP = 0;
-            for (int i = 0; i < Program.allResults.Count(); i++)
-            {
-                listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
-                listBoxResultInteractive.Items.Add(Program.qs.query[i]);
-                for (int a = 0; a <= Program.lQueryWeightOld.ElementAt(i).Count() - 1; a++)
+            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(outputResult)) {
+                for (int i = 0; i < Program.allResults.Count(); i++)
                 {
-                    listBoxResultInteractive.Items.Add(Program.lQueryWeightOld.ElementAt(i).ElementAt(a).term + " " + Program.lQueryWeightOld.ElementAt(i).ElementAt(a).weight);
-                }
-                if (Program.lQueryWeightNew.ElementAt(i).Count() != 0)
-                {
-                    line = Program.lQueryWeightNew.ElementAt(i).ElementAt(0).term;
-                    for (int b = 1; b <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; b++)
+                    listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
+                    listBoxResultInteractive.Items.Add(Program.qs.query[i]);
+                    for (int a = 0; a <= Program.lQueryWeightOld.ElementAt(i).Count() - 1; a++)
                     {
-                        line = line + " ";
-                        line = line + Program.lQueryWeightNew.ElementAt(i).ElementAt(b).term;
+                        listBoxResultInteractive.Items.Add(Program.lQueryWeightOld.ElementAt(i).ElementAt(a).term + " " + Program.lQueryWeightOld.ElementAt(i).ElementAt(a).weight);
                     }
-                    listBoxResultInteractive.Items.Add(line);
-                }
-                for (int c = 0; c <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; c++)
-                {
-                    listBoxResultInteractive.Items.Add(Program.lQueryWeightNew.ElementAt(i).ElementAt(c).term + " " + Program.lQueryWeightNew.ElementAt(i).ElementAt(c).weight);
-                }
-                listBoxResultInteractive.Items.Add("Recall = " + Program.calculateRecall(i));
-                listBoxResultInteractive.Items.Add("Precision = " + Program.calculatePrecision(i));
-                listBoxResultInteractive.Items.Add("Non-Interpolated Average Precision = " + Program.calculateNIAP(i));
-                meanRecall = meanRecall + Program.calculateRecall(i);
-                meanPrecision = meanPrecision+ Program.calculatePrecision(i);
-                meanNIAP = meanNIAP + Program.calculateNIAP(i);
-                
-                for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
-                {
-                    line = j + 1 + ". ";
-                    line = line + ("similarity = ") + Program.allResults[i][j].val + ("-- ");
-                    nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
-                    //line = line + ("(") + Program.ListDocuments[nd].No + (")");
-                    //line = line + (" - ");
-                    line = line + Program.ListDocuments[nd].Title;
-                    listBoxResultInteractive.Items.Add(line);
-                }
-                listBoxResultInteractive.Items.Add("\n");
-            }
-            meanRecall = meanRecall / Program.allResults.Count();
-            meanPrecision = meanPrecision / Program.allResults.Count();
-            meanNIAP = meanNIAP / Program.allResults.Count();
-            listBoxResultInteractive.Items.Add("Mean Recall: " + meanRecall);
-            listBoxResultInteractive.Items.Add("Mean Precision: " + meanPrecision);
-            listBoxResultInteractive.Items.Add("Mean Non interpolated average precision: " + meanNIAP);
+                    if (Program.lQueryWeightNew.ElementAt(i).Count() != 0)
+                    {
+                        line = Program.lQueryWeightNew.ElementAt(i).ElementAt(0).term;
+                        for (int b = 1; b <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; b++)
+                        {
+                            line = line + " ";
+                            line = line + Program.lQueryWeightNew.ElementAt(i).ElementAt(b).term;
+                        }
+                        listBoxResultInteractive.Items.Add(line);
+                    }
+                    for (int c = 0; c <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; c++)
+                    {
+                        listBoxResultInteractive.Items.Add(Program.lQueryWeightNew.ElementAt(i).ElementAt(c).term + " " + Program.lQueryWeightNew.ElementAt(i).ElementAt(c).weight);
+                    }
+                    listBoxResultInteractive.Items.Add("Recall = " + Program.calculateRecall(i));
+                    listBoxResultInteractive.Items.Add("Precision = " + Program.calculatePrecision(i));
+                    listBoxResultInteractive.Items.Add("Non-Interpolated Average Precision = " + Program.calculateNIAP(i));
+                    writer.WriteLine("Result for query #" + (i + 1));
+                    writer.WriteLine("Recall = " + Program.calculateRecall(i));
+                    writer.WriteLine("Precision = " + Program.calculatePrecision(i));
+                    writer.WriteLine("Non-Interpolated Average Precision = " + Program.calculateNIAP(i));
+                    meanRecall = meanRecall + Program.calculateRecall(i);
+                    meanPrecision = meanPrecision + Program.calculatePrecision(i);
+                    meanNIAP = meanNIAP + Program.calculateNIAP(i);
 
-        }
+                    for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
+                     {
+                         line = j + 1 + ". ";
+                         line = line + ("similarity = ") + Program.allResults[i][j].val + ("-- ");
+                         nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
+                         //line = line + ("(") + Program.ListDocuments[nd].No + (")");
+                         //line = line + (" - ");
+                         line = line + Program.ListDocuments[nd].Title;
+                         listBoxResultInteractive.Items.Add(line);
+                     }
+                     listBoxResultInteractive.Items.Add("\n");
+                 }
+                    meanRecall = meanRecall / Program.allResults.Count();
+                    meanPrecision = meanPrecision / Program.allResults.Count();
+                    meanNIAP = meanNIAP / Program.allResults.Count();
+                    listBoxResultInteractive.Items.Add("Mean Recall: " + meanRecall);
+                    listBoxResultInteractive.Items.Add("Mean Precision: " + meanPrecision);
+                    listBoxResultInteractive.Items.Add("Mean Non interpolated average precision: " + meanNIAP);
+                writer.WriteLine("Mean Recall: " + meanRecall);
+                writer.WriteLine("Mean Precision: " + meanPrecision);
+                writer.WriteLine("Mean Non interpolated average precision: " + meanNIAP);
+
+            } }
 
         private void RetrieveForm_FormClosing(object sender, FormClosingEventArgs e)
         {
