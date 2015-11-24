@@ -92,6 +92,7 @@ namespace TugasSTBI_1
             //reset list documents
             Program.ListDocuments.Clear();
             Program.ListDocuments = new List<Document>(Program.ListDocumentsFixed);
+            Console.WriteLine("test");
 
             Program.readRelJudg(IndexingForm.relevanceDirectory);
             Program.findResultQueries(Program.qs, Program.nRetrieve1); //first retrieve
@@ -153,13 +154,16 @@ namespace TugasSTBI_1
                 {
                     listBoxResultInteractive.Items.Add(Program.lQueryWeightOld.ElementAt(i).ElementAt(a).term + " " + Program.lQueryWeightOld.ElementAt(i).ElementAt(a).weight);
                 }
-                line = Program.lQueryWeightNew.ElementAt(i).ElementAt(0).term;
-                for (int b = 1; b<= Program.lQueryWeightNew.ElementAt(i).Count() - 1; b++)
+                if (Program.lQueryWeightNew.ElementAt(i).Count() != 0)
                 {
-                    line = line + " ";
-                    line = line + Program.lQueryWeightNew.ElementAt(i).ElementAt(b).term;
+                    line = Program.lQueryWeightNew.ElementAt(i).ElementAt(0).term;
+                    for (int b = 1; b <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; b++)
+                    {
+                        line = line + " ";
+                        line = line + Program.lQueryWeightNew.ElementAt(i).ElementAt(b).term;
+                    }
+                    listBoxResultInteractive.Items.Add(line);
                 }
-                listBoxResultInteractive.Items.Add(line);
                 for (int c = 0; c <= Program.lQueryWeightNew.ElementAt(i).Count() - 1; c++)
                 {
                     listBoxResultInteractive.Items.Add(Program.lQueryWeightNew.ElementAt(i).ElementAt(c).term + " " + Program.lQueryWeightNew.ElementAt(i).ElementAt(c).weight);

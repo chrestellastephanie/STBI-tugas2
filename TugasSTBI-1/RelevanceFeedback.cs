@@ -137,8 +137,9 @@ namespace TugasSTBI_1
             }
 
             removeQuery();
+            distinctQueryOld();
         }
-
+        
         public static void reCalculateSimilarity(int k)
         {
             //Program.allResults = new List<List<Docvalue>>();
@@ -170,7 +171,10 @@ namespace TugasSTBI_1
                         query.Add(new Docvalue(Program.allResults[queryNumber][a].docNum, 1));
                         if (Program.secondDocCollection.Equals("diff"))
                         {
-                            Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][a].docNum);
+                            if (Program.modeUsed.Equals("experiment"))
+                            {
+                                Program.relevantJudgements.ElementAt(queryNumber).Remove(Program.allResults[queryNumber][a].docNum);
+                            }
                         }
                     }
                     Program.relFeedback.Add(query);
@@ -182,7 +186,7 @@ namespace TugasSTBI_1
                 //{
 
                 int j = 0;
-                for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
+                for (int queryNumber = 0; queryNumber < Program.allResults.Count(); queryNumber++)
                 {
                     if ((Program.nRetrieve1 > Program.allResults.ElementAt(queryNumber).Count()) || (Program.nRetrieve1 == -1))
                     {
@@ -224,6 +228,16 @@ namespace TugasSTBI_1
                     Program.lQueryWeightNew[iter].Remove(subitem);
                     Program.lDQueryWeightNew[iter].Remove(subitem.term);
                 }
+                iter++;
+            }
+        }
+
+        private static void distinctQueryOld()
+        {
+            int iter = 0;
+            foreach (var item in Program.lQueryWeightOld)
+            {
+                Program.lQueryWeightOld[iter].Distinct();
                 iter++;
             }
         }

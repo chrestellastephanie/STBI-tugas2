@@ -158,7 +158,8 @@ namespace TugasSTBI_1
 
             //print hasil ke file
 
-            /*string outputResult = "D:/SearchResult.txt";
+            /*
+            string outputResult = "D:/SearchResult.txt";
             string line;
             using (StreamWriter writer = new StreamWriter(outputResult))
             {
@@ -405,8 +406,11 @@ namespace TugasSTBI_1
                 //Console.WriteLine(rjLine[i]);
                 rjChunked = rjLine[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 //Console.WriteLine(rjLine[i]);
-                while (relevantJudgements.Count() != Int32.Parse(rjChunked[0]) && relevantJudgements.Count() < qs.nQuery()) //di list belum ada list untuk query ke i
+
+                while (relevantJudgements.Count() < Int32.Parse(rjChunked[0]) || (relevantJudgements.Count() < qs.nQuery())) //di list belum ada list untuk query ke 
                 {
+                    Console.WriteLine(relevantJudgements.Count());
+                    Console.WriteLine(qs.nQuery());
                     relevantJudgements.Add(new List<string>());
                     relevantJudgementsHash.Add(new Dictionary<string,int>());
                 }
@@ -416,7 +420,7 @@ namespace TugasSTBI_1
                 //Console.WriteLine(Int32.Parse(rjChunked[0]) - 1 + " -- " + rjChunked[1]);
             }
             // print relevant judgement to console
-            //Console.WriteLine("ini rel judgnya");
+            Console.WriteLine("ini rel judgnya");
             /*
             for (int i = 0; i < relevantJudgements.Count(); i++)
             {
@@ -481,8 +485,10 @@ namespace TugasSTBI_1
         public static double calculateRecall(int queryNumber)
         {
             double recall = 0;
-
-            recall = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
+            if (relevantJudgements.ElementAt(queryNumber).Count() != 0)
+            {
+                recall = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)relevantJudgements.ElementAt(queryNumber).Count();
+            }
             //Console.WriteLine("jumlah benar yang diretrieve : " + listOfNRelevantRetrieved.ElementAt(queryNumber));
             //Console.WriteLine("banyaknya dokumen yang relevan pada collection : " + relevantJudgements.ElementAt(queryNumber).Count());
             //Console.WriteLine("Recall  : " + recall);
@@ -491,7 +497,10 @@ namespace TugasSTBI_1
         public static double calculatePrecision(int queryNumber)
         {
             double precision = 0;
-            precision = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)allResults.ElementAt(queryNumber).Count();
+            if (allResults.ElementAt(queryNumber).Count() != 0)
+            {
+                precision = (double)listOfNRelevantRetrieved.ElementAt(queryNumber) / (double)allResults.ElementAt(queryNumber).Count();
+            }
             return precision; 
         }
         public static double AveragePrecision(int queryNumber)
