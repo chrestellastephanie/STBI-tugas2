@@ -131,7 +131,7 @@ namespace TugasSTBI_1
                 }
                 lDQueryWeightNew.Add(dQueryWeight);
                 //Console.WriteLine("query ke : " + i);
-                Similarity sim = new Similarity(queryWithWeight, outputInvertedFile);
+                Similarity sim = new Similarity(queryWithWeight);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
                 if (k != -1) //-1 kalau hasil diretrieve semua
@@ -158,7 +158,7 @@ namespace TugasSTBI_1
 
             //print hasil ke file
 
-            string outputResult = "D:/SearchResult.txt";
+            /*string outputResult = "D:/SearchResult.txt";
             string line;
             using (StreamWriter writer = new StreamWriter(outputResult))
             {
@@ -173,7 +173,7 @@ namespace TugasSTBI_1
                         writer.WriteLine(line);
                     }
                 }
-            }
+            }*/
             Console.WriteLine("Selesai!!");
             Console.ReadLine();
         }
@@ -405,7 +405,7 @@ namespace TugasSTBI_1
                 //Console.WriteLine(rjLine[i]);
                 rjChunked = rjLine[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 //Console.WriteLine(rjLine[i]);
-                while (relevantJudgements.Count() != Int32.Parse(rjChunked[0])) //di list belum ada list untuk query ke i
+                while (relevantJudgements.Count() != Int32.Parse(rjChunked[0]) && relevantJudgements.Count() < qs.nQuery()) //di list belum ada list untuk query ke i
                 {
                     relevantJudgements.Add(new List<string>());
                     relevantJudgementsHash.Add(new Dictionary<string,int>());

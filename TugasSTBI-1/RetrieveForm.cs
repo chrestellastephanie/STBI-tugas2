@@ -70,7 +70,7 @@ namespace TugasSTBI_1
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
                     line = j + 1 + ". ";
-                    //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
+                    line = line + ("similarity = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum)-1;
                     line = line + ("((") + Program.ListDocuments[nd].No + ("))");
                     line = line + (" ---- ");
@@ -174,7 +174,7 @@ namespace TugasSTBI_1
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {
                     line = j + 1 + ". ";
-                    //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
+                    line = line + ("similarity = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
                     //line = line + ("(") + Program.ListDocuments[nd].No + (")");
                     //line = line + (" - ");
@@ -326,7 +326,7 @@ namespace TugasSTBI_1
                 for (int j = 0; j < Program.allResults.ElementAt(i).Count(); j++)
                 {                    
                     line = numerator + ". ";
-                    //line = line + ("--w = ") + Program.allResults[i][j].val + ("-- ");
+                    line = line + ("similarity = ") + Program.allResults[i][j].val + ("-- ");
                     nd = Int32.Parse(Program.allResults[i][j].docNum) - 1;
                     line = line + ("((") + Program.ListDocuments[nd].No + ("))");
                     line = line + (" ---- ");
@@ -334,7 +334,7 @@ namespace TugasSTBI_1
                     line = line + Program.ListDocuments[nd].Title;
                     //Console.WriteLine("ini gilaaa : " + Program.ListDocuments.ElementAt(nd).Title);
                     //line = line + Program.dTitle_NumDoc.FirstOrDefault(x => x.Value == nd).Key;
-                    if (!Program.ListDocuments[nd].Title.Equals(""))
+                    if (!Program.ListDocuments[nd].Title.Equals(" "))
                     {
                         listBoxResultInteractive.Items.Add(line);
                         numerator++;

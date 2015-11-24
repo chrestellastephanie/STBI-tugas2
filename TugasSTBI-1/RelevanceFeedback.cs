@@ -146,7 +146,7 @@ namespace TugasSTBI_1
             for (int i = 0; i < Program.lQueryWeightNew.Count; i++)
             {
                 List<Docvalue> result = new List<Docvalue>();
-                Similarity sim = new Similarity(Program.lQueryWeightNew[i] , Program.outputInvertedFile2);
+                Similarity sim = new Similarity(Program.lQueryWeightNew[i]);
                 result = sim.calculateDocumentsValue();
                 result = result.OrderByDescending(o => o.val).ToList();
                 /*if (k != -1) //-1 kalau hasil diretrieve semua
