@@ -138,6 +138,7 @@ namespace TugasSTBI_1
 
             removeQuery();
             distinctQueryOld();
+            distinctQueryNew();
         }
         
         public static void reCalculateSimilarity(int k)
@@ -232,13 +233,41 @@ namespace TugasSTBI_1
             }
         }
 
+        private static void distinctQueryNew()
+        {
+            int nQuery = Program.lQueryWeightNew.Count;
+            for (int i = 0; i < nQuery; i++)
+            {
+                Dictionary<string, bool> found = new Dictionary<string, bool>();
+                List<WeightedTermQuery> query = new List<WeightedTermQuery>();
+                foreach (var item in Program.lQueryWeightNew[i])
+                {
+                    if (!found.ContainsKey(item.term))
+                    {
+                        found.Add(item.term, true);
+                        query.Add(new WeightedTermQuery(item.term, item.weight));
+                    }
+                }
+                Program.lQueryWeightNew[i] = query;
+            }
+        }
+
         private static void distinctQueryOld()
         {
-            int iter = 0;
-            foreach (var item in Program.lQueryWeightOld)
+            int nQuery = Program.lQueryWeightOld.Count;
+            for (int i =0; i < nQuery; i++)
             {
-                Program.lQueryWeightOld[iter].Distinct();
-                iter++;
+                Dictionary<string, bool> found = new Dictionary<string, bool>();
+                List<WeightedTermQuery> query = new List<WeightedTermQuery>();
+                foreach (var item in Program.lQueryWeightOld[i])
+                {
+                    if (!found.ContainsKey(item.term))
+                    {
+                        found.Add(item.term, true);
+                        query.Add(new WeightedTermQuery(item.term, item.weight));
+                    }
+                }
+                Program.lQueryWeightOld[i] = query;
             }
         }
     }
