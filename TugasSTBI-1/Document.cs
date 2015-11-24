@@ -57,7 +57,7 @@ namespace TugasSTBI_1
                 {
                     string strContent = textSplitedByPart[i].Substring(2);
                     strContent = StopwordTool.RemoveStopwords(strContent);
-                    Console.WriteLine(strContent);
+                    //Console.WriteLine(strContent);
                     //remove number from content text
                     strContent = Regex.Replace(strContent, @"[0-9]+ ", string.Empty);
                     if (stemCode == 1)

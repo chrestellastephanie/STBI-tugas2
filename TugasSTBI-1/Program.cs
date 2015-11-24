@@ -25,6 +25,7 @@ namespace TugasSTBI_1
         public static string outputInvertedFile = "D:/InvertedFile.txt";
         public static string outputInvertedFile2 = "D:/InvertedFile2nd.txt"; // untuk 2nd retrieval
         //public static string relJudgPath = "D:/ADI/qrels.text";
+        public static string modeUsed;
 
         public static Dictionary<string, Dictionary<string, double>> dTermWeigth;
         public static Dictionary<string, Dictionary<string, int>> dDocuments;
@@ -97,6 +98,7 @@ namespace TugasSTBI_1
 
             // list of list query old and new
             lQueryWeightOld = new List<List<WeightedTermQuery>>();
+            lQueryWeightOld.Clear();
             lQueryWeightNew = new List<List<WeightedTermQuery>>();
             lDQueryWeightNew = new List<Dictionary<string, double>>();
 

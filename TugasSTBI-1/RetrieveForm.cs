@@ -23,6 +23,7 @@ namespace TugasSTBI_1
             buttonInteractiveSearch.Visible = true;
             listBoxResultInteractive.Visible = true;
             listBoxResultInteractive.Items.Clear();
+            Program.modeUsed = "interactive";
             if (!Program.relevanceFeedbackMethod.Equals("pseudo"))
             {
                 buttonSecondRetrieval.Visible = true;
@@ -85,6 +86,7 @@ namespace TugasSTBI_1
             buttonInteractiveSearch.Visible = false;
             listBoxResultInteractive.Visible = true;
             buttonSecondRetrieval.Visible = false;
+            Program.modeUsed = "experiment";
             labelResult.Visible = true;
 
             //reset list documents
