@@ -166,7 +166,17 @@ namespace TugasSTBI_1
                 HashSet<Docvalue> query = new HashSet<Docvalue>();
                 for (int queryNumber = 0; queryNumber <= Program.allResults.Count() - 1; queryNumber++)
                 {
-                    for (int a = 0; a <= Program.nPseudoRelevant - 1; a++)
+                    Console.WriteLine(Program.allResults.ElementAt(queryNumber).Count());
+                    int z;
+                    if(Program.allResults.ElementAt(queryNumber).Count() < Program.nPseudoRelevant)
+                    {
+                        z = Program.allResults.ElementAt(queryNumber).Count();
+                    }
+                    else
+                    {
+                        z = Program.nPseudoRelevant;
+                    }
+                    for (int a = 0; a <= z - 1; a++)
                     {
                         query.Add(new Docvalue(Program.allResults[queryNumber][a].docNum, 1));
                         if (Program.secondDocCollection.Equals("diff"))

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TugasSTBI_1
 {
@@ -143,15 +144,45 @@ namespace TugasSTBI_1
             listBoxResultInteractive.Items.Clear();
             string line;
             int nd;
-            string outputResult = "D:/recall.txt";
+            string outputResult = "D:/recall1.txt";
+            string outputcsv = "D:/recall.csv";
             
             double meanRecall = 0;
             double meanPrecision = 0;
             double meanNIAP = 0;
-            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(outputResult)) {
-                for (int i = 0; i < Program.allResults.Count(); i++)
-                {
-                    listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
+            File.Create(outputcsv).Close();
+
+            StreamWriter writer = new System.IO.StreamWriter(outputResult);
+            for(int i = 0; i < Program.allResults.Count(); i++)
+            {
+                meanRecall = meanRecall + Program.calculateRecall(i);
+                meanPrecision = meanPrecision + Program.calculatePrecision(i);
+                meanNIAP = meanNIAP + Program.calculateNIAP(i);
+            }
+            meanRecall = meanRecall / Program.allResults.Count();
+            meanPrecision = meanPrecision / Program.allResults.Count();
+            meanNIAP = meanNIAP / Program.allResults.Count();
+            writer.WriteLine("Mean Recall: " + meanRecall);
+            writer.WriteLine("Mean Precision: " + meanPrecision);
+            writer.WriteLine("Mean Non interpolated average precision: " + meanNIAP);
+            meanRecall = 0;
+            meanPrecision = 0;
+            meanNIAP = 0;
+
+            for (int i = 0; i < Program.allResults.Count(); i++)
+            {
+                
+                string delimiter = ",";
+                string[][] output = new string[][]{
+            new string[]{ "Recall = " + Program.calculateRecall(i), "Precision = " + Program.calculatePrecision(i), "Non-Interpolated Average Precision = " + Program.calculateNIAP(i)} /*add the values that you want inside a csv file. Mostly this function can be used in a foreach loop.*/
+            };
+                int length = output.GetLength(0);
+                StringBuilder sb = new StringBuilder();
+                for (int index = 0; index < length; index++)
+                    sb.AppendLine(string.Join(delimiter, output[index]));
+                File.AppendAllText(outputcsv, sb.ToString());
+            
+            listBoxResultInteractive.Items.Add("Result for query #" + (i+1));
                     listBoxResultInteractive.Items.Add(Program.qs.query[i]);
                     for (int a = 0; a <= Program.lQueryWeightOld.ElementAt(i).Count() - 1; a++)
                     {
@@ -204,7 +235,7 @@ namespace TugasSTBI_1
                 writer.WriteLine("Mean Precision: " + meanPrecision);
                 writer.WriteLine("Mean Non interpolated average precision: " + meanNIAP);
 
-            } }
+            }
 
         private void RetrieveForm_FormClosing(object sender, FormClosingEventArgs e)
         {
