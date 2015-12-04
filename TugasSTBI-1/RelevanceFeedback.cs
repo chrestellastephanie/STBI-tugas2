@@ -232,15 +232,15 @@ namespace TugasSTBI_1
                 iter++;
             }
 
-            int iter1 = 0;
-            foreach (var item in Program.lQueryWeightOld)
-            {
-                foreach (var subitem in item.Where(v => v.weight <= 0).ToList())
-                {
-                    Program.lQueryWeightOld[iter1].Remove(subitem);
-                }
-                iter++;
-            }
+            //int iter1 = 0;
+            //foreach (var item in Program.lQueryWeightOld)
+            //{
+            //    foreach (var subitem in item.Where(v => v.weight <= 0).ToList())
+            //    {
+            //        Program.lQueryWeightOld[iter1].Remove(subitem);
+            //    }
+            //    iter++;
+            //}
         }
 
         private static void distinctQueryNew()
